@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Hand-drawn pencil favicon -->
+  <path d="M5 27L4 28L8 27L24.5 10.5C25.5 9.5 25.5 8 24.5 7L23 5.5C22 4.5 20.5 4.5 19.5 5.5L3 22L5 27Z" fill="#F4D03F" stroke="#2B2B2B" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- Pencil lead tip -->
+  <path d="M3 22L1.5 29.5L9 28L8 24L5 21L3 22Z" fill="#E8D5B5" stroke="#2B2B2B" stroke-width="1.2"/>
+  <path d="M1.5 29.5L4 29L2 27L1.5 29.5Z" fill="#2B2B2B"/>
+  <!-- Eraser -->
+  <path d="M21.5 3.5L26.5 8.5C27.5 7.5 27.5 6 26.5 5L25 3.5C24 2.5 22.5 2.5 21.5 3.5Z" fill="#FF8DA1" stroke="#2B2B2B" stroke-width="1.5"/>
+  <!-- Metal Ferrule band -->
+  <path d="M19 6L24 11" stroke="#8E99A2" stroke-width="2" stroke-linecap="round"/>
+  <!-- Pencil line ridge -->
+  <path d="M7 21L21 7" stroke="#E67E22" stroke-width="1.2" stroke-dasharray="2 1"/>
+</svg>

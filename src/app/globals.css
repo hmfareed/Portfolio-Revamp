@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: var(--font-caveat), 'Caveat', cursive, sans-serif;
+  --font-handwriting: var(--font-kalam), 'Kalam', cursive, sans-serif;
+  --color-paper: #FBF8EF;
+  --color-paper-dark: #F4EED9;
+  --color-ruled: #A9C5E8;
+  --color-margin: #E4572E;
+  --color-graphite: #2B2B2B;
+  --color-highlighter: #FFE66D;
+}
+
+@layer base {
+  :root {
+    --font-heading: var(--font-caveat), cursive, sans-serif;
+    --font-handwriting: var(--font-kalam), cursive, sans-serif;
+  }
+
+  body {
+    background-color: #FBF8EF;
+    color: #2B2B2B;
+    font-family: var(--font-handwriting);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Accessible visible focus states */
+  *:focus-visible {
+    outline: 2px solid #E4572E;
+    outline-offset: 3px;
+  }
+}
+
+/* Custom utility for clean horizontal notebook tab row without ugly scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
