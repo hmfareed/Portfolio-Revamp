@@ -46,10 +46,10 @@ export const ExperienceSection: React.FC = () => {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="relative group"
               >
-                {/* Hand-drawn timeline node dot with pop */}
+                {/* Hand-drawn timeline node dot with spring pop */}
                 <motion.div
                   initial={shouldReduceMotion ? {} : { scale: 0 }}
-                  whileInView={{ scale: [0, 1.3, 1] }}
+                  whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 + 0.1, type: 'spring', stiffness: 400, damping: 15 }}
                   className="absolute -left-[27px] sm:-left-[35px] md:-left-[43px] top-1.5 w-6 h-6 rounded-full bg-[#FFE66D] border-2 border-[#2B2B2B] flex items-center justify-center shadow-xs"

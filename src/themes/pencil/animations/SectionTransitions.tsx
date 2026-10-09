@@ -127,7 +127,7 @@ export const DoodleBurst: React.FC = () => {
     <div ref={ref} className="relative w-full h-8 flex items-center justify-center pointer-events-none my-4">
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
-        animate={isInView ? { scale: [0, 1.25, 1], opacity: 1 } : {}}
+        animate={isInView ? { scale: 1, opacity: 1 } : {}}
         transition={{ type: 'spring', stiffness: 350, damping: 18 }}
         className="flex items-center gap-4 text-amber-500 font-bold"
       >
