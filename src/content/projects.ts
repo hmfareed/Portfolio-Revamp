@@ -29,7 +29,7 @@ export const projectsContent: Project[] = [
       caseStudySlug: "klyro"
     },
     image: "/images/projects/klyro.png",
-    placeholders: ["[screenshots]"]
+    placeholders: []
   },
   {
     slug: "kayspacks",
