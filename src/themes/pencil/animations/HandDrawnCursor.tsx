@@ -33,12 +33,19 @@ export const HandDrawnCursor: React.FC = () => {
       cursorY.set(e.clientY);
 
       // Detect hover on interactive elements, updating state only when value flips
-      const target = e.target as HTMLElement | null;
-      if (target) {
+      const rawTarget = e.target;
+      const element =
+        rawTarget instanceof Element
+          ? rawTarget
+          : (rawTarget as Node | null)?.parentElement;
+
+      if (element && typeof element.closest === 'function') {
         const isInteractive = Boolean(
-          target.closest('a, button, input, textarea, select, [role="button"], [data-interactive="true"]')
+          element.closest('a, button, input, textarea, select, [role="button"], [data-interactive="true"]')
         );
         setIsHoveringInteractive((prev) => (prev !== isInteractive ? isInteractive : prev));
+      } else {
+        setIsHoveringInteractive((prev) => (prev ? false : prev));
       }
     };
 
