@@ -170,6 +170,19 @@ export const AboutSection: React.FC = () => {
                         className="object-contain"
                       />
                     </span>
+                  ) : fact.includes('UTAS') ? (
+                    <span
+                      className="relative w-5 h-5 rounded-full border border-[#2B2B2B] overflow-hidden shrink-0 mt-0.5 shadow-2xs inline-block bg-[#FFFDF8]"
+                      title="CKT-UTAS University Seal"
+                    >
+                      <Image
+                        src="/images/logos/utas.png"
+                        alt="UTAS Logo"
+                        fill
+                        sizes="20px"
+                        className="object-contain p-0.5"
+                      />
+                    </span>
                   ) : (
                     <CheckmarkDoodle className="w-4 h-4 text-emerald-700 mt-1 shrink-0" />
                   )}
@@ -178,17 +191,32 @@ export const AboutSection: React.FC = () => {
               ))}
             </ul>
 
-            {/* Education Summary */}
-            <div className="mt-6 pt-4 border-t border-stone-800/20">
-              <h4 className="font-heading text-lg font-bold text-[#2B2B2B] mb-1">
-                Education &amp; Credentials
-              </h4>
-              <p className="font-handwriting text-sm text-stone-800">
-                <strong>{aboutContent.education.degree}</strong> ({aboutContent.education.period})
-              </p>
-              <p className="font-handwriting text-xs text-stone-600">
-                {aboutContent.education.institution}
-              </p>
+            {/* Education Summary with UTAS University Seal */}
+            <div className="mt-6 pt-4 border-t border-stone-800/20 flex items-start justify-between gap-3">
+              <div>
+                <h4 className="font-heading text-lg font-bold text-[#2B2B2B] mb-1">
+                  Education &amp; Credentials
+                </h4>
+                <p className="font-handwriting text-sm text-stone-800">
+                  <strong>{aboutContent.education.degree}</strong> ({aboutContent.education.period})
+                </p>
+                <p className="font-handwriting text-xs text-stone-600">
+                  {aboutContent.education.institution}
+                </p>
+              </div>
+
+              <div
+                className="relative shrink-0 w-11 h-11 rounded-full border border-[#2B2B2B] bg-[#FFFDF8] p-0.5 shadow-2xs hover:scale-105 hover:rotate-3 transition-transform"
+                title="CKT-UTAS University Seal"
+              >
+                <Image
+                  src="/images/logos/utas.png"
+                  alt="UTAS Logo"
+                  fill
+                  sizes="44px"
+                  className="object-contain p-0.5"
+                />
+              </div>
             </div>
           </StickyNote>
         </motion.div>

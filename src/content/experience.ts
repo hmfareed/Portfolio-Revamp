@@ -38,6 +38,7 @@ export const experienceContent: ExperienceItem[] = [
     period: "2026",
     type: "Leadership",
     location: "Navrongo",
+    logo: "/images/logos/utas.png",
     bullets: [
       "Led a team applying machine learning models to a chronic kidney disease dataset.",
       "Coordinated model testing and evaluated prediction accuracy."

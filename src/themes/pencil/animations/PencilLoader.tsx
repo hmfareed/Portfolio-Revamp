@@ -533,8 +533,13 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
 
                   <div className="flex items-baseline gap-2.5">
                     <span className="font-bold text-xs sm:text-sm uppercase font-mono text-stone-600">SCHOOL:</span>
-                    <span className="border-b-2 border-stone-400 flex-1 pl-1.5 text-xs sm:text-base font-semibold text-stone-600">
-                      UTAS Navrongo, Ghana
+                    <span className="border-b-2 border-stone-400 flex-1 pl-1.5 text-xs sm:text-base font-semibold text-stone-600 flex items-center justify-between">
+                      <span>UTAS Navrongo, Ghana</span>
+                      <img
+                        src="/images/logos/utas.png"
+                        alt="UTAS Seal"
+                        className="w-5 h-5 object-contain inline-block ml-1"
+                      />
                     </span>
                   </div>
                 </div>

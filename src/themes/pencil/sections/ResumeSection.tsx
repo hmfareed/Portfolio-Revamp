@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { StampButton } from '../primitives/StampButton';
@@ -72,12 +73,23 @@ export const ResumeSection: React.FC = () => {
             </h3>
 
             <p className="font-handwriting text-base sm:text-lg text-stone-700 leading-relaxed mb-4">
-              Full-stack developer specializing in the MERN stack and Next.js, with hands-on experience building production web applications for the Ghanaian market.
+              Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products.
             </p>
 
             <ul className="space-y-2 font-handwriting text-sm sm:text-base text-stone-800 mb-6">
               <li className="flex items-center justify-center md:justify-start gap-2">
-                <CheckmarkDoodle className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span
+                  className="relative w-4.5 h-4.5 rounded-full border border-[#2B2B2B] overflow-hidden shrink-0 inline-block bg-[#FFFDF8]"
+                  title="CKT-UTAS University Seal"
+                >
+                  <Image
+                    src="/images/logos/utas.png"
+                    alt="UTAS Logo"
+                    fill
+                    sizes="18px"
+                    className="object-contain p-0.5"
+                  />
+                </span>
                 <span>Level 400 BSc Computer Science, UTAS Navrongo</span>
               </li>
               <li className="flex items-center justify-center md:justify-start gap-2">
