@@ -7,6 +7,7 @@ import { MarginPencilScroll } from '../animations/MarginPencilScroll';
 import { HandDrawnCursor } from '../animations/HandDrawnCursor';
 import { BackgroundParallaxDoodles } from '../animations/BackgroundParallaxDoodles';
 import { ScribbleGuy } from '../animations/ScribbleGuy';
+import { JumpingSketchMan } from '../animations/JumpingSketchMan';
 
 interface PaperSheetProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface PaperSheetProps {
 
 export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
   return (
-    <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] font-handwriting overflow-x-hidden selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
+    <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] font-handwriting overflow-x-clip selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
       {/* Session-guarded Landing Page Pencil Sketch & Eraser Loader */}
       <PencilLoader />
 
@@ -23,6 +24,9 @@ export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
 
       {/* Left red margin pencil scroll progress tracker */}
       <MarginPencilScroll />
+
+      {/* Bigger Sketch Man jumping between sections on scroll */}
+      <JumpingSketchMan />
 
       {/* Floating velocity-reactive margin stick figure */}
       <ScribbleGuy />

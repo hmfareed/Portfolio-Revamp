@@ -40,7 +40,7 @@ export const NotebookNav: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xs py-2 mb-6">
+    <header className="sticky top-0 z-40 w-full bg-[#FBF8EF]/95 backdrop-blur-md pt-2 pb-1.5 mb-6 border-b-2 border-[#2B2B2B]/20 shadow-xs">
       <nav
         aria-label="Notebook sections"
         className="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 px-2 py-1"

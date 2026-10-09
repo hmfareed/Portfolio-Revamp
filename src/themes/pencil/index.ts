@@ -28,3 +28,4 @@ export * from './animations/PaperAirplaneSuccess';
 export * from './animations/SectionTransitions';
 export * from './animations/BackgroundParallaxDoodles';
 export * from './animations/ScribbleGuy';
+export * from './animations/JumpingSketchMan';
