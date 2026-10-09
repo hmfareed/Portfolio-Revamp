@@ -107,9 +107,19 @@ export const JumpingSketchMan: React.FC = () => {
 
           setTimeout(() => setShowDust(false), 300);
 
-          // Phase 4: Settle back to standing smile (160ms)
+          // Phase 4: Settle back to standing smile (160ms) and call attention to key section features
           setTimeout(() => {
             setPose('idle');
+            const sectionTips = [
+              'Open to freelance! ✦',
+              'Full-Stack story ✎',
+              'Check Live Demos! 🚀',
+              'Production track record ★',
+              'Interactive tech stack ⚡',
+              'Send me a note! ✉️',
+            ];
+            setSpeech(sectionTips[newSectionIdx] || 'Hi there! ✎');
+            setTimeout(() => setSpeech(null), 2600);
           }, 160);
         }, 480);
       }, 70);

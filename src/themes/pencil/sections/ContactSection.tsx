@@ -8,6 +8,7 @@ import { StampButton } from '../primitives/StampButton';
 import { TapeStrip, CheckmarkDoodle, ArrowDoodle, GithubDoodle, LinkedinDoodle } from '../primitives/Doodles';
 import { sendContactEmail, ContactFormState } from '@/app/actions/send-contact';
 import { PaperAirplaneSuccess } from '../animations/PaperAirplaneSuccess';
+import { SketchManMascot } from '../animations/SketchManMascot';
 import { Mail, MapPin, Send, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const initialState: ContactFormState = {};
@@ -272,17 +273,29 @@ export const ContactSection: React.FC = () => {
                 )}
               </div>
 
-              {/* Submit Button Styled as a Hand-Drawn Stamp */}
-              <div className="pt-2 flex items-center justify-between">
-                <StampButton
-                  type="submit"
-                  disabled={isPending}
-                  variant="stamp-red"
-                  className="text-lg px-7 py-3"
-                >
-                  <Send className="w-4 h-4 mr-1" />
-                  <span>{isPending ? 'STAMPING NOTE...' : 'STAMP & SEND NOTE'}</span>
-                </StampButton>
+              {/* Submit Button Styled as a Hand-Drawn Stamp & Sketch Man with Airplane */}
+              <div className="pt-2 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <StampButton
+                    type="submit"
+                    disabled={isPending}
+                    variant="stamp-red"
+                    className="text-lg px-7 py-3"
+                  >
+                    <Send className="w-4 h-4 mr-1" />
+                    <span>{isPending ? 'STAMPING NOTE...' : 'STAMP & SEND NOTE'}</span>
+                  </StampButton>
+
+                  {/* Sketch Man holding paper airplane */}
+                  <div className="hidden sm:block">
+                    <SketchManMascot
+                      pose="airplane"
+                      size="sm"
+                      defaultSpeech="Ready to fly! ✉️"
+                      className="hover:scale-110 transition-transform"
+                    />
+                  </div>
+                </div>
 
                 <span className="font-handwriting text-xs text-stone-500 italic hidden sm:inline">
                   Pencil Ink Verified

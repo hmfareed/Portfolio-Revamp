@@ -10,6 +10,7 @@ import { PlaceholderSlot } from '../primitives/PlaceholderSlot';
 import { ArrowDoodle } from '../primitives/Doodles';
 import { CounterNumber } from '../animations/CounterNumber';
 import { DoodleBurst } from '../animations/SectionTransitions';
+import { SketchManMascot } from '../animations/SketchManMascot';
 import { pencilMotion } from '../motion.config';
 
 export const ExperienceSection: React.FC = () => {
@@ -65,11 +66,22 @@ export const ExperienceSection: React.FC = () => {
                   whileInView={{ rotateX: 0, opacity: 1 }}
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.1 }}
-                  className="bg-white/80 p-5 sm:p-7 rounded-xs border-2 border-[#2B2B2B] shadow-[3px_4px_0px_#2B2B2B] transition-transform hover:-translate-y-1"
+                  className="relative bg-white/80 p-5 sm:p-7 rounded-xs border-2 border-[#2B2B2B] shadow-[3px_4px_0px_#2B2B2B] transition-transform hover:-translate-y-1"
                   style={{
                     transformOrigin: 'top center',
                   }}
                 >
+                  {/* Sketch Man bringing attention to top career milestone */}
+                  {idx === 0 && (
+                    <div className="absolute -top-7 right-5 z-20 pointer-events-auto hidden sm:block">
+                      <SketchManMascot
+                        pose="perched"
+                        size="sm"
+                        defaultSpeech="Solo Engineer! ⚡"
+                        className="hover:scale-110 transition-transform"
+                      />
+                    </div>
+                  )}
                   {/* Top metadata row */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2 font-handwriting">
                     <div className="flex items-center gap-2">

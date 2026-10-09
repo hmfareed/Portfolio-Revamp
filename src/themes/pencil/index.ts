@@ -33,3 +33,5 @@ export * from './animations/ScribbleGuy';
 export * from './animations/JumpingSketchMan';
 export * from './animations/DogEarBookmark';
 export * from './animations/MarginDoodlePad';
+export * from './animations/SketchManMascot';
+export * from './animations/HeroAvailabilityPlayground';

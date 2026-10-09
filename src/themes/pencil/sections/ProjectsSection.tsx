@@ -11,6 +11,7 @@ import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { PlaceholderSlot } from '../primitives/PlaceholderSlot';
 import { StarDoodle, CodeBracketsDoodle, ArrowDoodle, GithubDoodle } from '../primitives/Doodles';
 import { FallingPencilShavings } from '../animations/SectionTransitions';
+import { SketchManMascot } from '../animations/SketchManMascot';
 import { ExternalLink, FileText, Sparkles } from 'lucide-react';
 
 const CATEGORIES: { label: string; value: 'all' | ProjectCategory }[] = [
@@ -122,6 +123,18 @@ export const ProjectsSection: React.FC = () => {
                         <span className="absolute top-2 left-2 bg-[#FFE66D] text-[#2B2B2B] border border-[#2B2B2B] text-xs font-handwriting font-bold px-2 py-0.5 rounded-xs shadow-xs">
                           ★ Featured Build
                         </span>
+                      )}
+
+                      {/* Sketch Man perched on first featured project card bringing attention */}
+                      {project.featured && idx === 0 && (
+                        <div className="absolute -top-6 right-3 z-20 pointer-events-auto">
+                          <SketchManMascot
+                            pose="perched"
+                            size="sm"
+                            defaultSpeech="Flagship! ✦"
+                            className="hover:scale-110 transition-transform"
+                          />
+                        </div>
                       )}
                     </div>
 

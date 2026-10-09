@@ -10,6 +10,8 @@ import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { StarDoodle, ArrowDoodle, CodeBracketsDoodle, TapeStrip } from '../primitives/Doodles';
 import { HighlighterSwipe } from '../animations/HighlighterSwipe';
 import { PageCornerCurl } from '../animations/SectionTransitions';
+import { HeroAvailabilityPlayground } from '../animations/HeroAvailabilityPlayground';
+import { SketchManMascot } from '../animations/SketchManMascot';
 import { pencilMotion } from '../motion.config';
 import { usePencilLoaderContext } from '../context/PencilLoaderContext';
 
@@ -274,7 +276,18 @@ export const HeroSection: React.FC = () => {
                   : { scale: 0.85, opacity: 0 }
               }
               transition={{ delay: 0.15, type: 'spring', stiffness: 350, damping: 18 }}
+              className="relative"
             >
+              {/* Sketch Man perched on top of primary projects CTA */}
+              <div className="absolute -top-9 right-4 z-20 pointer-events-auto hidden sm:block">
+                <SketchManMascot
+                  pose="perched"
+                  size="sm"
+                  defaultSpeech="Explore! ✦"
+                  className="hover:scale-110 transition-transform"
+                />
+              </div>
+
               <StampButton
                 href="#projects"
                 variant="highlighter"
@@ -323,21 +336,18 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Quick status doodle indicator */}
+          {/* Glowing Availability Text & Sketch Man Playing Around Status Area */}
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
             animate={
               isHeadlineComplete || shouldReduceMotion
-                ? { opacity: 1 }
-                : { opacity: 0 }
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 8 }
             }
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center gap-3 mt-8 pt-4 border-t border-dashed border-stone-300 w-full font-handwriting text-stone-700"
+            transition={{ duration: 0.55, delay: 0.3 }}
+            className="w-full"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-sm sm:text-base font-bold text-emerald-800">
-              Open to freelance projects &amp; remote roles
-            </span>
+            <HeroAvailabilityPlayground />
           </motion.div>
         </motion.div>
 
