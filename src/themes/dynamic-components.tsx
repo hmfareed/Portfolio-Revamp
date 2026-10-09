@@ -6,11 +6,13 @@ import * as pencilTheme from './pencil';
 import * as brickTheme from './brick';
 import * as blockyTheme from './blocky';
 import * as chalkTheme from './chalk';
+import * as playgroundTheme from './playground';
 
 function getActiveTheme(currentTheme: ThemeKey) {
   if (currentTheme === 'pencil') return pencilTheme;
   if (currentTheme === 'blocky') return blockyTheme;
   if (currentTheme === 'chalk') return chalkTheme;
+  if (currentTheme === 'playground') return playgroundTheme;
   return brickTheme;
 }
 

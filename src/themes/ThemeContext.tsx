@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
-export type ThemeKey = 'pencil' | 'brick' | 'blocky' | 'chalk';
+export type ThemeKey = 'pencil' | 'brick' | 'blocky' | 'chalk' | 'playground';
 
 interface ThemeContextType {
   currentTheme: ThemeKey;
@@ -12,7 +12,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  currentTheme: 'chalk',
+  currentTheme: 'playground',
   setTheme: () => {},
   toggleTheme: () => {},
 });
@@ -26,7 +26,7 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultTheme = 'chalk',
+  defaultTheme = 'playground',
 }) => {
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>(defaultTheme);
   const [mounted, setMounted] = useState(false);
@@ -40,7 +40,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         (savedTheme === 'pencil' ||
           savedTheme === 'brick' ||
           savedTheme === 'blocky' ||
-          savedTheme === 'chalk')
+          savedTheme === 'chalk' ||
+          savedTheme === 'playground')
       ) {
         setCurrentTheme(savedTheme);
       }
@@ -67,6 +68,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         faviconEl.href = '/blocky-favicon.svg';
       } else if (newTheme === 'chalk') {
         faviconEl.href = '/chalk-favicon.svg';
+      } else if (newTheme === 'playground') {
+        faviconEl.href = '/playground-favicon.svg';
       } else {
         faviconEl.href = '/favicon.svg';
       }
@@ -77,6 +80,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     if (currentTheme === 'pencil') setTheme('brick');
     else if (currentTheme === 'brick') setTheme('blocky');
     else if (currentTheme === 'blocky') setTheme('chalk');
+    else if (currentTheme === 'chalk') setTheme('playground');
     else setTheme('pencil');
   };
 
@@ -173,6 +177,21 @@ const THEME_OPTIONS: ThemeOption[] = [
       </svg>
     ),
   },
+  {
+    key: 'playground',
+    label: 'Playground',
+    tagline: 'Online blocky game lobby',
+    icon: (className = 'w-4 h-4') => (
+      <svg
+        className={className}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+      </svg>
+    ),
+  },
 ];
 
 /**
@@ -230,11 +249,17 @@ export const ThemeToggle: React.FC = () => {
           fontClass: 'font-pixel text-xs',
         };
       case 'chalk':
-      default:
         return {
           className:
             'bg-[#263D33] text-[#F6D860] border-2 border-dashed border-[#F2F0E6]/70 shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:bg-[#2F4A3E]',
           fontClass: 'font-heading text-base',
+        };
+      case 'playground':
+      default:
+        return {
+          className:
+            'bg-[#2F3133] text-[#00B06F] border-2 border-[#00B06F] shadow-[0_4px_12px_rgba(0,176,111,0.25)] hover:bg-[#393B3D]',
+          fontClass: 'font-heading text-sm font-bold',
         };
     }
   };
@@ -249,8 +274,10 @@ export const ThemeToggle: React.FC = () => {
       case 'blocky':
         return 'bg-[#1E232A] border-3 border-black shadow-[0_8px_0_#0F1217] text-[#F3F4F6]';
       case 'chalk':
-      default:
         return 'bg-[#263D33] border-2 border-dashed border-[#F2F0E6]/70 shadow-[0_12px_28px_rgba(0,0,0,0.6)] text-[#F2F0E6]';
+      case 'playground':
+      default:
+        return 'bg-[#2F3133] border-2 border-[#393B3D] shadow-[0_16px_32px_rgba(0,0,0,0.6)] text-[#F7F7F8]';
     }
   };
 
@@ -315,7 +342,7 @@ export const ThemeToggle: React.FC = () => {
             {/* Header label */}
             <div className="flex items-center justify-between px-2.5 py-1.5 pb-2 mb-1 border-b border-white/10 text-[11px] font-mono uppercase tracking-wider opacity-60">
               <span>Switch Theme</span>
-              <span>4 Themes</span>
+              <span>5 Themes</span>
             </div>
 
             {/* List of Theme Items */}
@@ -340,7 +367,9 @@ export const ThemeToggle: React.FC = () => {
                           ? 'bg-[#D1382B] text-white font-bold'
                           : currentTheme === 'blocky'
                           ? 'bg-[#FFD23F] text-[#1E232A] font-bold'
-                          : 'bg-[#F6D860] text-[#23382F] font-bold'
+                          : currentTheme === 'chalk'
+                          ? 'bg-[#F6D860] text-[#23382F] font-bold'
+                          : 'bg-[#00B06F] text-white font-bold'
                         : 'hover:bg-white/10 opacity-80 hover:opacity-100'
                     }`}
                   >

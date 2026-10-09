@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323, Gaegu, Quicksand } from 'next/font/google';
+import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323, Gaegu, Quicksand, Fredoka, Rubik } from 'next/font/google';
 import { ThemeProvider, ThemeToggle } from '@/themes/ThemeContext';
 import './globals.css';
 
@@ -56,6 +56,20 @@ const quicksand = Quicksand({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-chalk-body',
+  display: 'swap',
+});
+
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-fredoka',
+  display: 'swap',
+});
+
+const rubik = Rubik({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-rubik',
   display: 'swap',
 });
 
@@ -121,7 +135,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable} ${gaegu.variable} ${quicksand.variable}`}
+      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable} ${gaegu.variable} ${quicksand.variable} ${fredoka.variable} ${rubik.variable}`}
     >
       <body className="antialiased min-h-screen">
         <ThemeProvider>
