@@ -93,9 +93,9 @@ export const ProjectsSection: React.FC = () => {
                     ) : undefined
                   }
                 >
-                  <div className="flex flex-col">
+                  <div className="flex flex-col flex-1">
                     {/* Project Screenshot / Visual Sketch Frame */}
-                    <div className="relative w-full aspect-16/10 rounded-xs overflow-hidden border-2 border-[#2B2B2B] bg-stone-100 mb-5 shadow-inner">
+                    <div className={`relative w-full aspect-16/10 rounded-xs overflow-hidden border-2 border-[#2B2B2B] ${project.slug === 'novelverse' ? 'bg-[#0A0713]' : 'bg-stone-100'} mb-5 shadow-inner`}>
                       {project.image ? (
                         <Image
                           src={project.image}

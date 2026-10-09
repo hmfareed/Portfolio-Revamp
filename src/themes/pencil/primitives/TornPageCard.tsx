@@ -33,25 +33,26 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
       whileHover={shouldReduceMotion ? {} : { rotate: 0, y: -8, scale: 1.02 }}
       whileTap={shouldReduceMotion ? {} : { scale: 0.99 }}
       transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-      className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] hover:shadow-[6px_12px_0px_#2B2B2B] transition-shadow duration-300 p-6 md:p-8 ${className}`}
+      className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] hover:shadow-[6px_12px_0px_#2B2B2B] transition-shadow duration-300 p-6 md:p-8 ${hasSpiralEdge ? 'pt-7 md:pt-8' : ''} ${className}`}
       style={{
         transformStyle: 'preserve-3d',
       }}
     >
-      {/* Top Masking Tape Strip with press-down animation */}
+      {/* Top Masking Tape Strip with press-down animation (absolute so it never acts as flex item) */}
       <motion.div
+        className="absolute -top-3 left-1/2 -translate-x-1/2 pointer-events-none z-20"
         initial={shouldReduceMotion ? {} : { scale: 1.25, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.25, type: 'spring', stiffness: 350, damping: 18 }}
       >
-        <TapeStrip className="-top-3 left-1/2 -translate-x-1/2" angle={initialTilt > 0 ? -1.5 : 2} />
+        <TapeStrip angle={initialTilt > 0 ? -1.5 : 2} />
       </motion.div>
 
       {/* Spiral bound perforated edge at the top */}
       {hasSpiralEdge && (
         <div
-          className="absolute top-0 left-0 right-0 h-4 flex items-center justify-around px-4 pointer-events-none border-b border-dashed border-[#A9C5E8]/60 overflow-hidden"
+          className="absolute top-0 left-0 right-0 h-4 flex items-center justify-around px-4 pointer-events-none border-b border-dashed border-[#A9C5E8]/60 overflow-hidden z-10"
           aria-hidden="true"
         >
           {Array.from({ length: 16 }).map((_, i) => (
@@ -76,9 +77,7 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
         </motion.div>
       )}
 
-      <div className={hasSpiralEdge ? 'pt-2' : ''}>
-        {children}
-      </div>
+      {children}
     </motion.div>
   );
 };
