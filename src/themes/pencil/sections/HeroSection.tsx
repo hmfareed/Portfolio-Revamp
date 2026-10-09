@@ -13,10 +13,10 @@ import { PageCornerCurl } from '../animations/SectionTransitions';
 import { pencilMotion } from '../motion.config';
 import { usePencilLoaderContext } from '../context/PencilLoaderContext';
 
-const SEGMENT_1 = 'Full-stack developer building';
-const SEGMENT_2 = 'payment-ready';
-const SEGMENT_3 = 'web products for the';
-const SEGMENT_4 = 'Ghanaian market.';
+const SEGMENT_1 = 'Full-stack engineer architecting';
+const SEGMENT_2 = 'scalable web applications,';
+const SEGMENT_3 = 'robust APIs, and';
+const SEGMENT_4 = 'production-ready digital products.';
 
 const TOTAL_CHARS =
   SEGMENT_1.length + SEGMENT_2.length + SEGMENT_3.length + SEGMENT_4.length;
@@ -179,13 +179,13 @@ export const HeroSection: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.85rem] font-heading font-bold text-[#2B2B2B] leading-tight mb-4 select-text"
             title="Click to reveal full text"
           >
-            {/* Segment 1: "Full-stack developer building" */}
+            {/* Segment 1: "Full-stack engineer architecting" */}
             <span>{seg1Text}</span>
             {activeSegment === 1 && !isHeadlineComplete && !shouldReduceMotion && (
               <WritingPencilCursor />
             )}
 
-            {/* Segment 2: "payment-ready" (Highlighted) */}
+            {/* Segment 2: "scalable web applications," (Highlighted) */}
             {seg2Text.length > 0 && (
               <>
                 {' '}
@@ -198,7 +198,7 @@ export const HeroSection: React.FC = () => {
               </>
             )}
 
-            {/* Segment 3: "web products for the" */}
+            {/* Segment 3: "robust APIs, and" */}
             {seg3Text.length > 0 && (
               <>
                 {' '}
@@ -209,7 +209,7 @@ export const HeroSection: React.FC = () => {
               </>
             )}
 
-            {/* Segment 4: "Ghanaian market." (Underlined) */}
+            {/* Segment 4: "production-ready digital products." (Underlined) */}
             {seg4Text.length > 0 && (
               <>
                 {' '}

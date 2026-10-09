@@ -30,13 +30,13 @@ export const ChalkHeroSection: React.FC = () => {
 
           {/* Chalk Headline with Animated Stroke / Fade Reveal */}
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl text-[#F2F0E6] leading-tight tracking-wide mb-4">
-            Full-stack developer building{' '}
+            Full-stack engineer architecting{' '}
             <span className="text-[#F6D860] relative inline-block">
-              payment-ready
+              scalable web applications,
               <ChalkLine color="#F6D860" className="w-full h-3 mt-1" />
             </span>{' '}
-            web products for the{' '}
-            <span className="text-[#8EC5E8]">Ghanaian market.</span>
+            robust APIs, and{' '}
+            <span className="text-[#8EC5E8]">production-ready digital products.</span>
           </h1>
 
           {/* Subline */}

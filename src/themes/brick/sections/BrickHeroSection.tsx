@@ -50,13 +50,13 @@ export const BrickHeroSection: React.FC = () => {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.9rem] font-heading font-bold text-[#1A1F2B] leading-tight mb-4">
-              Full-stack developer building{' '}
+              Full-stack engineer architecting{' '}
               <span className="inline-block bg-[#FFC62B] text-[#1A1F2B] px-2 py-0.5 rounded-xl border border-black/20 shadow-xs">
-                payment-ready
+                scalable web applications,
               </span>{' '}
-              web products for the{' '}
+              robust APIs, and{' '}
               <span className="relative inline-block text-[#D1382B]">
-                Ghanaian market.
+                production-ready digital products.
                 <BrickUnderline color="#D1382B" className="w-full h-3 mt-1" />
               </span>
             </h1>

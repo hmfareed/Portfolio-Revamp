@@ -85,7 +85,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mohammedfareed.dev'),
   title: 'Mohammed Fareed — Full-Stack Developer | Portfolio',
   description:
-    'Full-stack developer building payment-ready web products for the Ghanaian market. Next.js, React, TypeScript, Node.js, MongoDB, PostgreSQL, Paystack, and AI.',
+    'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products. Next.js, React, TypeScript, Node.js, MongoDB, PostgreSQL, Paystack, and AI.',
   keywords: [
     'Mohammed Fareed',
     'Mohammed Fareed Mandeeya Haruna',
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
     url: 'https://mohammedfareed.dev',
     title: 'Mohammed Fareed — Full-Stack Developer Portfolio',
     description:
-      'Full-stack developer building payment-ready web products for the Ghanaian market. Next.js, React, TypeScript, Node.js, Paystack, and AI.',
+      'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products. Next.js, React, TypeScript, Node.js, Paystack, and AI.',
     siteName: 'Mohammed Fareed Portfolio',
     images: [
       {
@@ -124,7 +124,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Mohammed Fareed — Full-Stack Developer',
     description:
-      'Full-stack developer building payment-ready web products for the Ghanaian market.',
+      'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products.',
     images: ['/images/profile/fareed.png'],
   },
 };

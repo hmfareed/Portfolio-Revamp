@@ -38,13 +38,13 @@ export const TitleScreenHero: React.FC = () => {
 
             {/* Headline */}
             <h1 className="font-pixel text-2xl sm:text-3xl md:text-4xl text-[#FFFFFF] leading-snug tracking-wide mb-4">
-              Full-stack developer building{' '}
+              Full-stack engineer architecting{' '}
               <span className="text-[#FFD23F] bg-black/40 px-2 py-0.5 border border-[#FFD23F]/40">
-                payment-ready
+                scalable web applications,
               </span>{' '}
-              web products for the{' '}
+              robust APIs, and{' '}
               <span className="text-[#38BDF8]">
-                Ghanaian market.
+                production-ready digital products.
                 <PixelDivider color="#38BDF8" className="w-full h-3 mt-1" />
               </span>
             </h1>
