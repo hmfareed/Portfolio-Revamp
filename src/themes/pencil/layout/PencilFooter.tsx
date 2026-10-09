@@ -111,13 +111,26 @@ export const PencilFooter: React.FC = () => {
           </a>
         </div>
 
-        <div className="text-sm text-stone-600 flex flex-col items-center gap-1">
+          <div className="text-sm text-stone-600 flex flex-col items-center gap-1">
           <p>
             Designed &amp; Hand-Coded in {contactContent.location} · {currentYear}
           </p>
           <p className="text-xs text-stone-500">
             Hand-drawn Pencil Theme · Built with Next.js, TypeScript &amp; Tailwind CSS
           </p>
+          <button
+            type="button"
+            onClick={() => {
+              try {
+                sessionStorage.removeItem('pencil_loader_seen');
+              } catch {}
+              window.location.href = '/?intro=true';
+            }}
+            className="mt-3 text-xs font-handwriting font-bold text-stone-700 hover:text-[#E4572E] underline underline-offset-2 cursor-pointer flex items-center gap-1 px-3 py-1 bg-white/70 border border-stone-400 rounded-xs shadow-2xs hover:bg-[#FFE66D] transition-colors"
+            title="Replay the 3D exercise book opening intro animation"
+          >
+            <span>↺ Replay Exercise Book Intro</span>
+          </button>
         </div>
       </div>
     </footer>
