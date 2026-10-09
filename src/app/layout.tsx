@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Caveat, Kalam, Lilita_One, Nunito } from 'next/font/google';
-import { activeTheme } from '@/themes/theme.config';
+import { ThemeProvider, ThemeToggle } from '@/themes/ThemeContext';
 import './globals.css';
 
 const caveat = Caveat({
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mohammed Fareed Mandeeya Haruna', url: 'https://github.com/hmfareed' }],
   creator: 'Mohammed Fareed',
   icons: {
-    icon: activeTheme.tokens.favicon,
-    shortcut: activeTheme.tokens.favicon,
-    apple: activeTheme.tokens.favicon,
+    icon: '/brick-favicon.svg',
+    shortcut: '/brick-favicon.svg',
+    apple: '/brick-favicon.svg',
   },
   openGraph: {
     type: 'website',
@@ -96,7 +96,10 @@ export default function RootLayout({
       className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable}`}
     >
       <body className="antialiased min-h-screen">
-        {children}
+        <ThemeProvider>
+          <ThemeToggle />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
