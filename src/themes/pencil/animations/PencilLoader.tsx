@@ -17,7 +17,7 @@ const STATUS_MESSAGES = [
 
 export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
   const shouldReduceMotion = useReducedMotion();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [phase, setPhase] = useState<'cover' | 'flipping' | 'sketching' | 'erasing' | 'done'>('cover');
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState(STATUS_MESSAGES[0]);
@@ -28,38 +28,18 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
 
   // Skip loader handler
   const handleSkip = useCallback(() => {
-    try {
-      sessionStorage.setItem('pencil_loader_seen', 'true');
-    } catch {
-      // sessionStorage might be restricted
-    }
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     setIsVisible(false);
     onComplete?.();
   }, [onComplete]);
 
-  // Session storage check & sequence progression
+  // Sequence progression
   useEffect(() => {
     if (shouldReduceMotion) {
+      setIsVisible(false);
       onComplete?.();
       return;
     }
-
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const forceIntro = urlParams.get('intro') === 'true';
-      const alreadySeen = sessionStorage.getItem('pencil_loader_seen');
-
-      if (alreadySeen && !forceIntro) {
-        onComplete?.();
-        return;
-      }
-    } catch {
-      // continue
-    }
-
-    // Show special loading animation
-    setIsVisible(true);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -125,11 +105,6 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
 
     // Phase 5: 'done' (5.4s) - Unmount and reveal portfolio
     const tDone = setTimeout(() => {
-      try {
-        sessionStorage.setItem('pencil_loader_seen', 'true');
-      } catch {
-        // ignore
-      }
       setIsVisible(false);
       onComplete?.();
     }, 5400);
