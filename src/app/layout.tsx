@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323, Gaegu, Quicksand, Fredoka, Rubik } from 'next/font/google';
+import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323, Gaegu, Quicksand, Fredoka, Rubik, Geist } from 'next/font/google';
 import { ThemeProvider, ThemeToggle } from '@/themes/ThemeContext';
 import './globals.css';
 
@@ -73,6 +73,13 @@ const rubik = Rubik({
   display: 'swap',
 });
 
+const geist = Geist({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-geist',
+  display: 'swap',
+});
+
 export const viewport: Viewport = {
   themeColor: '#7FD6FF',
   width: 'device-width',
@@ -135,7 +142,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable} ${gaegu.variable} ${quicksand.variable} ${fredoka.variable} ${rubik.variable}`}
+      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable} ${gaegu.variable} ${quicksand.variable} ${fredoka.variable} ${rubik.variable} ${geist.variable}`}
     >
       <body className="antialiased min-h-screen">
         <ThemeProvider>

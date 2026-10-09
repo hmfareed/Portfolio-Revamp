@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Clean rounded squircle backdrop -->
+  <rect width="64" height="64" rx="14" fill="#f9f9f9" />
+  <rect x="1" y="1" width="62" height="62" rx="13" stroke="#e5e5e5" stroke-width="2" />
+  
+  <!-- Geometric "M" left wing & peak in Brand Blue -->
+  <path d="M14 46V18h6l8 14 8-14h6v28h-6V27.5L28 41.5 20 27.5V46H14z" fill="#3248C3" />
+  
+  <!-- Geometric "F" accent & crossbar in Company Gold -->
+  <path d="M38 18h12v5H38v-5z" fill="#D1AA67" />
+  <path d="M38 29h8v4.5H38V29z" fill="#FFBF23" />
+</svg>

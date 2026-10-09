@@ -7,12 +7,14 @@ import * as brickTheme from './brick';
 import * as blockyTheme from './blocky';
 import * as chalkTheme from './chalk';
 import * as playgroundTheme from './playground';
+import * as goldBlueTheme from './gold-blue';
 
 function getActiveTheme(currentTheme: ThemeKey) {
   if (currentTheme === 'pencil') return pencilTheme;
   if (currentTheme === 'blocky') return blockyTheme;
   if (currentTheme === 'chalk') return chalkTheme;
   if (currentTheme === 'playground') return playgroundTheme;
+  if (currentTheme === 'gold-blue') return goldBlueTheme;
   return brickTheme;
 }
 
