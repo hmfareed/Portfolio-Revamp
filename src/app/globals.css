@@ -3,60 +3,18 @@
 @theme {
   --font-heading: var(--font-caveat), 'Caveat', cursive, sans-serif;
   --font-handwriting: var(--font-kalam), 'Kalam', cursive, sans-serif;
-  --font-lilita: var(--font-lilita), 'Lilita One', cursive, sans-serif;
-  --font-nunito: var(--font-nunito), 'Nunito', sans-serif;
-  --font-pixel: var(--font-pixel), 'Press Start 2P', monospace;
-  --font-vt323: var(--font-vt323), 'VT323', monospace;
-  --font-chalk-heading: var(--font-chalk-heading), 'Gaegu', cursive, sans-serif;
-  --font-chalk-body: var(--font-chalk-body), 'Quicksand', sans-serif;
-  --font-fredoka: var(--font-fredoka), 'Fredoka', cursive, sans-serif;
-  --font-rubik: var(--font-rubik), 'Rubik', sans-serif;
   --color-paper: #FBF8EF;
   --color-paper-dark: #F4EED9;
   --color-ruled: #A9C5E8;
   --color-margin: #E4572E;
   --color-graphite: #2B2B2B;
   --color-highlighter: #FFE66D;
-  --color-brick-red: #D1382B;
-  --color-brick-yellow: #FFC62B;
-  --color-brick-blue: #1F6FEB;
-  --color-brick-green: #2E9E4F;
-  --color-brick-white: #F4F1E8;
-  --color-brick-dark: #1A1F2B;
-  --color-blocky-sky: #7FD6FF;
-  --color-blocky-grass: #58B947;
-  --color-blocky-dirt: #8B5A2B;
-  --color-blocky-stone: #9AA3AD;
-  --color-blocky-gold: #FFD23F;
-  --color-chalk-slate: #2F4A3E;
-  --color-chalk-slate-dark: #23382F;
-  --color-chalk-wood: #8A5A33;
-  --color-chalk-white: #F2F0E6;
-  --color-chalk-pink: #F4A6B8;
-  --color-chalk-yellow: #F6D860;
-  --color-chalk-blue: #8EC5E8;
-  --color-playground-bg: #232527;
-  --color-playground-panel: #2F3133;
-  --color-playground-panel-light: #393B3D;
-  --color-playground-play: #00B06F;
-  --color-playground-blue: #2F7BFF;
-  --color-playground-yellow: #FFC933;
-  --color-playground-coral: #FF5A5F;
-  --color-playground-text: #F7F7F8;
 }
 
 @layer base {
   :root {
     --font-heading: var(--font-caveat), cursive, sans-serif;
     --font-handwriting: var(--font-kalam), cursive, sans-serif;
-    --font-lilita: var(--font-lilita), cursive, sans-serif;
-    --font-nunito: var(--font-nunito), sans-serif;
-    --font-pixel: var(--font-pixel), monospace;
-    --font-vt323: var(--font-vt323), monospace;
-    --font-chalk-heading: var(--font-chalk-heading), cursive, sans-serif;
-    --font-chalk-body: var(--font-chalk-body), sans-serif;
-    --font-fredoka: var(--font-fredoka), cursive, sans-serif;
-    --font-rubik: var(--font-rubik), sans-serif;
   }
 
   body {

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323, Gaegu, Quicksand, Fredoka, Rubik } from 'next/font/google';
-import { ThemeProvider, ThemeToggle } from '@/themes/ThemeContext';
-import { CURRENT_THEME_KEY } from '@/themes/theme.config';
+import { Caveat, Kalam } from 'next/font/google';
+import { ThemeProvider } from '@/themes/ThemeContext';
 import './globals.css';
 
 const caveat = Caveat({
@@ -18,65 +17,8 @@ const kalam = Kalam({
   display: 'swap',
 });
 
-const lilitaOne = Lilita_One({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-lilita',
-  display: 'swap',
-});
-
-const nunito = Nunito({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800', '900'],
-  variable: '--font-nunito',
-  display: 'swap',
-});
-
-const pressStart2P = Press_Start_2P({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-pixel',
-  display: 'swap',
-});
-
-const vt323 = VT323({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-vt323',
-  display: 'swap',
-});
-
-const gaegu = Gaegu({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-chalk-heading',
-  display: 'swap',
-});
-
-const quicksand = Quicksand({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-chalk-body',
-  display: 'swap',
-});
-
-const fredoka = Fredoka({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-fredoka',
-  display: 'swap',
-});
-
-const rubik = Rubik({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-rubik',
-  display: 'swap',
-});
-
-
 export const viewport: Viewport = {
-  themeColor: '#7FD6FF',
+  themeColor: '#ECE5D3',
   width: 'device-width',
   initialScale: 1,
 };
@@ -99,9 +41,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mohammed Fareed Mandeeya Haruna', url: 'https://github.com/hmfareed' }],
   creator: 'Mohammed Fareed',
   icons: {
-    icon: '/chalk-favicon.svg',
-    shortcut: '/chalk-favicon.svg',
-    apple: '/chalk-favicon.svg',
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     type: 'website',
@@ -138,11 +80,10 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable} ${gaegu.variable} ${quicksand.variable} ${fredoka.variable} ${rubik.variable}`}
+      className={`scroll-smooth ${caveat.variable} ${kalam.variable}`}
     >
       <body className="antialiased min-h-screen" suppressHydrationWarning>
-        <ThemeProvider defaultTheme={CURRENT_THEME_KEY}>
-          <ThemeToggle />
+        <ThemeProvider defaultTheme="pencil">
           {children}
         </ThemeProvider>
       </body>
