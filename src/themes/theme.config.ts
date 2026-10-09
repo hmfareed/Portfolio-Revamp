@@ -1,6 +1,7 @@
 import * as pencilTheme from './pencil';
 import * as brickTheme from './brick';
 import * as blockyTheme from './blocky';
+import * as chalkTheme from './chalk';
 import {
   DynamicPaperSheet,
   DynamicNotebookNav,
@@ -23,12 +24,13 @@ export const THEMES = {
   pencil: pencilTheme,
   brick: brickTheme,
   blocky: blockyTheme,
+  chalk: chalkTheme,
 } as const;
 
 export type ThemeKey = keyof typeof THEMES;
 
 // Default initial server fallback theme:
-export const CURRENT_THEME_KEY: ThemeKey = 'blocky';
+export const CURRENT_THEME_KEY: ThemeKey = 'chalk';
 
 /**
  * Standard active theme contract.

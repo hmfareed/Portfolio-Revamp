@@ -7,6 +7,8 @@
   --font-nunito: var(--font-nunito), 'Nunito', sans-serif;
   --font-pixel: var(--font-pixel), 'Press Start 2P', monospace;
   --font-vt323: var(--font-vt323), 'VT323', monospace;
+  --font-chalk-heading: var(--font-chalk-heading), 'Gaegu', cursive, sans-serif;
+  --font-chalk-body: var(--font-chalk-body), 'Quicksand', sans-serif;
   --color-paper: #FBF8EF;
   --color-paper-dark: #F4EED9;
   --color-ruled: #A9C5E8;
@@ -24,6 +26,13 @@
   --color-blocky-dirt: #8B5A2B;
   --color-blocky-stone: #9AA3AD;
   --color-blocky-gold: #FFD23F;
+  --color-chalk-slate: #2F4A3E;
+  --color-chalk-slate-dark: #23382F;
+  --color-chalk-wood: #8A5A33;
+  --color-chalk-white: #F2F0E6;
+  --color-chalk-pink: #F4A6B8;
+  --color-chalk-yellow: #F6D860;
+  --color-chalk-blue: #8EC5E8;
 }
 
 @layer base {
@@ -34,6 +43,8 @@
     --font-nunito: var(--font-nunito), sans-serif;
     --font-pixel: var(--font-pixel), monospace;
     --font-vt323: var(--font-vt323), monospace;
+    --font-chalk-heading: var(--font-chalk-heading), cursive, sans-serif;
+    --font-chalk-body: var(--font-chalk-body), sans-serif;
   }
 
   body {

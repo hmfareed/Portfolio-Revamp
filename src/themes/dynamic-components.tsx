@@ -5,10 +5,12 @@ import { useTheme, ThemeKey } from './ThemeContext';
 import * as pencilTheme from './pencil';
 import * as brickTheme from './brick';
 import * as blockyTheme from './blocky';
+import * as chalkTheme from './chalk';
 
 function getActiveTheme(currentTheme: ThemeKey) {
   if (currentTheme === 'pencil') return pencilTheme;
   if (currentTheme === 'blocky') return blockyTheme;
+  if (currentTheme === 'chalk') return chalkTheme;
   return brickTheme;
 }
 

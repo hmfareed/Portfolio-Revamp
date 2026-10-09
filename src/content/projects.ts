@@ -157,56 +157,6 @@ export const projectsContent: Project[] = [
     placeholders: []
   },
   {
-    slug: "threadly",
-    title: "Threadly — Clothing E-Commerce Site",
-    pitch: "Clothing storefront with Paystack checkout and Cloudinary-hosted product media, built with a two-person team.",
-    role: "Lead Developer",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "MongoDB/Mongoose",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "Paystack",
-      "Cloudinary",
-      "Vercel"
-    ],
-    categories: ["e-commerce"],
-    featured: false,
-    features: [
-      "Built with a two-person team, where you led the development.",
-      "Clothing storefront with Paystack checkout and Cloudinary-hosted product media."
-    ],
-    links: {
-      live: null,
-      github: null,
-      caseStudySlug: "threadly"
-    },
-    image: null,
-    placeholders: ["[Add: features, live link, screenshots.]"]
-  },
-  {
-    slug: "ai-order-assistant",
-    title: "AI Order Assistant — Multi-Tenant SaaS for Food Vendors",
-    pitch: "Multi-tenant SaaS for Ghanaian food vendors that takes orders across WhatsApp, SMS and voice, with POS support.",
-    role: "Full-Stack Developer",
-    stack: [
-      "[Add: stack]"
-    ],
-    categories: ["SaaS", "AI"],
-    featured: false,
-    features: [
-      "Multi-tenant SaaS for Ghanaian food vendors that takes orders across WhatsApp, SMS and voice, with POS support."
-    ],
-    links: {
-      live: null,
-      github: null,
-      caseStudySlug: "ai-order-assistant"
-    },
-    image: null,
-    placeholders: ["[Add: stack, how tenants are isolated, status, live link.]"]
-  },
-  {
     slug: "novelverse",
     title: "NovelVerse — Reading and Writing Platform",
     pitch: "Wattpad-style platform for reading and writing stories, with user roles, a coin-based economy and Clerk-powered subscriptions.",
@@ -230,27 +180,5 @@ export const projectsContent: Project[] = [
     },
     image: "/images/projects/novelverse.jpg",
     placeholders: ["[Add: stack, status, live link.]"]
-  },
-  {
-    slug: "buildtogether",
-    title: "BuildTogether — Startup Concept",
-    pitch: "A platform where people post projects and recruit collaborators by role, with verified contribution records once a project is completed.",
-    role: "Product Concept & Design",
-    stack: [
-      "Ideas I'm exploring"
-    ],
-    categories: ["SaaS"],
-    featured: false,
-    features: [
-      "A platform where people post projects and recruit collaborators by role, with verified contribution records once a project is completed.",
-      "Exploratory product concept showcasing spec-first thinking and collaborative developer workflows."
-    ],
-    links: {
-      live: null,
-      github: null,
-      caseStudySlug: "buildtogether"
-    },
-    image: null,
-    placeholders: []
   }
 ];

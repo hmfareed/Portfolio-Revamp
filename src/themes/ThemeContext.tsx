@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-export type ThemeKey = 'pencil' | 'brick' | 'blocky';
+export type ThemeKey = 'pencil' | 'brick' | 'blocky' | 'chalk';
 
 interface ThemeContextType {
   currentTheme: ThemeKey;
@@ -12,7 +12,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  currentTheme: 'blocky',
+  currentTheme: 'chalk',
   setTheme: () => {},
   toggleTheme: () => {},
 });
@@ -26,7 +26,7 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultTheme = 'blocky',
+  defaultTheme = 'chalk',
 }) => {
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>(defaultTheme);
   const [mounted, setMounted] = useState(false);
@@ -37,7 +37,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       const savedTheme = localStorage.getItem('portfolio_theme') as ThemeKey | null;
       if (
         savedTheme &&
-        (savedTheme === 'pencil' || savedTheme === 'brick' || savedTheme === 'blocky')
+        (savedTheme === 'pencil' ||
+          savedTheme === 'brick' ||
+          savedTheme === 'blocky' ||
+          savedTheme === 'chalk')
       ) {
         setCurrentTheme(savedTheme);
       }
@@ -62,6 +65,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         faviconEl.href = '/brick-favicon.svg';
       } else if (newTheme === 'blocky') {
         faviconEl.href = '/blocky-favicon.svg';
+      } else if (newTheme === 'chalk') {
+        faviconEl.href = '/chalk-favicon.svg';
       } else {
         faviconEl.href = '/favicon.svg';
       }
@@ -71,6 +76,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   const toggleTheme = () => {
     if (currentTheme === 'pencil') setTheme('brick');
     else if (currentTheme === 'brick') setTheme('blocky');
+    else if (currentTheme === 'blocky') setTheme('chalk');
     else setTheme('pencil');
   };
 
@@ -83,7 +89,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
 /**
  * Top Corner Floating Theme Toggle
- * Tactile pill in the top-right corner to switch between Pencil, Brick Builder, and Blocky Game World
+ * Tactile pill in the top-right corner to switch between Pencil, Brick, Blocky, and Chalkboard
  */
 export const ThemeToggle: React.FC = () => {
   const { currentTheme, setTheme } = useTheme();
@@ -92,7 +98,9 @@ export const ThemeToggle: React.FC = () => {
   let containerStyles = '';
   let containerInlineStyle: React.CSSProperties = {};
 
-  if (currentTheme === 'blocky') {
+  if (currentTheme === 'chalk') {
+    containerStyles = 'bg-[#263D33]/95 backdrop-blur-md border-2 border-dashed border-[#F2F0E6]/60 shadow-[0_6px_16px_rgba(0,0,0,0.5)]';
+  } else if (currentTheme === 'blocky') {
     containerStyles = 'bg-[#1E232A]/90 backdrop-blur-md border-3 border-black shadow-[0_6px_0_#0F1217]';
     containerInlineStyle = {
       boxShadow: 'inset 2px 2px 0 rgba(255,255,255,0.15), inset -2px -2px 0 rgba(0,0,0,0.6), 0 6px 0 #0F1217',
@@ -121,12 +129,10 @@ export const ThemeToggle: React.FC = () => {
           type="button"
           onClick={() => setTheme('pencil')}
           aria-pressed={currentTheme === 'pencil'}
-          className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+          className={`relative flex items-center gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             currentTheme === 'pencil'
               ? 'text-[#2B2B2B]'
-              : currentTheme === 'brick' || currentTheme === 'blocky'
-              ? 'text-stone-300 hover:text-white'
-              : 'text-stone-600 hover:text-[#2B2B2B]'
+              : 'text-stone-300 hover:text-white'
           }`}
         >
           {currentTheme === 'pencil' && (
@@ -140,7 +146,7 @@ export const ThemeToggle: React.FC = () => {
               }
             />
           )}
-          <span className="relative z-10 flex items-center gap-1.5 font-handwriting">
+          <span className="relative z-10 flex items-center gap-1 font-handwriting">
             <svg
               className="w-3.5 h-3.5 shrink-0"
               viewBox="0 0 24 24"
@@ -154,7 +160,7 @@ export const ThemeToggle: React.FC = () => {
               <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
               <path d="m15 5 4 4" />
             </svg>
-            <span>Pencil</span>
+            <span className="hidden sm:inline">Pencil</span>
           </span>
         </button>
 
@@ -163,11 +169,9 @@ export const ThemeToggle: React.FC = () => {
           type="button"
           onClick={() => setTheme('brick')}
           aria-pressed={currentTheme === 'brick'}
-          className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+          className={`relative flex items-center gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             currentTheme === 'brick'
               ? 'text-white'
-              : currentTheme === 'pencil'
-              ? 'text-stone-600 hover:text-[#2B2B2B]'
               : 'text-stone-300 hover:text-white'
           }`}
         >
@@ -186,8 +190,7 @@ export const ThemeToggle: React.FC = () => {
               }
             />
           )}
-          <span className="relative z-10 flex items-center gap-1.5 font-heading uppercase tracking-wider">
-            {/* Tiny 2-stud brick icon */}
+          <span className="relative z-10 flex items-center gap-1 font-heading uppercase tracking-wider">
             <svg
               className="w-3.5 h-3.5 shrink-0"
               viewBox="0 0 20 20"
@@ -198,7 +201,7 @@ export const ThemeToggle: React.FC = () => {
               <circle cx="6.5" cy="4" r="2" />
               <circle cx="13.5" cy="4" r="2" />
             </svg>
-            <span>Brick</span>
+            <span className="hidden sm:inline">Brick</span>
           </span>
         </button>
 
@@ -207,11 +210,9 @@ export const ThemeToggle: React.FC = () => {
           type="button"
           onClick={() => setTheme('blocky')}
           aria-pressed={currentTheme === 'blocky'}
-          className={`relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+          className={`relative flex items-center gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             currentTheme === 'blocky'
               ? 'text-[#1E232A]'
-              : currentTheme === 'pencil'
-              ? 'text-stone-600 hover:text-[#2B2B2B]'
               : 'text-stone-300 hover:text-white'
           }`}
         >
@@ -230,8 +231,7 @@ export const ThemeToggle: React.FC = () => {
               }
             />
           )}
-          <span className="relative z-10 flex items-center gap-1.5 font-pixel text-[10px] uppercase">
-            {/* Tiny pixel gamepad icon */}
+          <span className="relative z-10 flex items-center gap-1 font-pixel text-[10px] uppercase">
             <svg
               className="w-3.5 h-3.5 shrink-0"
               viewBox="0 0 24 24"
@@ -247,7 +247,50 @@ export const ThemeToggle: React.FC = () => {
               <circle cx="15" cy="11" r="1" fill="currentColor" />
               <circle cx="18" cy="13" r="1" fill="currentColor" />
             </svg>
-            <span>Blocky</span>
+            <span className="hidden sm:inline">Blocky</span>
+          </span>
+        </button>
+
+        {/* Chalk Option Button */}
+        <button
+          type="button"
+          onClick={() => setTheme('chalk')}
+          aria-pressed={currentTheme === 'chalk'}
+          className={`relative flex items-center gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+            currentTheme === 'chalk'
+              ? 'text-[#23382F]'
+              : 'text-stone-300 hover:text-white'
+          }`}
+        >
+          {currentTheme === 'chalk' && (
+            <motion.div
+              layoutId="theme-active-indicator"
+              className="absolute inset-0 bg-[#F6D860] rounded-xl border-b-2 border-[#D4B63A]"
+              style={{
+                boxShadow:
+                  'inset 0 1.5px 0 rgba(255, 255, 255, 0.6), 0 3px 6px rgba(0, 0, 0, 0.3)',
+              }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { type: 'spring', stiffness: 450, damping: 30 }
+              }
+            />
+          )}
+          <span className="relative z-10 flex items-center gap-1 font-heading text-sm sm:text-base font-bold">
+            <svg
+              className="w-3.5 h-3.5 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="14" width="18" height="6" rx="2" transform="rotate(-30 12 17)" fill="currentColor" opacity="0.3" />
+              <line x1="6" y1="18" x2="18" y2="10" strokeWidth="2.5" />
+            </svg>
+            <span className="hidden sm:inline">Chalk</span>
           </span>
         </button>
       </div>
