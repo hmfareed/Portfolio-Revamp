@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323, Gaegu, Quicksand, Fredoka, Rubik, Geist } from 'next/font/google';
 import { ThemeProvider, ThemeToggle } from '@/themes/ThemeContext';
+import { CURRENT_THEME_KEY } from '@/themes/theme.config';
 import './globals.css';
 
 const caveat = Caveat({
@@ -142,10 +143,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable} ${gaegu.variable} ${quicksand.variable} ${fredoka.variable} ${rubik.variable} ${geist.variable}`}
     >
-      <body className="antialiased min-h-screen">
-        <ThemeProvider>
+      <body className="antialiased min-h-screen" suppressHydrationWarning>
+        <ThemeProvider defaultTheme={CURRENT_THEME_KEY}>
           <ThemeToggle />
           {children}
         </ThemeProvider>

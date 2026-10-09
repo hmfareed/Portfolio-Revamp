@@ -9,12 +9,14 @@ interface ThemeContextType {
   currentTheme: ThemeKey;
   setTheme: (theme: ThemeKey) => void;
   toggleTheme: () => void;
+  mounted: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   currentTheme: 'gold-blue',
   setTheme: () => {},
   toggleTheme: () => {},
+  mounted: false,
 });
 
 export const useTheme = () => useContext(ThemeContext);
@@ -88,8 +90,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     else setTheme('pencil');
   };
 
+  // During SSR and the initial client hydration pass, guarantee that currentTheme matches defaultTheme
+  // to eliminate hydration mismatches against server-rendered HTML.
+  const activeThemeKey = mounted ? currentTheme : defaultTheme;
+
   return (
-    <ThemeContext.Provider value={{ currentTheme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ currentTheme: activeThemeKey, setTheme, toggleTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   );

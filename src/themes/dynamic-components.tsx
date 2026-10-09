@@ -11,11 +11,12 @@ import * as goldBlueTheme from './gold-blue';
 
 function getActiveTheme(currentTheme: ThemeKey) {
   if (currentTheme === 'pencil') return pencilTheme;
+  if (currentTheme === 'brick') return brickTheme;
   if (currentTheme === 'blocky') return blockyTheme;
   if (currentTheme === 'chalk') return chalkTheme;
   if (currentTheme === 'playground') return playgroundTheme;
   if (currentTheme === 'gold-blue') return goldBlueTheme;
-  return brickTheme;
+  return goldBlueTheme;
 }
 
 export function DynamicPaperSheet({ children }: { children: React.ReactNode }) {
