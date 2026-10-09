@@ -5,6 +5,8 @@
   --font-handwriting: var(--font-kalam), 'Kalam', cursive, sans-serif;
   --font-lilita: var(--font-lilita), 'Lilita One', cursive, sans-serif;
   --font-nunito: var(--font-nunito), 'Nunito', sans-serif;
+  --font-pixel: var(--font-pixel), 'Press Start 2P', monospace;
+  --font-vt323: var(--font-vt323), 'VT323', monospace;
   --color-paper: #FBF8EF;
   --color-paper-dark: #F4EED9;
   --color-ruled: #A9C5E8;
@@ -17,6 +19,11 @@
   --color-brick-green: #2E9E4F;
   --color-brick-white: #F4F1E8;
   --color-brick-dark: #1A1F2B;
+  --color-blocky-sky: #7FD6FF;
+  --color-blocky-grass: #58B947;
+  --color-blocky-dirt: #8B5A2B;
+  --color-blocky-stone: #9AA3AD;
+  --color-blocky-gold: #FFD23F;
 }
 
 @layer base {
@@ -25,6 +32,8 @@
     --font-handwriting: var(--font-kalam), cursive, sans-serif;
     --font-lilita: var(--font-lilita), cursive, sans-serif;
     --font-nunito: var(--font-nunito), sans-serif;
+    --font-pixel: var(--font-pixel), monospace;
+    --font-vt323: var(--font-vt323), monospace;
   }
 
   body {

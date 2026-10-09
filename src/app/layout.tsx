@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Caveat, Kalam, Lilita_One, Nunito } from 'next/font/google';
+import { Caveat, Kalam, Lilita_One, Nunito, Press_Start_2P, VT323 } from 'next/font/google';
 import { ThemeProvider, ThemeToggle } from '@/themes/ThemeContext';
 import './globals.css';
 
@@ -31,8 +31,22 @@ const nunito = Nunito({
   display: 'swap',
 });
 
+const pressStart2P = Press_Start_2P({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-pixel',
+  display: 'swap',
+});
+
+const vt323 = VT323({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-vt323',
+  display: 'swap',
+});
+
 export const viewport: Viewport = {
-  themeColor: '#2E9E4F',
+  themeColor: '#7FD6FF',
   width: 'device-width',
   initialScale: 1,
 };
@@ -55,9 +69,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mohammed Fareed Mandeeya Haruna', url: 'https://github.com/hmfareed' }],
   creator: 'Mohammed Fareed',
   icons: {
-    icon: '/brick-favicon.svg',
-    shortcut: '/brick-favicon.svg',
-    apple: '/brick-favicon.svg',
+    icon: '/blocky-favicon.svg',
+    shortcut: '/blocky-favicon.svg',
+    apple: '/blocky-favicon.svg',
   },
   openGraph: {
     type: 'website',
@@ -93,7 +107,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable}`}
+      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable} ${pressStart2P.variable} ${vt323.variable}`}
     >
       <body className="antialiased min-h-screen">
         <ThemeProvider>

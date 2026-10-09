@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- 3D Isometric Pixel-Art Grass Block Favicon -->
+  <!-- Top Face (Grass) -->
+  <polygon points="16,2 30,10 16,18 2,10" fill="#58B947" stroke="#1E232A" stroke-width="1.5" stroke-linejoin="round" />
+  <!-- Top Face Pixel Highlights -->
+  <polygon points="16,4 26,10 20,13 10,7" fill="#6BD656" />
+  <rect x="13" y="8" width="3" height="3" fill="#8CE878" />
+  <rect x="18" y="9" width="2" height="2" fill="#469C36" />
+  <rect x="8" y="10" width="3" height="2" fill="#469C36" />
+
+  <!-- Left Face (Dirt + Hanging Grass Fringe) -->
+  <polygon points="2,10 16,18 16,30 2,22" fill="#8B5A2B" stroke="#1E232A" stroke-width="1.5" stroke-linejoin="round" />
+  <!-- Left Face Grass Top Layer -->
+  <polygon points="2,10 16,18 16,21 12,20 10,22 7,20 4,21 2,18" fill="#58B947" />
+  <!-- Left Face Dirt Specks -->
+  <rect x="5" y="23" width="2" height="2" fill="#6A411B" />
+  <rect x="10" y="24" width="3" height="2" fill="#A8733E" />
+  <rect x="8" y="27" width="2" height="2" fill="#543212" />
+
+  <!-- Right Face (Dirt in Shadow + Grass Fringe) -->
+  <polygon points="16,18 30,10 30,22 16,30" fill="#6E441D" stroke="#1E232A" stroke-width="1.5" stroke-linejoin="round" />
+  <!-- Right Face Grass Top Layer -->
+  <polygon points="16,18 30,10 30,17 27,19 25,18 22,21 19,19 16,21" fill="#439433" />
+  <!-- Right Face Dirt Specks -->
+  <rect x="20" y="23" width="3" height="2" fill="#543212" />
+  <rect x="25" y="22" width="2" height="2" fill="#8B5A2B" />
+  <rect x="22" y="26" width="2" height="2" fill="#42250B" />
+</svg>
