@@ -96,15 +96,19 @@ export const ExperienceSection: React.FC = () => {
 
                     {item.logo && (
                       <div
-                        className="relative shrink-0 w-11 h-11 sm:w-13 sm:h-13 rounded-full border-2 border-[#2B2B2B] bg-[#FFFDF8] p-1 shadow-[2px_2px_0px_#2B2B2B] hover:scale-105 hover:rotate-3 transition-transform"
-                        title={`${item.organization} Company Logo`}
+                        className="relative shrink-0 w-11 h-11 sm:w-13 sm:h-13 rounded-full border-2 border-[#2B2B2B] bg-[#FFFDF8] overflow-hidden shadow-[2px_2px_0px_#2B2B2B] hover:scale-105 hover:rotate-3 transition-transform"
+                        title={item.id === 'freelance' ? 'Mohammed Fareed (Solo Full-Stack Developer)' : `${item.organization} Logo`}
                       >
                         <Image
                           src={item.logo}
-                          alt={`${item.organization} Logo`}
+                          alt={item.id === 'freelance' ? 'Mohammed Fareed' : `${item.organization} Logo`}
                           fill
                           sizes="52px"
-                          className="object-contain p-0.5 rounded-full"
+                          className={
+                            item.id === 'freelance'
+                              ? 'object-cover object-top'
+                              : 'object-contain p-1 rounded-full'
+                          }
                         />
                       </div>
                     )}

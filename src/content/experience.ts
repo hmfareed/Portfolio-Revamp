@@ -54,6 +54,7 @@ export const experienceContent: ExperienceItem[] = [
     period: "2025 – Present",
     type: "Freelance",
     location: "Remote / Tamale",
+    logo: "/images/profile/fareed.png",
     bullets: [
       "Designed, built and deployed full-stack web apps end to end for clients and personal ventures.",
       "Owned the full lifecycle: specs, Stitch/Banani UI prototyping, implementation and deployment.",
