@@ -32,7 +32,7 @@ export const THEMES = {
 export type ThemeKey = keyof typeof THEMES;
 
 // Default initial server fallback theme:
-export const CURRENT_THEME_KEY: ThemeKey = 'playground';
+export const CURRENT_THEME_KEY: ThemeKey = 'pencil';
 
 /**
  * Standard active theme contract.

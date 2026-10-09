@@ -23,14 +23,31 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
 
   return (
     <motion.div
-      initial={{ rotate: initialTilt }}
-      whileHover={shouldReduceMotion ? {} : { rotate: 0, y: -8, scale: 1.01 }}
-      transition={{ type: 'spring', stiffness: 350, damping: 25 }}
-      className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] transition-all p-6 md:p-8 ${className}`}
-      style={{ filter: 'url(#pencil-wobble)' }}
+      initial={
+        shouldReduceMotion
+          ? { opacity: 0 }
+          : { opacity: 0, y: 35, rotateY: initialTilt > 0 ? 10 : -10, rotate: initialTilt }
+      }
+      whileInView={{ opacity: 1, y: 0, rotateY: 0, rotate: initialTilt }}
+      viewport={{ once: true, amount: 0.15 }}
+      whileHover={shouldReduceMotion ? {} : { rotate: 0, y: -8, scale: 1.02 }}
+      whileTap={shouldReduceMotion ? {} : { scale: 0.99 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+      className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] hover:shadow-[6px_12px_0px_#2B2B2B] transition-shadow duration-300 p-6 md:p-8 ${className}`}
+      style={{
+        filter: 'url(#pencil-wobble)',
+        transformStyle: 'preserve-3d',
+      }}
     >
-      {/* Top Masking Tape Strip */}
-      <TapeStrip className="-top-3 left-1/2 -translate-x-1/2" angle={initialTilt > 0 ? -1.5 : 2} />
+      {/* Top Masking Tape Strip with press-down animation */}
+      <motion.div
+        initial={shouldReduceMotion ? {} : { scale: 1.25, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.25, type: 'spring', stiffness: 350, damping: 18 }}
+      >
+        <TapeStrip className="-top-3 left-1/2 -translate-x-1/2" angle={initialTilt > 0 ? -1.5 : 2} />
+      </motion.div>
 
       {/* Spiral bound perforated edge at the top */}
       {hasSpiralEdge && (
@@ -47,14 +64,20 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
         </div>
       )}
 
-      {/* Margin doodle slot if provided */}
+      {/* Margin doodle slot if provided, pops after card settles */}
       {doodleSlot && (
-        <div className="absolute -top-3 -right-3 pointer-events-none z-10">
+        <motion.div
+          initial={shouldReduceMotion ? {} : { scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.35, type: 'spring', stiffness: 400, damping: 15 }}
+          className="absolute -top-3 -right-3 pointer-events-none z-10"
+        >
           {doodleSlot}
-        </div>
+        </motion.div>
       )}
 
-      <div className={hasSpiralEdge ? "pt-2" : ""}>
+      <div className={hasSpiralEdge ? 'pt-2' : ''}>
         {children}
       </div>
     </motion.div>

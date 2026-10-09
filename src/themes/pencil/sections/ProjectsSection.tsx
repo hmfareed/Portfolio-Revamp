@@ -10,6 +10,7 @@ import { TornPageCard } from '../primitives/TornPageCard';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { PlaceholderSlot } from '../primitives/PlaceholderSlot';
 import { StarDoodle, CodeBracketsDoodle, ArrowDoodle, GithubDoodle } from '../primitives/Doodles';
+import { FallingPencilShavings } from '../animations/SectionTransitions';
 import { ExternalLink, FileText, Sparkles } from 'lucide-react';
 
 const CATEGORIES: { label: string; value: 'all' | ProjectCategory }[] = [
@@ -227,6 +228,9 @@ export const ProjectsSection: React.FC = () => {
           })}
         </AnimatePresence>
       </motion.div>
+
+      {/* Falling pencil shavings transition to Experience */}
+      <FallingPencilShavings />
     </section>
   );
 };

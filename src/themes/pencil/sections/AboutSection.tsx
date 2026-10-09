@@ -6,6 +6,8 @@ import { aboutContent } from '@/content/about';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { StickyNote } from '../primitives/StickyNote';
 import { CheckmarkDoodle, PaperclipDoodle, StarDoodle } from '../primitives/Doodles';
+import { HighlighterSwipe } from '../animations/HighlighterSwipe';
+import { TornEdgeSlide } from '../animations/SectionTransitions';
 
 export const AboutSection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -37,9 +39,9 @@ export const AboutSection: React.FC = () => {
           {aboutContent.story.map((paragraph, idx) => (
             <p key={idx} className="relative">
               {idx === 0 && (
-                <span className="inline-block px-1.5 py-0.5 mr-1 bg-[#FFE66D]/70 rounded-xs font-bold text-[#2B2B2B]">
+                <HighlighterSwipe color="#FFE66D" className="mr-1 font-bold text-[#2B2B2B]">
                   Hello!
-                </span>
+                </HighlighterSwipe>
               )}
               {paragraph}
             </p>
@@ -106,6 +108,9 @@ export const AboutSection: React.FC = () => {
           </StickyNote>
         </motion.div>
       </div>
+
+      {/* Torn paper edge slide transition */}
+      <TornEdgeSlide />
     </section>
   );
 };

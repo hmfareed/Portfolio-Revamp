@@ -2,6 +2,11 @@
 
 import React from 'react';
 import { PencilFilters } from '../primitives/PencilFilters';
+import { PencilLoader } from '../animations/PencilLoader';
+import { MarginPencilScroll } from '../animations/MarginPencilScroll';
+import { HandDrawnCursor } from '../animations/HandDrawnCursor';
+import { BackgroundParallaxDoodles } from '../animations/BackgroundParallaxDoodles';
+import { ScribbleGuy } from '../animations/ScribbleGuy';
 
 interface PaperSheetProps {
   children: React.ReactNode;
@@ -10,6 +15,21 @@ interface PaperSheetProps {
 export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
   return (
     <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] font-handwriting overflow-x-hidden selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
+      {/* Session-guarded Landing Page Pencil Sketch & Eraser Loader */}
+      <PencilLoader />
+
+      {/* Desktop fine-pointer custom graphite pencil cursor & eraser mode */}
+      <HandDrawnCursor />
+
+      {/* Left red margin pencil scroll progress tracker */}
+      <MarginPencilScroll />
+
+      {/* Floating velocity-reactive margin stick figure */}
+      <ScribbleGuy />
+
+      {/* Layered background parallax doodles */}
+      <BackgroundParallaxDoodles />
+
       {/* SVG filter definitions for pencil tremor and textures */}
       <PencilFilters />
 

@@ -8,6 +8,9 @@ import { aboutContent } from '@/content/about';
 import { StampButton } from '../primitives/StampButton';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { StarDoodle, ArrowDoodle, CodeBracketsDoodle, TapeStrip } from '../primitives/Doodles';
+import { HighlighterSwipe } from '../animations/HighlighterSwipe';
+import { PageCornerCurl } from '../animations/SectionTransitions';
+import { pencilMotion } from '../motion.config';
 
 export const HeroSection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -32,9 +35,9 @@ export const HeroSection: React.FC = () => {
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.85rem] font-heading font-bold text-[#2B2B2B] leading-tight mb-4">
             Full-stack developer building{' '}
-            <span className="relative inline-block bg-[#FFE66D]/70 px-1 rounded-xs">
+            <HighlighterSwipe color="#FFE66D">
               payment-ready
-            </span>{' '}
+            </HighlighterSwipe>{' '}
             web products for the{' '}
             <span className="relative inline-block">
               Ghanaian market.
@@ -47,33 +50,51 @@ export const HeroSection: React.FC = () => {
             {heroContent.subline}
           </p>
 
-          {/* Action Stamp Buttons */}
+          {/* Action Stamp Buttons with sticker pop entrance */}
           <div className="flex flex-wrap items-center gap-4 sm:gap-5 w-full sm:w-auto">
-            <StampButton
-              href="#projects"
-              variant="highlighter"
-              className="text-lg px-6 py-3"
+            <motion.div
+              initial={shouldReduceMotion ? {} : { scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.15, type: 'spring', stiffness: 350, damping: 18 }}
             >
-              <span>{heroContent.buttons.projects}</span>
-              <ArrowDoodle className="w-5 h-5 text-[#2B2B2B]" direction="right" />
-            </StampButton>
+              <StampButton
+                href="#projects"
+                variant="highlighter"
+                className="text-lg px-6 py-3"
+              >
+                <span>{heroContent.buttons.projects}</span>
+                <ArrowDoodle className="w-5 h-5 text-[#2B2B2B]" direction="right" />
+              </StampButton>
+            </motion.div>
 
-            <StampButton
-              href="/Mohammed-Fareed_Resume.pdf"
-              download="Mohammed-Fareed_Resume.pdf"
-              variant="stamp-red"
-              className="text-base px-5 py-3"
+            <motion.div
+              initial={shouldReduceMotion ? {} : { scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.25, type: 'spring', stiffness: 350, damping: 18 }}
             >
-              <span>{heroContent.buttons.resume}</span>
-            </StampButton>
+              <StampButton
+                href="/Mohammed-Fareed_Resume.pdf"
+                download="Mohammed-Fareed_Resume.pdf"
+                variant="stamp-red"
+                className="text-base px-5 py-3"
+              >
+                <span>{heroContent.buttons.resume}</span>
+              </StampButton>
+            </motion.div>
 
-            <StampButton
-              href="#contact"
-              variant="pencil"
-              className="text-base px-5 py-3"
+            <motion.div
+              initial={shouldReduceMotion ? {} : { scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.35, type: 'spring', stiffness: 350, damping: 18 }}
             >
-              <span>{heroContent.buttons.contact}</span>
-            </StampButton>
+              <StampButton
+                href="#contact"
+                variant="pencil"
+                className="text-base px-5 py-3"
+              >
+                <span>{heroContent.buttons.contact}</span>
+              </StampButton>
+            </motion.div>
           </div>
 
           {/* Quick status doodle indicator */}
@@ -151,19 +172,30 @@ export const HeroSection: React.FC = () => {
             'Tailwind CSS',
             'AI Integrations',
           ].map((tech, idx) => (
-            <span
+            <motion.span
               key={tech}
+              initial={shouldReduceMotion ? {} : { y: -35, opacity: 0, rotate: (idx % 2 === 0 ? -4 : 4) }}
+              whileInView={{ y: 0, opacity: 1, rotate: ((idx % 3) - 1) * 1 }}
+              viewport={{ once: true }}
+              transition={{
+                delay: idx * pencilMotion.staggers.stickyNotes,
+                type: 'spring',
+                stiffness: 280,
+                damping: 18,
+              }}
               className="px-3 py-1 rounded-sm bg-white/90 border border-stone-800 text-stone-800 text-sm font-bold shadow-[2px_2px_0px_#2B2B2B] hover:-translate-y-0.5 transition-transform"
               style={{
                 filter: 'url(#pencil-wobble)',
-                transform: `rotate(${(idx % 3 - 1) * 1}deg)`,
               }}
             >
               #{tech}
-            </span>
+            </motion.span>
           ))}
         </div>
       </div>
+
+      {/* Page corner curl transition to next section */}
+      <PageCornerCurl />
     </section>
   );
 };

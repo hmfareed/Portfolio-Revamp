@@ -7,6 +7,7 @@ import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { StampButton } from '../primitives/StampButton';
 import { TapeStrip, CheckmarkDoodle, ArrowDoodle, GithubDoodle, LinkedinDoodle } from '../primitives/Doodles';
 import { sendContactEmail, ContactFormState } from '@/app/actions/send-contact';
+import { PaperAirplaneSuccess } from '../animations/PaperAirplaneSuccess';
 import { Mail, MapPin, Send, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const initialState: ContactFormState = {};
@@ -297,6 +298,9 @@ export const ContactSection: React.FC = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Origami Paper Airplane Launch on Form Dispatch */}
+      <PaperAirplaneSuccess show={Boolean(state.success)} />
     </section>
   );
 };

@@ -13,7 +13,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  currentTheme: 'playground',
+  currentTheme: 'pencil',
   setTheme: () => {},
   toggleTheme: () => {},
   mounted: false,
@@ -28,7 +28,7 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultTheme = 'playground',
+  defaultTheme = 'pencil',
 }) => {
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>(defaultTheme);
   const [mounted, setMounted] = useState(false);

@@ -68,10 +68,19 @@ export const SkillsSection: React.FC = () => {
           return (
             <motion.div
               key={group.id}
-              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={
+                shouldReduceMotion
+                  ? { opacity: 0 }
+                  : { y: -60, opacity: 0, rotate: group.tilt * 2.5 }
+              }
+              whileInView={{ y: 0, opacity: 1, rotate: group.tilt }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.4, delay: idx * 0.07 }}
+              transition={{
+                type: 'spring',
+                stiffness: 260,
+                damping: 19,
+                delay: idx * 0.08,
+              }}
               className="h-full flex"
             >
               <StickyNote
@@ -90,19 +99,45 @@ export const SkillsSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Handwritten skill tags */}
+                  {/* Handwritten skill tags scribbling in one by one */}
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {group.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="inline-block text-xs sm:text-sm font-handwriting font-medium px-2 py-0.5 rounded-xs bg-white/70 border border-stone-700/60 text-stone-900 shadow-2xs hover:bg-white transition-colors"
-                        style={{
-                          filter: 'url(#pencil-wobble)',
-                        }}
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                    {group.skills.map((skill, sIdx) => {
+                      // Scratch-out correction easter egg on two specific skills: TypeScript and Next.js
+                      const isScratchout =
+                        (group.id === 'languages' && skill === 'TypeScript') ||
+                        (group.id === 'frontend' && skill === 'Next.js');
+
+                      return (
+                        <motion.span
+                          key={sIdx}
+                          initial={shouldReduceMotion ? {} : { scale: 0.8, opacity: 0 }}
+                          whileInView={{ scale: 1, opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{
+                            delay: idx * 0.05 + sIdx * 0.035,
+                            type: 'spring',
+                            stiffness: 340,
+                            damping: 18,
+                          }}
+                          className="relative inline-flex items-center text-xs sm:text-sm font-handwriting font-medium px-2 py-0.5 rounded-xs bg-white/70 border border-stone-700/60 text-stone-900 shadow-2xs hover:bg-white transition-colors"
+                          style={{
+                            filter: 'url(#pencil-wobble)',
+                          }}
+                        >
+                          {isScratchout ? (
+                            <span className="inline-flex items-center gap-1">
+                              {/* Struck-through intentional typo */}
+                              <span className="relative text-stone-400 line-through decoration-[#E4572E] decoration-2 text-[11px]">
+                                {skill === 'TypeScript' ? 'TypeScrpt' : 'Nxt.js'}
+                              </span>
+                              <span className="font-bold text-[#2B2B2B]">{skill}</span>
+                            </span>
+                          ) : (
+                            <span>{skill}</span>
+                          )}
+                        </motion.span>
+                      );
+                    })}
                   </div>
                 </div>
 

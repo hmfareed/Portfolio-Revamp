@@ -7,6 +7,9 @@ import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { PencilCircle } from '../primitives/PencilCircle';
 import { PlaceholderSlot } from '../primitives/PlaceholderSlot';
 import { ArrowDoodle } from '../primitives/Doodles';
+import { CounterNumber } from '../animations/CounterNumber';
+import { DoodleBurst } from '../animations/SectionTransitions';
+import { pencilMotion } from '../motion.config';
 
 export const ExperienceSection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -43,19 +46,30 @@ export const ExperienceSection: React.FC = () => {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="relative group"
               >
-                {/* Hand-drawn timeline node dot */}
-                <div
+                {/* Hand-drawn timeline node dot with pop */}
+                <motion.div
+                  initial={shouldReduceMotion ? {} : { scale: 0 }}
+                  whileInView={{ scale: [0, 1.3, 1] }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 + 0.1, type: 'spring', stiffness: 400, damping: 15 }}
                   className="absolute -left-[27px] sm:-left-[35px] md:-left-[43px] top-1.5 w-6 h-6 rounded-full bg-[#FFE66D] border-2 border-[#2B2B2B] flex items-center justify-center shadow-xs"
                   style={{ filter: 'url(#pencil-wobble)' }}
                   aria-hidden="true"
                 >
                   <span className="w-2 h-2 rounded-full bg-[#2B2B2B]" />
-                </div>
+                </motion.div>
 
-                {/* Entry Content Card */}
-                <div
+                {/* Entry Content Card with paper unfold effect */}
+                <motion.div
+                  initial={shouldReduceMotion ? {} : { rotateX: -15, opacity: 0 }}
+                  whileInView={{ rotateX: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.1 }}
                   className="bg-white/80 p-5 sm:p-7 rounded-xs border-2 border-[#2B2B2B] shadow-[3px_4px_0px_#2B2B2B] transition-transform hover:-translate-y-1"
-                  style={{ filter: 'url(#pencil-wobble)' }}
+                  style={{
+                    filter: 'url(#pencil-wobble)',
+                    transformOrigin: 'top center',
+                  }}
                 >
                   {/* Top metadata row */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2 font-handwriting">
@@ -85,9 +99,11 @@ export const ExperienceSection: React.FC = () => {
                     <div className="my-4 flex flex-wrap items-center gap-6 p-3 bg-amber-50/80 border border-stone-300 rounded-xs font-handwriting">
                       {item.highlightStats.map((stat, sIdx) => (
                         <div key={sIdx} className="flex items-center gap-2">
-                          <PencilCircle strokeColor="#E4572E" className="font-heading text-2xl sm:text-3xl font-bold text-[#2B2B2B]">
-                            {stat.value}
-                          </PencilCircle>
+                          <CounterNumber
+                            value={stat.value}
+                            strokeColor="#E4572E"
+                            className="font-heading text-2xl sm:text-3xl font-bold text-[#2B2B2B]"
+                          />
                           <span className="text-sm sm:text-base text-stone-700">
                             {stat.label}
                           </span>
@@ -116,7 +132,7 @@ export const ExperienceSection: React.FC = () => {
                       ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
               </motion.div>
             );
           })}
@@ -128,6 +144,9 @@ export const ExperienceSection: React.FC = () => {
           <span className="text-base italic">Continuously building and shipping software</span>
         </div>
       </div>
+
+      {/* Doodle burst section transition */}
+      <DoodleBurst />
     </section>
   );
 };
