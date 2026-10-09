@@ -87,7 +87,7 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
         } else {
           setStatusText(STATUS_MESSAGES[4]);
           setSketchManPose('cheering');
-          setSpeech('Ready! Let&apos;s go! ✎');
+          setSpeech("Ready! Let's go! ✎");
         }
 
         if (rawP < 100) {
@@ -130,7 +130,7 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.35, ease: 'easeInOut' } }}
         onClick={handleSkip}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-[#ECE5D3] select-none cursor-pointer overflow-hidden will-change-opacity"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-[#ECE5D3] select-none cursor-pointer overflow-hidden will-change-opacity p-3 sm:p-6"
       >
         {/* Vintage Desk Mat Background Texture */}
         <div
@@ -149,53 +149,53 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
             e.stopPropagation();
             handleSkip();
           }}
-          className="absolute top-5 right-5 sm:top-6 sm:right-8 z-30 px-3.5 py-1.5 font-handwriting text-sm sm:text-base font-bold text-stone-800 bg-white/90 border-2 border-stone-800 rounded-xs shadow-xs hover:bg-[#FFE66D] hover:text-[#2B2B2B] transition-colors cursor-pointer"
+          className="absolute top-4 right-4 sm:top-6 sm:right-8 z-30 px-3.5 sm:px-4 py-1.5 sm:py-2 font-handwriting text-sm sm:text-base font-bold text-stone-800 bg-white/95 border-2 border-stone-800 rounded-xs shadow-xs hover:bg-[#FFE66D] hover:text-[#2B2B2B] transition-colors cursor-pointer"
         >
           Skip Intro [Esc] ➔
         </button>
 
-        {/* The 3D Exercise Book Notebook Stage */}
+        {/* The Bigger, Cinematic 3D Exercise Book Notebook Stage */}
         <div
-          className="relative w-[92vw] max-w-[440px] sm:max-w-[480px] h-[520px] sm:h-[560px]"
-          style={{ perspective: 1400 }}
+          className="relative w-[96vw] max-w-[560px] sm:max-w-[640px] md:max-w-[720px] lg:max-w-[780px] h-[580px] sm:h-[660px] md:h-[740px] max-h-[92vh]"
+          style={{ perspective: 1600 }}
         >
-          {/* Notebook Base Drop Shadow */}
-          <div className="absolute inset-0 bg-black/25 rounded-md filter blur-md transform translate-y-4 translate-x-3 pointer-events-none" />
+          {/* Realistic Heavy Notebook Drop Shadow */}
+          <div className="absolute inset-0 bg-black/30 rounded-lg filter blur-lg transform translate-y-5 translate-x-4 pointer-events-none" />
 
           {/* LAYER 1: Inside Page (Page 1) - revealed when cover flips open */}
-          <div className="absolute inset-0 bg-[#FBF8EF] rounded-r-md border-2 border-[#2B2B2B] shadow-xl overflow-hidden flex flex-col justify-between p-6 sm:p-8">
-            {/* Ruled Blue Lines */}
+          <div className="absolute inset-0 bg-[#FBF8EF] rounded-r-lg border-2 border-[#2B2B2B] shadow-2xl overflow-hidden flex flex-col justify-between p-6 sm:p-10 md:p-12">
+            {/* Ruled Blue Lines repeating cleanly across full sheet */}
             <div
               className="pointer-events-none absolute inset-0 opacity-40"
               style={{
                 backgroundImage:
-                  'repeating-linear-gradient(to bottom, transparent, transparent 31px, #A9C5E8 31px, #A9C5E8 32px)',
+                  'repeating-linear-gradient(to bottom, transparent, transparent 33px, #A9C5E8 33px, #A9C5E8 34px)',
               }}
             />
 
             {/* Red Left Margin Line */}
-            <div className="pointer-events-none absolute top-0 bottom-0 left-12 w-0.5 bg-[#E4572E]/70">
+            <div className="pointer-events-none absolute top-0 bottom-0 left-14 sm:left-20 w-0.5 bg-[#E4572E]/70">
               <div className="absolute top-0 bottom-0 -left-1 w-[1px] bg-[#E4572E]/30" />
             </div>
 
             {/* Page Header */}
-            <div className="relative z-10 pl-8">
-              <div className="flex items-center justify-between border-b border-[#A9C5E8] pb-2">
-                <span className="font-mono text-xs text-stone-500 font-bold uppercase tracking-wider">
-                  Page 01 · Portfolio
+            <div className="relative z-10 pl-10 sm:pl-14">
+              <div className="flex items-center justify-between border-b-2 border-[#A9C5E8] pb-2 sm:pb-3">
+                <span className="font-mono text-xs sm:text-sm text-stone-500 font-bold uppercase tracking-wider">
+                  Page 01 · Portfolio Blueprint
                 </span>
-                <span className="font-handwriting text-xs text-stone-600 font-bold">
-                  Date: 2026
+                <span className="font-handwriting text-sm sm:text-base text-stone-600 font-bold">
+                  Edition: 2026
                 </span>
               </div>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#2B2B2B] mt-2">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[#2B2B2B] mt-2 sm:mt-3 leading-tight">
                 Mohammed Fareed
               </h2>
-              <div className="w-32 h-1 bg-[#E4572E] rounded-full mt-1" />
+              <div className="w-40 sm:w-56 h-1.5 bg-[#E4572E] rounded-full mt-1.5" />
             </div>
 
-            {/* Center Area: Sketch Man Action Stage */}
-            <div className="relative z-10 flex flex-col items-center justify-center my-auto pl-6">
+            {/* Center Area: Scaled-Up Sketch Man Action Stage */}
+            <div className="relative z-10 flex flex-col items-center justify-center my-auto pl-6 sm:pl-10">
               {/* Floating Speech Bubble */}
               <AnimatePresence>
                 {speech && (
@@ -205,21 +205,21 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0, opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="mb-2 bg-[#FFE66D] border-2 border-[#2B2B2B] px-3 py-1 rounded-xs text-xs sm:text-sm font-handwriting font-bold whitespace-nowrap shadow-xs relative"
+                    className="mb-3 bg-[#FFE66D] border-2 border-[#2B2B2B] px-4 py-1.5 rounded-xs text-sm sm:text-base font-handwriting font-bold whitespace-nowrap shadow-xs relative"
                   >
                     <span>{speech}</span>
-                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#FFE66D] border-r-2 border-b-2 border-[#2B2B2B] rotate-45" />
+                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#FFE66D] border-r-2 border-b-2 border-[#2B2B2B] rotate-45" />
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              {/* Hand-Drawn Sketch Man Stick Figure */}
-              <div className="relative w-16 h-22 flex items-center justify-center">
+              {/* Hand-Drawn Sketch Man Stick Figure (Scaled Up ~22% for commanding presence) */}
+              <div className="relative w-20 h-28 sm:w-24 sm:h-34 flex items-center justify-center">
                 <svg
                   viewBox="0 0 52 74"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-14 h-20 text-[#2B2B2B] drop-shadow-xs"
+                  className="w-full h-full text-[#2B2B2B] drop-shadow-sm"
                 >
                   {/* Head */}
                   <circle
@@ -304,36 +304,38 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                 </svg>
 
                 {/* Ambient Doodles around Sketch Man */}
-                <span className="absolute -left-6 top-2 text-stone-500 font-mono text-xs">
+                <span className="absolute -left-8 top-3 text-stone-600 font-mono text-sm sm:text-base font-bold">
                   &lt;/&gt;
                 </span>
-                <span className="absolute -right-6 top-1 text-amber-500 font-bold text-sm">
+                <span className="absolute -right-8 top-2 text-amber-500 font-bold text-base sm:text-xl">
                   ★
                 </span>
-                <span className="absolute -right-8 bottom-3 text-stone-700 text-xs">
+                <span className="absolute -right-10 bottom-4 text-stone-800 text-sm sm:text-base">
                   ☕
                 </span>
               </div>
             </div>
 
             {/* Bottom Progress Bar on Ruled Line */}
-            <div className="relative z-10 pl-8">
-              <div className="flex items-center justify-between font-handwriting text-xs sm:text-sm font-bold text-stone-700 mb-1">
+            <div className="relative z-10 pl-10 sm:pl-14">
+              <div className="flex items-center justify-between font-handwriting text-sm sm:text-base md:text-lg font-bold text-stone-700 mb-1.5">
                 <span>{statusText}</span>
-                <span className="font-mono text-xs text-stone-800">{progress}%</span>
+                <span className="font-mono text-xs sm:text-sm text-stone-900 font-bold bg-amber-100 px-2 py-0.5 rounded-xs border border-stone-400">
+                  {progress}%
+                </span>
               </div>
 
               {/* Ruled Notebook Line Loading Bar */}
-              <div className="relative w-full h-3 border-b-2 border-dashed border-[#A9C5E8]">
+              <div className="relative w-full h-3.5 sm:h-4 border-b-2 border-dashed border-[#A9C5E8]">
                 {/* Pencil line drawn across */}
                 <div
-                  className="absolute left-0 bottom-[-2px] h-[3px] bg-[#2B2B2B] rounded-full transition-all duration-75"
+                  className="absolute left-0 bottom-[-2px] h-[3.5px] bg-[#2B2B2B] rounded-full transition-all duration-75"
                   style={{ width: `${progress}%` }}
                 />
                 {/* Tiny graphite tip indicator riding the line */}
                 <div
-                  className="absolute bottom-[-6px] w-2.5 h-2.5 rounded-full bg-[#E4572E] transition-all duration-75"
-                  style={{ left: `calc(${progress}% - 5px)` }}
+                  className="absolute bottom-[-6px] w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#E4572E] transition-all duration-75 shadow-xs"
+                  style={{ left: `calc(${progress}% - 6px)` }}
                 />
               </div>
             </div>
@@ -353,12 +355,12 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
               transformOrigin: 'left center',
               transformStyle: 'preserve-3d',
             }}
-            className="absolute inset-0 bg-[#243E31] rounded-r-md border-2 border-[#172820] shadow-2xl flex flex-col justify-between overflow-hidden"
+            className="absolute inset-0 bg-[#223B2F] rounded-r-lg border-2 border-[#15251D] shadow-2xl flex flex-col justify-between overflow-hidden"
           >
-            {/* Left Spine Tape Binding (Black & Gold exercise book spine) */}
-            <div className="absolute top-0 bottom-0 left-0 w-9 bg-[#172820] border-r border-amber-600/40 z-20 flex flex-col items-center justify-around py-4">
-              {Array.from({ length: 9 }).map((_, i) => (
-                <div key={i} className="w-1.5 h-3 border-l border-amber-400/50" />
+            {/* Left Spine Tape Binding (Black & Gold vintage exercise book spine) */}
+            <div className="absolute top-0 bottom-0 left-0 w-11 sm:w-14 bg-[#15251D] border-r-2 border-amber-600/40 z-20 flex flex-col items-center justify-around py-5">
+              {Array.from({ length: 11 }).map((_, i) => (
+                <div key={i} className="w-2 sm:w-2.5 h-3.5 border-l-2 border-amber-400/50" />
               ))}
             </div>
 
@@ -373,51 +375,51 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
             />
 
             {/* Cover Content / School Label Area */}
-            <div className="relative z-10 pl-14 pr-6 pt-10 pb-8 h-full flex flex-col justify-between">
+            <div className="relative z-10 pl-16 sm:pl-22 pr-6 sm:pr-10 pt-10 sm:pt-14 pb-8 sm:pb-12 h-full flex flex-col justify-between">
               {/* Top Cover Header */}
-              <div className="text-center border-b border-amber-200/30 pb-3">
-                <span className="font-mono text-[10px] tracking-widest uppercase text-amber-200/80 font-bold block">
+              <div className="text-center border-b border-amber-200/30 pb-3 sm:pb-4">
+                <span className="font-mono text-xs sm:text-sm tracking-widest uppercase text-amber-200/90 font-bold block mb-1">
                   ★ EXERCISE BOOK · SPECIAL EDITION ★
                 </span>
-                <span className="font-heading text-lg font-bold text-amber-100 tracking-wider">
+                <span className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-amber-100 tracking-wider">
                   MOHAMMED FAREED
                 </span>
               </div>
 
-              {/* The Classic School Exercise Book Label Sticker */}
-              <div className="bg-[#FAF7EB] border-3 border-double border-[#2B2B2B] rounded-xs p-5 shadow-lg relative my-auto">
-                <div className="text-center border-b border-stone-300 pb-2 mb-3">
-                  <span className="font-mono text-xs uppercase tracking-wider font-bold text-stone-800">
+              {/* The Classic School Exercise Book Label Sticker (Expanded & Centered) */}
+              <div className="bg-[#FAF7EB] border-4 border-double border-[#2B2B2B] rounded-sm p-6 sm:p-8 md:p-10 shadow-xl relative my-auto">
+                <div className="text-center border-b-2 border-stone-300 pb-2.5 mb-4">
+                  <span className="font-mono text-xs sm:text-sm uppercase tracking-wider font-bold text-stone-800">
                     CS PORTFOLIO RECORD
                   </span>
                 </div>
 
                 {/* Form fields */}
-                <div className="space-y-2.5 font-handwriting text-sm sm:text-base text-stone-800">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-bold text-xs uppercase font-mono text-stone-600">NAME:</span>
-                    <span className="font-bold text-base sm:text-lg text-[#2B2B2B] border-b border-stone-400 flex-1 pl-1">
+                <div className="space-y-3 sm:space-y-4 font-handwriting text-base sm:text-lg md:text-xl text-stone-800">
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="font-bold text-xs sm:text-sm uppercase font-mono text-stone-600">NAME:</span>
+                    <span className="font-bold text-lg sm:text-2xl md:text-3xl text-[#2B2B2B] border-b-2 border-stone-400 flex-1 pl-1.5">
                       Mohammed Fareed
                     </span>
                   </div>
 
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-bold text-xs uppercase font-mono text-stone-600">SUBJECT:</span>
-                    <span className="border-b border-stone-400 flex-1 pl-1 text-sm font-semibold text-stone-700">
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="font-bold text-xs sm:text-sm uppercase font-mono text-stone-600">SUBJECT:</span>
+                    <span className="border-b-2 border-stone-400 flex-1 pl-1.5 text-base sm:text-xl font-semibold text-stone-700">
                       Full-Stack · Next.js · MERN
                     </span>
                   </div>
 
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-bold text-xs uppercase font-mono text-stone-600">LEVEL:</span>
-                    <span className="border-b border-stone-400 flex-1 pl-1 text-sm font-semibold text-stone-700">
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="font-bold text-xs sm:text-sm uppercase font-mono text-stone-600">LEVEL:</span>
+                    <span className="border-b-2 border-stone-400 flex-1 pl-1.5 text-sm sm:text-lg font-semibold text-stone-700">
                       Level 400 BSc Computer Science
                     </span>
                   </div>
 
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-bold text-xs uppercase font-mono text-stone-600">SCHOOL:</span>
-                    <span className="border-b border-stone-400 flex-1 pl-1 text-xs font-semibold text-stone-600">
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="font-bold text-xs sm:text-sm uppercase font-mono text-stone-600">SCHOOL:</span>
+                    <span className="border-b-2 border-stone-400 flex-1 pl-1.5 text-xs sm:text-base font-semibold text-stone-600">
                       UTAS Navrongo, Ghana
                     </span>
                   </div>
@@ -426,18 +428,18 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                 {/* Red Rubber Stamp that slams onto the label */}
                 <motion.div
                   initial={{ scale: 2.2, opacity: 0, rotate: -25 }}
-                  animate={{ scale: 1, opacity: 0.9, rotate: -12 }}
+                  animate={{ scale: 1, opacity: 0.95, rotate: -12 }}
                   transition={{ delay: 0.45, type: 'spring', stiffness: 450, damping: 18 }}
-                  className="absolute -bottom-3.5 -right-3 px-3 py-1 border-2 border-dashed border-[#E4572E] text-[#E4572E] font-heading font-black text-xs uppercase tracking-widest rounded-xs bg-[#FAF7EB]/90 shadow-xs"
+                  className="absolute -bottom-4 -right-4 px-4 sm:px-5 py-1.5 sm:py-2 border-3 border-dashed border-[#E4572E] text-[#E4572E] font-heading font-black text-xs sm:text-sm uppercase tracking-widest rounded-xs bg-[#FAF7EB] shadow-md"
                 >
                   ★ APPROVED ★
                 </motion.div>
               </div>
 
               {/* Bottom Cover Metadata */}
-              <div className="flex items-center justify-between text-[11px] font-mono text-amber-200/60 pt-2 border-t border-amber-200/20">
+              <div className="flex items-center justify-between text-xs sm:text-sm font-mono text-amber-200/70 pt-2.5 border-t border-amber-200/20">
                 <span>PENCIL THEME · 2026</span>
-                <span className="animate-pulse">Opening notebook...</span>
+                <span className="animate-pulse font-bold">Opening notebook...</span>
               </div>
             </div>
           </motion.div>
@@ -452,8 +454,8 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
             className="absolute inset-0 bg-[#F4A6B8]/35 backdrop-blur-[2px] pointer-events-none flex items-center justify-end pr-10 z-40"
           >
             {/* Eraser block trailing edge */}
-            <div className="w-20 h-56 bg-[#F4A6B8] border-3 border-[#2B2B2B] rounded-sm shadow-2xl flex items-center justify-center -rotate-12">
-              <span className="font-mono text-[11px] uppercase font-bold text-[#2B2B2B] -rotate-90 tracking-widest">
+            <div className="w-24 h-64 bg-[#F4A6B8] border-3 border-[#2B2B2B] rounded-sm shadow-2xl flex items-center justify-center -rotate-12">
+              <span className="font-mono text-xs uppercase font-bold text-[#2B2B2B] -rotate-90 tracking-widest">
                 ERASER
               </span>
             </div>
