@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Caveat, Kalam } from 'next/font/google';
+import { Caveat, Kalam, Lilita_One, Nunito } from 'next/font/google';
+import { activeTheme } from '@/themes/theme.config';
 import './globals.css';
 
 const caveat = Caveat({
@@ -16,8 +17,22 @@ const kalam = Kalam({
   display: 'swap',
 });
 
+const lilitaOne = Lilita_One({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-lilita',
+  display: 'swap',
+});
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800', '900'],
+  variable: '--font-nunito',
+  display: 'swap',
+});
+
 export const viewport: Viewport = {
-  themeColor: '#FBF8EF',
+  themeColor: '#2E9E4F',
   width: 'device-width',
   initialScale: 1,
 };
@@ -40,9 +55,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mohammed Fareed Mandeeya Haruna', url: 'https://github.com/hmfareed' }],
   creator: 'Mohammed Fareed',
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: activeTheme.tokens.favicon,
+    shortcut: activeTheme.tokens.favicon,
+    apple: activeTheme.tokens.favicon,
   },
   openGraph: {
     type: 'website',
@@ -76,8 +91,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${caveat.variable} ${kalam.variable}`}>
-      <body className="font-handwriting bg-[#FBF8EF] text-[#2B2B2B] antialiased min-h-screen">
+    <html
+      lang="en"
+      className={`scroll-smooth ${caveat.variable} ${kalam.variable} ${lilitaOne.variable} ${nunito.variable}`}
+    >
+      <body className="antialiased min-h-screen">
         {children}
       </body>
     </html>

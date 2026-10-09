@@ -9,7 +9,7 @@ interface PaperSheetProps {
 
 export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
   return (
-    <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] overflow-x-hidden selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
+    <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] font-handwriting overflow-x-hidden selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
       {/* SVG filter definitions for pencil tremor and textures */}
       <PencilFilters />
 

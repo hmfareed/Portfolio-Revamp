@@ -3,28 +3,32 @@
 @theme {
   --font-heading: var(--font-caveat), 'Caveat', cursive, sans-serif;
   --font-handwriting: var(--font-kalam), 'Kalam', cursive, sans-serif;
+  --font-lilita: var(--font-lilita), 'Lilita One', cursive, sans-serif;
+  --font-nunito: var(--font-nunito), 'Nunito', sans-serif;
   --color-paper: #FBF8EF;
   --color-paper-dark: #F4EED9;
   --color-ruled: #A9C5E8;
   --color-margin: #E4572E;
   --color-graphite: #2B2B2B;
   --color-highlighter: #FFE66D;
+  --color-brick-red: #D1382B;
+  --color-brick-yellow: #FFC62B;
+  --color-brick-blue: #1F6FEB;
+  --color-brick-green: #2E9E4F;
+  --color-brick-white: #F4F1E8;
+  --color-brick-dark: #1A1F2B;
 }
 
 @layer base {
   :root {
     --font-heading: var(--font-caveat), cursive, sans-serif;
     --font-handwriting: var(--font-kalam), cursive, sans-serif;
+    --font-lilita: var(--font-lilita), cursive, sans-serif;
+    --font-nunito: var(--font-nunito), sans-serif;
   }
 
   body {
-    background-color: #FBF8EF;
-    color: #2B2B2B;
-    font-family: var(--font-handwriting);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    min-height: 100vh;
   }
 
   /* Accessible visible focus states */

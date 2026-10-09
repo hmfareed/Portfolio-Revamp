@@ -1,4 +1,5 @@
 export * from './tokens';
+export { pencilTokens as tokens } from './tokens';
 export * from './layout/PaperSheet';
 export * from './layout/NotebookNav';
 export * from './layout/PencilFooter';

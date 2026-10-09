@@ -29,5 +29,6 @@ export const pencilTokens = {
     pencilThin: '1.5px solid #2B2B2B',
     pencilMedium: '2px solid #2B2B2B',
     pencilThick: '3px solid #2B2B2B',
-  }
+  },
+  favicon: '/favicon.svg',
 } as const;
