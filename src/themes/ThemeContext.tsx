@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
-export type ThemeKey = 'pencil' | 'brick' | 'blocky' | 'chalk' | 'playground' | 'gold-blue';
+export type ThemeKey = 'pencil' | 'brick' | 'blocky' | 'chalk' | 'playground';
 
 interface ThemeContextType {
   currentTheme: ThemeKey;
@@ -13,7 +13,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  currentTheme: 'gold-blue',
+  currentTheme: 'playground',
   setTheme: () => {},
   toggleTheme: () => {},
   mounted: false,
@@ -28,7 +28,7 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultTheme = 'gold-blue',
+  defaultTheme = 'playground',
 }) => {
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>(defaultTheme);
   const [mounted, setMounted] = useState(false);
@@ -43,8 +43,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
           savedTheme === 'brick' ||
           savedTheme === 'blocky' ||
           savedTheme === 'chalk' ||
-          savedTheme === 'playground' ||
-          savedTheme === 'gold-blue')
+          savedTheme === 'playground')
       ) {
         setCurrentTheme(savedTheme);
       }
@@ -73,8 +72,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
         faviconEl.href = '/chalk-favicon.svg';
       } else if (newTheme === 'playground') {
         faviconEl.href = '/playground-favicon.svg';
-      } else if (newTheme === 'gold-blue') {
-        faviconEl.href = '/gold-blue-favicon.svg';
       } else {
         faviconEl.href = '/favicon.svg';
       }
@@ -86,7 +83,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     else if (currentTheme === 'brick') setTheme('blocky');
     else if (currentTheme === 'blocky') setTheme('chalk');
     else if (currentTheme === 'chalk') setTheme('playground');
-    else if (currentTheme === 'playground') setTheme('gold-blue');
     else setTheme('pencil');
   };
 
@@ -202,27 +198,6 @@ const THEME_OPTIONS: ThemeOption[] = [
       </svg>
     ),
   },
-  {
-    key: 'gold-blue',
-    label: 'Gold Blue',
-    tagline: 'Clean corporate tech aesthetic',
-    icon: (className = 'w-4 h-4') => (
-      <svg
-        className={className}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="9" stroke="#3248C3" strokeWidth="2.5" />
-        <path d="M12 7v10" stroke="#D1AA67" strokeWidth="2.5" />
-        <path d="M8 12h8" stroke="#D1AA67" strokeWidth="2.5" />
-      </svg>
-    ),
-  },
 ];
 
 /**
@@ -286,17 +261,11 @@ export const ThemeToggle: React.FC = () => {
           fontClass: 'font-heading text-base',
         };
       case 'playground':
+      default:
         return {
           className:
             'bg-[#2F3133] text-[#00B06F] border-2 border-[#00B06F] shadow-[0_4px_12px_rgba(0,176,111,0.25)] hover:bg-[#393B3D]',
           fontClass: 'font-heading text-sm font-bold',
-        };
-      case 'gold-blue':
-      default:
-        return {
-          className:
-            'bg-white text-[#1a1a1a] border border-[#e5e5e5] shadow-xs hover:border-[#3248C3] hover:text-[#3248C3]',
-          fontClass: 'font-sans text-xs sm:text-sm font-semibold tracking-tight',
         };
     }
   };
@@ -313,10 +282,8 @@ export const ThemeToggle: React.FC = () => {
       case 'chalk':
         return 'bg-[#263D33] border-2 border-dashed border-[#F2F0E6]/70 shadow-[0_12px_28px_rgba(0,0,0,0.6)] text-[#F2F0E6]';
       case 'playground':
-        return 'bg-[#2F3133] border-2 border-[#393B3D] shadow-[0_16px_32px_rgba(0,0,0,0.6)] text-[#F7F7F8]';
-      case 'gold-blue':
       default:
-        return 'bg-white border border-[#e5e5e5] shadow-[0_16px_36px_rgba(0,0,0,0.12)] text-[#1a1a1a]';
+        return 'bg-[#2F3133] border-2 border-[#393B3D] shadow-[0_16px_32px_rgba(0,0,0,0.6)] text-[#F7F7F8]';
     }
   };
 
@@ -381,7 +348,7 @@ export const ThemeToggle: React.FC = () => {
             {/* Header label */}
             <div className="flex items-center justify-between px-2.5 py-1.5 pb-2 mb-1 border-b border-white/10 text-[11px] font-mono uppercase tracking-wider opacity-60">
               <span>Switch Theme</span>
-              <span>6 Themes</span>
+              <span>5 Themes</span>
             </div>
 
             {/* List of Theme Items */}
@@ -408,9 +375,7 @@ export const ThemeToggle: React.FC = () => {
                           ? 'bg-[#FFD23F] text-[#1E232A] font-bold'
                           : currentTheme === 'chalk'
                           ? 'bg-[#F6D860] text-[#23382F] font-bold'
-                          : currentTheme === 'playground'
-                          ? 'bg-[#00B06F] text-white font-bold'
-                          : 'bg-[#3248C3] text-white font-bold'
+                          : 'bg-[#00B06F] text-white font-bold'
                         : 'hover:bg-white/10 opacity-80 hover:opacity-100'
                     }`}
                   >

@@ -11,7 +11,6 @@
   --font-chalk-body: var(--font-chalk-body), 'Quicksand', sans-serif;
   --font-fredoka: var(--font-fredoka), 'Fredoka', cursive, sans-serif;
   --font-rubik: var(--font-rubik), 'Rubik', sans-serif;
-  --font-geist: var(--font-geist), 'Geist', sans-serif;
   --color-paper: #FBF8EF;
   --color-paper-dark: #F4EED9;
   --color-ruled: #A9C5E8;
@@ -44,17 +43,6 @@
   --color-playground-yellow: #FFC933;
   --color-playground-coral: #FF5A5F;
   --color-playground-text: #F7F7F8;
-  --color-gold-company: #D1AA67;
-  --color-gold-product: #FFBF23;
-  --color-gold-blue-brand: #3248C3;
-  --color-gold-blue-sec: #118ab2;
-  --color-gold-green-1: #2ECC71;
-  --color-gold-green-2: #06d6a0;
-  --color-gold-orange: #C76E00;
-  --color-gold-red: #FF0000;
-  --color-gold-fg: #1a1a1a;
-  --color-gold-muted: #6b6b6b;
-  --color-gold-bg: #f9f9f9;
 }
 
 @layer base {
@@ -69,7 +57,6 @@
     --font-chalk-body: var(--font-chalk-body), sans-serif;
     --font-fredoka: var(--font-fredoka), cursive, sans-serif;
     --font-rubik: var(--font-rubik), sans-serif;
-    --font-geist: var(--font-geist), sans-serif;
   }
 
   body {
