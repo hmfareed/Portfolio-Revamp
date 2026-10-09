@@ -135,10 +135,26 @@ export const ProjectsSection: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#2B2B2B] leading-snug mb-2">
-                      {project.title}
-                    </h3>
+                    {/* Title with optional client logo */}
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#2B2B2B] leading-snug">
+                        {project.title}
+                      </h3>
+                      {project.slug === 'hanara-sms' && (
+                        <div
+                          className="relative shrink-0 w-8 h-9 rounded-xs border border-[#2B2B2B] bg-[#FFFDF8] p-0.5 shadow-2xs hover:scale-105 transition-transform"
+                          title="Hanara Schools Official Crest"
+                        >
+                          <Image
+                            src="/images/logos/hanara-schools.png"
+                            alt="Hanara Schools Logo"
+                            fill
+                            sizes="36px"
+                            className="object-contain"
+                          />
+                        </div>
+                      )}
+                    </div>
 
                     {/* Pitch */}
                     <p className="font-handwriting text-base text-stone-700 leading-snug mb-4">

@@ -66,6 +66,7 @@ export const experienceContent: ExperienceItem[] = [
     period: "Sep 2024 – Present",
     type: "Full-time",
     location: "Tamale · Hybrid",
+    logo: "/images/logos/hanara-schools.png",
     bullets: [
       "Architected and built an end-to-end School Management System across two campuses, supporting 790+ active students, multi-stream classes, fee reconciliation and academic reporting.",
       "Engineered IndexedDB/Dexie local caching and background sync with UUID idempotency keys so staff can record fees and attendance during network outages.",

@@ -55,10 +55,27 @@ export const AboutSection: React.FC = () => {
             <div className="absolute -top-3 -right-2">
               <PaperclipDoodle className="w-5 h-8 text-stone-600" />
             </div>
-            <h3 className="font-heading text-xl font-bold text-[#2B2B2B] mb-2 flex items-center gap-2">
-              <StarDoodle className="w-5 h-5 text-amber-500" />
-              <span>Teaching shapes my software</span>
-            </h3>
+
+            <div className="flex items-start justify-between gap-4 mb-2">
+              <h3 className="font-heading text-xl font-bold text-[#2B2B2B] flex items-center gap-2">
+                <StarDoodle className="w-5 h-5 text-amber-500" />
+                <span>Teaching shapes my software</span>
+              </h3>
+
+              <div
+                className="relative shrink-0 w-11 h-12 rounded-xs border border-[#2B2B2B] bg-[#FFFDF8] p-1 shadow-[2px_2px_0px_#2B2B2B] hover:scale-105 transition-transform"
+                title="Hanara Schools Crest"
+              >
+                <Image
+                  src="/images/logos/hanara-schools.png"
+                  alt="Hanara Schools Logo"
+                  fill
+                  sizes="44px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
             <p className="text-base sm:text-lg text-stone-800 mb-2">
               {aboutContent.teachingExperience.classes}
             </p>
@@ -98,6 +115,19 @@ export const AboutSection: React.FC = () => {
                         fill
                         sizes="20px"
                         className="object-contain p-0.5"
+                      />
+                    </span>
+                  ) : fact.includes('Hanara') ? (
+                    <span
+                      className="relative w-5 h-5 rounded-xs border border-[#2B2B2B] overflow-hidden shrink-0 mt-0.5 shadow-2xs inline-block bg-[#FFFDF8]"
+                      title="Hanara Schools Crest"
+                    >
+                      <Image
+                        src="/images/logos/hanara-schools.png"
+                        alt="Hanara Schools Logo"
+                        fill
+                        sizes="20px"
+                        className="object-contain"
                       />
                     </span>
                   ) : (
