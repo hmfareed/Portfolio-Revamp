@@ -6,13 +6,19 @@ import { motion, useReducedMotion } from 'framer-motion';
 interface HandDrawnUnderlineProps {
   className?: string;
   color?: string;
+  active?: boolean;
 }
 
 export const HandDrawnUnderline: React.FC<HandDrawnUnderlineProps> = ({
   className = "w-full h-3 mt-1",
-  color = "#2B2B2B"
+  color = "#2B2B2B",
+  active,
 }) => {
   const shouldReduceMotion = useReducedMotion();
+
+  // If active is explicitly provided, drive animation directly; otherwise fallback to whileInView
+  const isAnimated = active !== undefined ? active : false;
+  const isControlled = active !== undefined;
 
   return (
     <svg
@@ -30,12 +36,21 @@ export const HandDrawnUnderline: React.FC<HandDrawnUnderlineProps> = ({
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={shouldReduceMotion ? { opacity: 0 } : { pathLength: 0, opacity: 0 }}
-        whileInView={shouldReduceMotion ? { opacity: 1 } : { pathLength: 1, opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
+        animate={
+          isControlled
+            ? (isAnimated || shouldReduceMotion ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 })
+            : undefined
+        }
+        whileInView={
+          !isControlled
+            ? (shouldReduceMotion ? { opacity: 1 } : { pathLength: 1, opacity: 1 })
+            : undefined
+        }
+        viewport={!isControlled ? { once: true, amount: 0.8 } : undefined}
         transition={{
           duration: shouldReduceMotion ? 0.3 : 0.8,
           ease: "easeInOut",
-          delay: 0.15
+          delay: isControlled ? 0 : 0.15
         }}
         style={{ filter: "url(#pencil-wobble)" }}
       />
@@ -46,12 +61,21 @@ export const HandDrawnUnderline: React.FC<HandDrawnUnderlineProps> = ({
         strokeLinecap="round"
         strokeOpacity="0.55"
         initial={shouldReduceMotion ? { opacity: 0 } : { pathLength: 0, opacity: 0 }}
-        whileInView={shouldReduceMotion ? { opacity: 1 } : { pathLength: 1, opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
+        animate={
+          isControlled
+            ? (isAnimated || shouldReduceMotion ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 })
+            : undefined
+        }
+        whileInView={
+          !isControlled
+            ? (shouldReduceMotion ? { opacity: 1 } : { pathLength: 1, opacity: 1 })
+            : undefined
+        }
+        viewport={!isControlled ? { once: true, amount: 0.8 } : undefined}
         transition={{
           duration: shouldReduceMotion ? 0.3 : 0.7,
           ease: "easeInOut",
-          delay: 0.35
+          delay: isControlled ? 0.15 : 0.35
         }}
         style={{ filter: "url(#pencil-wobble)" }}
       />

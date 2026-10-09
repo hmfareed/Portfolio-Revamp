@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { PencilFilters } from '../primitives/PencilFilters';
 import { PencilLoader } from '../animations/PencilLoader';
 import { MarginPencilScroll } from '../animations/MarginPencilScroll';
@@ -9,16 +10,32 @@ import { BackgroundParallaxDoodles } from '../animations/BackgroundParallaxDoodl
 import { JumpingSketchMan } from '../animations/JumpingSketchMan';
 import { DogEarBookmark } from '../animations/DogEarBookmark';
 import { MarginDoodlePad } from '../animations/MarginDoodlePad';
+import { PencilLoaderProvider, usePencilLoaderContext } from '../context/PencilLoaderContext';
 
 interface PaperSheetProps {
   children: React.ReactNode;
 }
 
-export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
+const PaperSheetInner: React.FC<PaperSheetProps> = ({ children }) => {
+  const { isLoaded, markLoaded } = usePencilLoaderContext();
+  const shouldReduceMotion = useReducedMotion();
+
+  // Safety fallback: Ensure page is always visible even if loader is interrupted
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      markLoaded();
+      return;
+    }
+    const timer = setTimeout(() => {
+      markLoaded();
+    }, 6200);
+    return () => clearTimeout(timer);
+  }, [markLoaded, shouldReduceMotion]);
+
   return (
     <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] font-handwriting overflow-x-clip selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
-      {/* Session-guarded Landing Page Pencil Sketch & Eraser Loader */}
-      <PencilLoader />
+      {/* 3D Exercise Book Loader with 100% Celebration & Dive Transition */}
+      <PencilLoader onComplete={markLoaded} />
 
       {/* Desktop fine-pointer custom graphite pencil cursor & eraser mode */}
       <HandDrawnCursor />
@@ -83,10 +100,23 @@ export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
         <div className="absolute top-0 bottom-0 -left-1 w-[1px] bg-[#E4572E]/40" />
       </div>
 
-      {/* Main page content area with responsive margin indent on desktop */}
-      <div className="relative z-20 md:pl-16 lg:pl-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      {/* Main page content area with smooth entrance reveal */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+        animate={{ opacity: isLoaded || shouldReduceMotion ? 1 : 0 }}
+        transition={{ duration: 0.65, ease: 'easeOut' }}
+        className="relative z-20 md:pl-16 lg:pl-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"
+      >
         {children}
-      </div>
+      </motion.div>
     </div>
+  );
+};
+
+export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
+  return (
+    <PencilLoaderProvider>
+      <PaperSheetInner>{children}</PaperSheetInner>
+    </PencilLoaderProvider>
   );
 };

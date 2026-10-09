@@ -1,6 +1,7 @@
 export * from './tokens';
 export { pencilTokens as tokens } from './tokens';
 export * from './motion.config';
+export * from './context/PencilLoaderContext';
 export * from './layout/PaperSheet';
 export * from './layout/NotebookNav';
 export * from './layout/PencilFooter';

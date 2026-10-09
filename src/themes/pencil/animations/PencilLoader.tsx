@@ -12,13 +12,27 @@ const STATUS_MESSAGES = [
   'Ruling notebook margins...',
   'Drafting project blueprints...',
   'Checking code & notes...',
-  'Ready! Opening site...',
+  'Ready! Launching portfolio... ★',
+];
+
+// Celebratory doodle particles for the 100% explosion
+const CELEBRATION_PARTICLES = [
+  { id: 1, symbol: '★', color: '#F59E0B', x: -75, y: -85, rot: -20, size: 'text-2xl', delay: 0 },
+  { id: 2, symbol: '✦', color: '#3B82F6', x: 80, y: -90, rot: 25, size: 'text-xl', delay: 0.04 },
+  { id: 3, symbol: '✎', color: '#E4572E', x: -110, y: -35, rot: -45, size: 'text-2xl', delay: 0.08 },
+  { id: 4, symbol: '100%', color: '#B91C1C', x: 0, y: -130, rot: -4, size: 'text-base font-bold font-mono', delay: 0.06 },
+  { id: 5, symbol: '✔', color: '#059669', x: 95, y: -30, rot: 15, size: 'text-xl font-bold', delay: 0.1 },
+  { id: 6, symbol: '★', color: '#E4572E', x: -45, y: -115, rot: 12, size: 'text-lg', delay: 0.12 },
+  { id: 7, symbol: '✧', color: '#8B5CF6', x: 60, y: -120, rot: -18, size: 'text-xl', delay: 0.14 },
+  { id: 8, symbol: '☕', color: '#78350F', x: -120, y: 15, rot: 10, size: 'text-lg', delay: 0.16 },
+  { id: 9, symbol: '&lt;/&gt;', color: '#1F2937', x: 110, y: 20, rot: -12, size: 'text-xs font-mono font-bold', delay: 0.18 },
+  { id: 10, symbol: '★', color: '#F59E0B', x: 25, y: -145, rot: 30, size: 'text-xl', delay: 0.1 },
 ];
 
 export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
   const shouldReduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(true);
-  const [phase, setPhase] = useState<'cover' | 'flipping' | 'sketching' | 'erasing' | 'done'>('cover');
+  const [phase, setPhase] = useState<'cover' | 'flipping' | 'sketching' | 'celebration' | 'dive' | 'done'>('cover');
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState(STATUS_MESSAGES[0]);
   const [sketchManPose, setSketchManPose] = useState<'waving' | 'drawing' | 'cheering'>('waving');
@@ -48,14 +62,14 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
     };
     window.addEventListener('keydown', handleKeyDown);
 
-    // Timeline Progression
-    // Phase 1: 'cover' (0.0s - 1.8s) - Cover is displayed, name signed, stamp hits
+    // Timeline Progression:
+    // Phase 1: 'cover' (0.0s - 1.8s) - 3D Notebook Cover is displayed, stamp slams down
     // Phase 2: 'flipping' (1.8s - 2.6s) - Cover 3D flips open
     const tCoverFlip = setTimeout(() => {
       setPhase('flipping');
     }, 1800);
 
-    // Phase 3: 'sketching' (2.6s - 4.7s) - Sketch Man hops onto Page 1, draws progress
+    // Phase 3: 'sketching' (2.6s - 4.4s) - Sketch Man draws progress 0% -> 100%
     const tSketching = setTimeout(() => {
       setPhase('sketching');
       setSketchManPose('waving');
@@ -64,12 +78,11 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
       // Switch to drawing after initial wave
       setTimeout(() => {
         setSketchManPose('drawing');
-        setSpeech('Sketching site...');
-      }, 700);
+        setSpeech('Drafting site...');
+      }, 600);
 
-      // Start smooth RAF progress bar from 2.6s to 4.6s (2000ms duration)
       const startTime = Date.now();
-      const duration = 2000;
+      const duration = 1800; // 1.8s smooth progress
 
       const updateProgress = () => {
         const elapsed = Date.now() - startTime;
@@ -86,35 +99,38 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
           setStatusText(STATUS_MESSAGES[3]);
         } else {
           setStatusText(STATUS_MESSAGES[4]);
-          setSketchManPose('cheering');
-          setSpeech("Ready! Let's go! ✎");
         }
 
         if (rawP < 100) {
           animFrameRef.current = requestAnimationFrame(updateProgress);
+        } else {
+          // Exactly at 100% -> Trigger the celebration phase!
+          setPhase('celebration');
+          setSketchManPose('cheering');
+          setSpeech("🎉 TA-DA! 100% READY!");
         }
       };
 
       animFrameRef.current = requestAnimationFrame(updateProgress);
     }, 2550);
 
-    // Phase 4: 'erasing' (4.7s - 5.4s) - Eraser swipe transition
-    const tErasing = setTimeout(() => {
-      setPhase('erasing');
-    }, 4750);
+    // Phase 4 -> Phase 5: 'dive' (5.3s) - Zoom into notebook page
+    const tDive = setTimeout(() => {
+      setPhase('dive');
+    }, 5300);
 
-    // Phase 5: 'done' (5.4s) - Unmount and reveal portfolio
+    // Phase 6: 'done' (6.0s) - Unmount and trigger landing page reveal
     const tDone = setTimeout(() => {
       setIsVisible(false);
       onComplete?.();
-    }, 5400);
+    }, 6000);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
       clearTimeout(tCoverFlip);
       clearTimeout(tSketching);
-      clearTimeout(tErasing);
+      clearTimeout(tDive);
       clearTimeout(tDone);
     };
   }, [shouldReduceMotion, handleSkip, onComplete]);
@@ -128,9 +144,12 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
         role="presentation"
         aria-hidden="true"
         initial={{ opacity: 1 }}
-        exit={{ opacity: 0, transition: { duration: 0.35, ease: 'easeInOut' } }}
+        animate={{
+          opacity: phase === 'dive' ? 0 : 1,
+        }}
+        exit={{ opacity: 0, transition: { duration: 0.4, ease: 'easeInOut' } }}
         onClick={handleSkip}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-[#ECE5D3] select-none cursor-pointer overflow-hidden will-change-opacity p-3 sm:p-6"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-[#ECE5D3] select-none cursor-pointer overflow-hidden p-3 sm:p-6 transition-opacity duration-700"
       >
         {/* Vintage Desk Mat Background Texture */}
         <div
@@ -154,9 +173,28 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
           Skip Intro [Esc] ➔
         </button>
 
-        {/* The Bigger, Cinematic 3D Exercise Book Notebook Stage */}
-        <div
-          className="relative w-[96vw] max-w-[560px] sm:max-w-[640px] md:max-w-[720px] lg:max-w-[780px] h-[580px] sm:h-[660px] md:h-[740px] max-h-[92vh]"
+        {/* The 3D Exercise Book Notebook Stage with Dive-In Zoom Transition */}
+        <motion.div
+          animate={
+            phase === 'dive'
+              ? {
+                  scale: 2.7,
+                  opacity: 0,
+                  filter: 'blur(5px)',
+                  y: 30,
+                }
+              : {
+                  scale: 1,
+                  opacity: 1,
+                  filter: 'blur(0px)',
+                  y: 0,
+                }
+          }
+          transition={{
+            duration: 0.7,
+            ease: [0.65, 0, 0.35, 1],
+          }}
+          className="relative w-[96vw] max-w-[560px] sm:max-w-[640px] md:max-w-[720px] lg:max-w-[780px] h-[580px] sm:h-[660px] md:h-[740px] max-h-[92vh] origin-center"
           style={{ perspective: 1600 }}
         >
           {/* Realistic Heavy Notebook Drop Shadow */}
@@ -194,7 +232,7 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
               <div className="w-40 sm:w-56 h-1.5 bg-[#E4572E] rounded-full mt-1.5" />
             </div>
 
-            {/* Center Area: Scaled-Up Sketch Man Action Stage */}
+            {/* Center Area: Scaled-Up Sketch Man Action & 100% Celebration Stage */}
             <div className="relative z-10 flex flex-col items-center justify-center my-auto pl-6 sm:pl-10">
               {/* Floating Speech Bubble */}
               <AnimatePresence>
@@ -204,8 +242,12 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                     initial={{ scale: 0, opacity: 0, y: 8 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="mb-3 bg-[#FFE66D] border-2 border-[#2B2B2B] px-4 py-1.5 rounded-xs text-sm sm:text-base font-handwriting font-bold whitespace-nowrap shadow-xs relative"
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    className={`mb-3 border-2 border-[#2B2B2B] px-4 py-1.5 rounded-xs text-sm sm:text-base font-handwriting font-bold whitespace-nowrap shadow-xs relative ${
+                      phase === 'celebration'
+                        ? 'bg-[#FFE66D] text-[#2B2B2B] ring-2 ring-amber-400'
+                        : 'bg-[#FFE66D] text-[#2B2B2B]'
+                    }`}
                   >
                     <span>{speech}</span>
                     <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#FFE66D] border-r-2 border-b-2 border-[#2B2B2B] rotate-45" />
@@ -213,8 +255,53 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                 )}
               </AnimatePresence>
 
-              {/* Hand-Drawn Sketch Man Stick Figure (Scaled Up ~22% for commanding presence) */}
-              <div className="relative w-20 h-28 sm:w-24 sm:h-34 flex items-center justify-center">
+              {/* Hand-Drawn Sketch Man Stick Figure Container */}
+              <motion.div
+                className="relative w-20 h-28 sm:w-24 sm:h-34 flex items-center justify-center"
+                animate={
+                  phase === 'celebration'
+                    ? {
+                        y: [-2, -18, -4],
+                        scale: [1, 1.15, 1.08],
+                      }
+                    : {
+                        y: 0,
+                        scale: 1,
+                      }
+                }
+                transition={{
+                  duration: 0.5,
+                  ease: 'easeOut',
+                }}
+              >
+                {/* 100% Celebratory Particle Explosion from Sketch Man */}
+                {phase === 'celebration' && (
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-30">
+                    {CELEBRATION_PARTICLES.map((p) => (
+                      <motion.span
+                        key={p.id}
+                        initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
+                        animate={{
+                          scale: [0, 1.3, 1],
+                          opacity: [0, 1, 0.9],
+                          x: p.x,
+                          y: p.y,
+                          rotate: p.rot,
+                        }}
+                        transition={{
+                          delay: p.delay,
+                          duration: 0.45,
+                          ease: 'easeOut',
+                        }}
+                        style={{ color: p.color }}
+                        className={`absolute select-none pointer-events-none drop-shadow-sm ${p.size}`}
+                      >
+                        {p.symbol}
+                      </motion.span>
+                    ))}
+                  </div>
+                )}
+
                 <svg
                   viewBox="0 0 52 74"
                   fill="none"
@@ -313,14 +400,37 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                 <span className="absolute -right-10 bottom-4 text-stone-800 text-sm sm:text-base">
                   ☕
                 </span>
-              </div>
+              </motion.div>
+
+              {/* 100% Launch Verification Stamp that slams onto the page */}
+              {phase === 'celebration' && (
+                <motion.div
+                  initial={{ scale: 2.6, opacity: 0, rotate: -25 }}
+                  animate={{ scale: 1, opacity: 0.95, rotate: -6 }}
+                  transition={{ type: 'spring', stiffness: 450, damping: 18 }}
+                  className="mt-4 px-4 sm:px-6 py-2 border-3 border-dashed border-[#E4572E] text-[#E4572E] bg-[#FAF7EB] rounded-xs shadow-md font-heading font-black text-center"
+                >
+                  <span className="block text-sm sm:text-base tracking-widest uppercase">
+                    ★ 100% LAUNCH READY ★
+                  </span>
+                  <span className="block font-handwriting text-xs sm:text-sm text-stone-700 font-bold">
+                    PORTFOLIO BLUEPRINT COMPLETE
+                  </span>
+                </motion.div>
+              )}
             </div>
 
             {/* Bottom Progress Bar on Ruled Line */}
             <div className="relative z-10 pl-10 sm:pl-14">
               <div className="flex items-center justify-between font-handwriting text-sm sm:text-base md:text-lg font-bold text-stone-700 mb-1.5">
                 <span>{statusText}</span>
-                <span className="font-mono text-xs sm:text-sm text-stone-900 font-bold bg-amber-100 px-2 py-0.5 rounded-xs border border-stone-400">
+                <span
+                  className={`font-mono text-xs sm:text-sm font-bold px-2 py-0.5 rounded-xs border transition-colors ${
+                    progress === 100
+                      ? 'bg-emerald-100 text-emerald-900 border-emerald-500 font-black'
+                      : 'bg-amber-100 text-stone-900 border-stone-400'
+                  }`}
+                >
                   {progress}%
                 </span>
               </div>
@@ -329,12 +439,16 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
               <div className="relative w-full h-3.5 sm:h-4 border-b-2 border-dashed border-[#A9C5E8]">
                 {/* Pencil line drawn across */}
                 <div
-                  className="absolute left-0 bottom-[-2px] h-[3.5px] bg-[#2B2B2B] rounded-full transition-all duration-75"
+                  className={`absolute left-0 bottom-[-2px] h-[3.5px] rounded-full transition-all duration-75 ${
+                    progress === 100 ? 'bg-[#059669]' : 'bg-[#2B2B2B]'
+                  }`}
                   style={{ width: `${progress}%` }}
                 />
                 {/* Tiny graphite tip indicator riding the line */}
                 <div
-                  className="absolute bottom-[-6px] w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#E4572E] transition-all duration-75 shadow-xs"
+                  className={`absolute bottom-[-6px] w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all duration-75 shadow-xs ${
+                    progress === 100 ? 'bg-emerald-500' : 'bg-[#E4572E]'
+                  }`}
                   style={{ left: `calc(${progress}% - 6px)` }}
                 />
               </div>
@@ -386,7 +500,7 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
                 </span>
               </div>
 
-              {/* The Classic School Exercise Book Label Sticker (Expanded & Centered) */}
+              {/* The Classic School Exercise Book Label Sticker */}
               <div className="bg-[#FAF7EB] border-4 border-double border-[#2B2B2B] rounded-sm p-6 sm:p-8 md:p-10 shadow-xl relative my-auto">
                 <div className="text-center border-b-2 border-stone-300 pb-2.5 mb-4">
                   <span className="font-mono text-xs sm:text-sm uppercase tracking-wider font-bold text-stone-800">
@@ -443,21 +557,19 @@ export const PencilLoader: React.FC<PencilLoaderProps> = ({ onComplete }) => {
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Eraser Wipe Curtain Transition (reveals the site cleanly) */}
-        {phase === 'erasing' && (
+        {/* Dynamic Graphite & Page Sweep Transition into Landing Page */}
+        {phase === 'dive' && (
           <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
-            transition={{ duration: 0.65, ease: [0.65, 0, 0.35, 1] }}
-            className="absolute inset-0 bg-[#F4A6B8]/35 backdrop-blur-[2px] pointer-events-none flex items-center justify-end pr-10 z-40"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+            className="absolute inset-0 bg-[#FBF8EF]/60 backdrop-blur-[2px] pointer-events-none origin-left z-40 flex items-center justify-center"
           >
-            {/* Eraser block trailing edge */}
-            <div className="w-24 h-64 bg-[#F4A6B8] border-3 border-[#2B2B2B] rounded-sm shadow-2xl flex items-center justify-center -rotate-12">
-              <span className="font-mono text-xs uppercase font-bold text-[#2B2B2B] -rotate-90 tracking-widest">
-                ERASER
-              </span>
+            <div className="font-handwriting text-2xl font-bold text-stone-800 flex items-center gap-2">
+              <span className="animate-spin text-2xl">✎</span>
+              <span>Drafting notebook...</span>
             </div>
           </motion.div>
         )}

@@ -9,6 +9,7 @@ interface HighlighterSwipeProps {
   color?: string;
   className?: string;
   delay?: number;
+  active?: boolean;
 }
 
 export const HighlighterSwipe: React.FC<HighlighterSwipeProps> = ({
@@ -16,10 +17,13 @@ export const HighlighterSwipe: React.FC<HighlighterSwipeProps> = ({
   color = '#FFE66D',
   className = '',
   delay = 0.15,
+  active,
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: pencilMotion.thresholds.highlighter });
   const shouldReduceMotion = useReducedMotion();
+
+  const isTriggered = active !== undefined ? active : (isInView || shouldReduceMotion);
 
   return (
     <span ref={ref} className={`relative inline-block px-1 rounded-xs ${className}`}>
@@ -27,7 +31,7 @@ export const HighlighterSwipe: React.FC<HighlighterSwipeProps> = ({
       <motion.span
         aria-hidden="true"
         initial={shouldReduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
-        animate={isInView || shouldReduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
+        animate={isTriggered || shouldReduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
         transition={{
           duration: shouldReduceMotion ? 0 : pencilMotion.durations.highlighterSweep,
           ease: pencilMotion.easings.smooth,
