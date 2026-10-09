@@ -32,8 +32,8 @@ export const projectsContent: Project[] = [
     placeholders: ["[screenshots]"]
   },
   {
-    slug: "kaypacks",
-    title: "Kaypacks — Water Delivery E-Commerce Platform",
+    slug: "kayspacks",
+    title: "Kayspacks — Water Delivery E-Commerce Platform",
     pitch: "Full e-commerce platform for a water delivery business, with multiple brands and pack quantities.",
     role: "Full-Stack Developer",
     stack: [
@@ -57,11 +57,11 @@ export const projectsContent: Project[] = [
       "Separate admin AI assistant for order summaries, inventory checks, store settings and sales analytics."
     ],
     links: {
-      live: "https://kaypacks.vercel.app",
+      live: "https://kayspack.vercel.app",
       github: null,
-      caseStudySlug: "kaypacks"
+      caseStudySlug: "kayspacks"
     },
-    image: "/images/projects/kaypacks.png",
+    image: "/images/projects/kayspacks.png",
     placeholders: []
   },
   {
@@ -71,8 +71,11 @@ export const projectsContent: Project[] = [
     role: "Full-Stack Developer",
     stack: [
       "Next.js",
-      "[MongoDB or PostgreSQL/Prisma: confirm]",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
       "JWT",
+      "Vercel",
       "Cloudinary",
       "Paystack"
     ],
@@ -92,7 +95,7 @@ export const projectsContent: Project[] = [
       caseStudySlug: "africart"
     },
     image: "/images/projects/africart.png",
-    placeholders: ["[MongoDB or PostgreSQL/Prisma: confirm]"]
+    placeholders: []
   },
   {
     slug: "hanara-sms",
@@ -159,26 +162,26 @@ export const projectsContent: Project[] = [
   {
     slug: "novelverse",
     title: "NovelVerse — Reading and Writing Platform",
-    pitch: "Wattpad-style platform for reading and writing stories, with user roles, a coin-based economy and Clerk-powered subscriptions.",
+    pitch: "Wattpad-style platform for reading and writing stories, with user roles, a coin-based economy and JWT authentication.",
     role: "Full-Stack Developer",
     stack: [
       "Next.js",
-      "React",
       "TypeScript",
-      "Clerk",
-      "[Add: stack]"
+      "Tailwind CSS",
+      "MongoDB",
+      "JWT"
     ],
     categories: ["SaaS"],
     featured: false,
     features: [
-      "Wattpad-style platform for reading and writing stories, with user roles, a coin-based economy and Clerk-powered subscriptions."
+      "Wattpad-style platform for reading and writing stories, with user roles, a coin-based economy and JWT authentication."
     ],
     links: {
       live: null,
-      github: null,
+      github: "https://github.com/hmfareed/Novel-webapp",
       caseStudySlug: "novelverse"
     },
     image: "/images/projects/novelverse.jpg",
-    placeholders: ["[Add: stack, status, live link.]"]
+    placeholders: []
   }
 ];
