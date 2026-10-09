@@ -117,6 +117,46 @@ export const AboutSection: React.FC = () => {
                         className="object-contain p-0.5"
                       />
                     </span>
+                  ) : fact.includes('Tamale Metropolitan Assembly') && fact.includes('Hanara') ? (
+                    <span className="inline-flex items-center gap-1 shrink-0 mt-0.5">
+                      <span
+                        className="relative w-5 h-5 rounded-full border border-[#2B2B2B] overflow-hidden shadow-2xs inline-block bg-[#FFFDF8]"
+                        title="Tamale Metropolitan Assembly Seal"
+                      >
+                        <Image
+                          src="/images/logos/tma.png"
+                          alt="Tamale Metropolitan Assembly Logo"
+                          fill
+                          sizes="20px"
+                          className="object-contain p-0.5"
+                        />
+                      </span>
+                      <span
+                        className="relative w-4.5 h-5 rounded-xs border border-[#2B2B2B] overflow-hidden shadow-2xs inline-block bg-[#FFFDF8]"
+                        title="Hanara Schools Crest"
+                      >
+                        <Image
+                          src="/images/logos/hanara-schools.png"
+                          alt="Hanara Schools Logo"
+                          fill
+                          sizes="20px"
+                          className="object-contain"
+                        />
+                      </span>
+                    </span>
+                  ) : fact.includes('Tamale Metropolitan Assembly') ? (
+                    <span
+                      className="relative w-5 h-5 rounded-full border border-[#2B2B2B] overflow-hidden shrink-0 mt-0.5 shadow-2xs inline-block bg-[#FFFDF8]"
+                      title="Tamale Metropolitan Assembly Seal"
+                    >
+                      <Image
+                        src="/images/logos/tma.png"
+                        alt="Tamale Metropolitan Assembly Logo"
+                        fill
+                        sizes="20px"
+                        className="object-contain p-0.5"
+                      />
+                    </span>
                   ) : fact.includes('Hanara') ? (
                     <span
                       className="relative w-5 h-5 rounded-xs border border-[#2B2B2B] overflow-hidden shrink-0 mt-0.5 shadow-2xs inline-block bg-[#FFFDF8]"

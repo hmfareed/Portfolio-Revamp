@@ -23,6 +23,7 @@ export const experienceContent: ExperienceItem[] = [
     period: "Aug 2026 – Present",
     type: "Internship",
     location: "On-site, Tamale",
+    logo: "/images/logos/tma.png",
     bullets: [
       "Support IT management and computer information systems activities."
     ],
