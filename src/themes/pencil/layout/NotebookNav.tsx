@@ -22,25 +22,30 @@ export const NotebookNav: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('#home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = NAV_ITEMS.map((item) => item.href.slice(1));
-      const scrollY = window.scrollY;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop - 180 <= scrollY) {
-          setActiveTab(`#${sections[i]}`);
-          break;
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveTab(`#${entry.target.id}`);
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0,
       }
-    };
+    );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    NAV_ITEMS.forEach((item) => {
+      const el = document.getElementById(item.href.slice(1));
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#FBF8EF]/95 backdrop-blur-md pt-2 pb-1.5 mb-6 border-b-2 border-[#2B2B2B]/20 shadow-xs">
+    <header className="sticky top-0 z-40 w-full bg-[#FBF8EF]/95 backdrop-blur-md pt-2 pb-1.5 mb-6 border-b-2 border-[#2B2B2B]/20 shadow-xs will-change-transform">
       <nav
         aria-label="Notebook sections"
         className="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 px-2 py-1"
@@ -55,7 +60,6 @@ export const NotebookNav: React.FC = () => {
               whileTap={{ y: 0 }}
               style={{
                 backgroundColor: item.color,
-                filter: 'url(#pencil-wobble)',
               }}
               className={`relative px-3.5 sm:px-5 py-1.5 sm:py-2 text-sm sm:text-base font-handwriting font-bold tracking-wide rounded-t-md border-2 border-b-0 border-[#2B2B2B] shadow-xs shrink-0 transition-transform ${
                 isActive

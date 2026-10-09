@@ -50,7 +50,6 @@ export const AboutSection: React.FC = () => {
           {/* Teaching Callout Card */}
           <div
             className="mt-8 p-6 bg-amber-50/70 border-2 border-[#2B2B2B] rounded-xs shadow-[3px_4px_0px_#2B2B2B] relative"
-            style={{ filter: 'url(#pencil-wobble)' }}
           >
             <div className="absolute -top-3 -right-2">
               <PaperclipDoodle className="w-5 h-8 text-stone-600" />

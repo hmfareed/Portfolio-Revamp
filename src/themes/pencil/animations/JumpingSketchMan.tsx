@@ -24,7 +24,6 @@ export const JumpingSketchMan: React.FC = () => {
   const [isReading, setIsReading] = useState(false);
 
   const prevSectionRef = useRef(0);
-  const isJumpingRef = useRef(false);
   const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset idle reading timer
@@ -32,10 +31,8 @@ export const JumpingSketchMan: React.FC = () => {
     setIsReading(false);
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
     idleTimerRef.current = setTimeout(() => {
-      if (!isJumpingRef.current) {
-        setIsReading(true);
-      }
-    }, 7000);
+      setIsReading(true);
+    }, 6500);
   }, []);
 
   // Calculate target screen position based on section index
@@ -49,137 +46,132 @@ export const JumpingSketchMan: React.FC = () => {
       // Mobile coordinates: bounce between left and right edges within safe margins
       switch (idx) {
         case 0: // Home
-          return { x: 12, y: 150 };
+          return { x: 12, y: 140 };
         case 1: // About
-          return { x: vw - 64, y: 190 };
+          return { x: vw - 64, y: 175 };
         case 2: // Projects
-          return { x: 14, y: 175 };
+          return { x: 14, y: 165 };
         case 3: // Experience
-          return { x: vw - 64, y: 210 };
+          return { x: vw - 64, y: 190 };
         case 4: // Skills
-          return { x: 14, y: 185 };
+          return { x: 14, y: 175 };
         case 5: // Contact
         default:
-          return { x: vw - 64, y: 220 };
+          return { x: vw - 64, y: 200 };
       }
     } else {
       // Desktop coordinates: leap across the screen from margin to content to margin
       switch (idx) {
         case 0: // Home (on the left margin line)
-          return { x: 38, y: 180 };
+          return { x: 38, y: 170 };
         case 1: // About (leaps to the right side near quick facts)
-          return { x: Math.min(vw - 110, 1100), y: 230 };
+          return { x: Math.min(vw - 110, 1100), y: 220 };
         case 2: // Projects (leaps back toward left margin)
-          return { x: 48, y: 210 };
+          return { x: 48, y: 200 };
         case 3: // Experience (leaps toward center-left near timeline)
-          return { x: 110, y: 260 };
+          return { x: 110, y: 250 };
         case 4: // Skills (leaps across to the right side near sticky notes)
-          return { x: Math.min(vw - 120, 1120), y: 220 };
+          return { x: Math.min(vw - 120, 1120), y: 210 };
         case 5: // Contact (leaps down to bottom-left near contact note)
         default:
-          return { x: 50, y: 270 };
+          return { x: 50, y: 260 };
       }
     }
   }, []);
 
+  // Trigger jump from current section to new section with smooth physics
+  const triggerJump = useCallback(
+    (newSectionIdx: number) => {
+      if (newSectionIdx === prevSectionRef.current) return;
+      resetIdleTimer();
+      prevSectionRef.current = newSectionIdx;
+      setActiveSectionIdx(newSectionIdx);
+
+      const target = getSectionTarget(newSectionIdx);
+      setFacingLeft(target.x < position.x);
+
+      // Phase 1: Quick Crouch (60ms)
+      setPose('crouch');
+
+      setTimeout(() => {
+        // Phase 2: Launch into air with parabolic arc
+        setPose('jumping');
+        setJumpArcY(-75);
+        setPosition(target);
+
+        // Phase 3: Touch down at target (480ms airtime)
+        setTimeout(() => {
+          setJumpArcY(0);
+          setPose('landing');
+          setShowDust(true);
+
+          setTimeout(() => setShowDust(false), 300);
+
+          // Phase 4: Settle back to standing smile (160ms)
+          setTimeout(() => {
+            setPose('idle');
+          }, 160);
+        }, 480);
+      }, 70);
+    },
+    [getSectionTarget, position.x, resetIdleTimer]
+  );
+
   // Update target on resize
   useEffect(() => {
     const handleResize = () => {
-      if (!isJumpingRef.current) {
-        setPosition(getSectionTarget(activeSectionIdx));
-      }
+      setPosition(getSectionTarget(activeSectionIdx));
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, [activeSectionIdx, getSectionTarget]);
 
-  // Section scroll tracker
+  // Asynchronous IntersectionObserver: zero scroll listeners, zero layout reflows!
   useEffect(() => {
     if (shouldReduceMotion) return;
 
     resetIdleTimer();
 
-    let ticking = false;
-
-    const handleScroll = () => {
-      resetIdleTimer();
-      if (ticking) return;
-      ticking = true;
-
-      requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-
-        for (let i = SECTION_IDS.length - 1; i >= 0; i--) {
-          const el = document.getElementById(SECTION_IDS[i]);
-          if (el && el.offsetTop - 240 <= scrollY) {
-            if (prevSectionRef.current !== i && !isJumpingRef.current) {
-              triggerJump(i);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = SECTION_IDS.indexOf(entry.target.id as (typeof SECTION_IDS)[number]);
+            if (idx !== -1) {
+              triggerJump(idx);
             }
-            break;
           }
-        }
-        ticking = false;
-      });
-    };
+        });
+      },
+      {
+        rootMargin: '-15% 0px -55% 0px',
+        threshold: 0.1,
+      }
+    );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
     };
-  }, [shouldReduceMotion, resetIdleTimer]);
+  }, [shouldReduceMotion, triggerJump, resetIdleTimer]);
 
-  // Trigger jump from current section to new section
-  const triggerJump = (newSectionIdx: number) => {
-    isJumpingRef.current = true;
-    setIsReading(false);
-    prevSectionRef.current = newSectionIdx;
-    setActiveSectionIdx(newSectionIdx);
-
-    const target = getSectionTarget(newSectionIdx);
-    setFacingLeft(target.x < position.x);
-
-    // Phase 1: Crouch (80ms)
-    setPose('crouch');
-
-    setTimeout(() => {
-      // Phase 2: Launch into air
-      setPose('jumping');
-      // Create high parabolic arc: jumpArcY lifts up
-      setJumpArcY(-90);
-      setPosition(target);
-
-      // Phase 3: Land (mid-air flight duration 550ms)
-      setTimeout(() => {
-        setJumpArcY(0);
-        setPose('landing');
-        setShowDust(true);
-
-        setTimeout(() => setShowDust(false), 350);
-
-        // Phase 4: Settle back to standing smile
-        setTimeout(() => {
-          setPose('idle');
-          isJumpingRef.current = false;
-        }, 180);
-      }, 550);
-    }, 90);
-  };
-
-  // Easter egg: click to do a flip jump
+  // Easter egg: click to do a flip jump and pop speech bubble
   const handleClick = () => {
     resetIdleTimer();
-    if (isJumpingRef.current) return;
-    isJumpingRef.current = true;
     setPose('jumping');
-    setJumpArcY(-60);
+    setJumpArcY(-55);
 
     const speechOptions = [
       'Wheee! ✎',
       'Keep building! ★',
       'Nice to meet you! :)',
       'Drag & toss me! ✦',
-      'Great section! ✎',
+      'Great notes! ✎',
     ];
     const randomSpeech = speechOptions[Math.floor(Math.random() * speechOptions.length)];
     setSpeech(randomSpeech);
@@ -192,11 +184,10 @@ export const JumpingSketchMan: React.FC = () => {
       setTimeout(() => setShowDust(false), 300);
       setTimeout(() => {
         setPose('idle');
-        isJumpingRef.current = false;
       }, 150);
-    }, 450);
+    }, 420);
 
-    setTimeout(() => setSpeech(null), 2200);
+    setTimeout(() => setSpeech(null), 2000);
   };
 
   if (shouldReduceMotion) return null;
@@ -216,22 +207,23 @@ export const JumpingSketchMan: React.FC = () => {
         setTimeout(() => {
           setShowDust(false);
           setPose('idle');
-        }, 200);
+        }, 180);
       }}
       aria-hidden="true"
-      className="pointer-events-auto fixed z-35 select-none cursor-grab active:cursor-grabbing"
-      style={{
-        left: position.x,
-        top: position.y + jumpArcY,
-        transition:
-          pose === 'jumping'
-            ? 'left 550ms cubic-bezier(0.25, 0.8, 0.25, 1), top 550ms cubic-bezier(0.2, 0.9, 0.3, 1)'
-            : 'top 150ms ease-out',
+      className="pointer-events-auto fixed top-0 left-0 z-35 select-none cursor-grab active:cursor-grabbing will-change-transform"
+      animate={{
+        x: position.x,
+        y: position.y + jumpArcY,
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 150,
+        damping: 18,
       }}
     >
       <div
         onClick={handleClick}
-        title="I jump as you scroll! You can also drag & toss me!"
+        title="I jump between sections as you scroll! Drag & toss me!"
         className="relative group"
       >
         {/* Speech Bubble */}
@@ -241,9 +233,8 @@ export const JumpingSketchMan: React.FC = () => {
               initial={{ scale: 0, opacity: 0, y: 8 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0, opacity: 0, y: -4 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.18 }}
               className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#FFE66D] border-2 border-[#2B2B2B] px-2.5 py-0.5 rounded-xs text-xs font-handwriting font-bold whitespace-nowrap shadow-xs z-20 pointer-events-none"
-              style={{ filter: 'url(#pencil-wobble)' }}
             >
               {speech}
               <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#FFE66D] border-r-2 border-b-2 border-[#2B2B2B] rotate-45" />
@@ -256,7 +247,7 @@ export const JumpingSketchMan: React.FC = () => {
           <motion.div
             initial={{ scale: 0.4, opacity: 0.9 }}
             animate={{ scale: 1.2, opacity: 0 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className="absolute -bottom-2 -left-2 w-16 h-4 pointer-events-none"
           >
             <svg viewBox="0 0 60 16" fill="none" className="w-full h-full text-stone-600">
@@ -275,11 +266,11 @@ export const JumpingSketchMan: React.FC = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="w-13 h-18 text-[#2B2B2B] drop-shadow-xs"
           animate={{
-            scaleX: pose === 'crouch' || pose === 'landing' ? (facingLeft ? -1.2 : 1.2) : facingLeft ? -1 : 1,
-            scaleY: pose === 'crouch' || pose === 'landing' ? 0.82 : 1,
-            rotate: pose === 'jumping' ? (facingLeft ? -18 : 18) : 0,
+            scaleX: pose === 'crouch' || pose === 'landing' ? (facingLeft ? -1.18 : 1.18) : facingLeft ? -1 : 1,
+            scaleY: pose === 'crouch' || pose === 'landing' ? 0.84 : 1,
+            rotate: pose === 'jumping' ? (facingLeft ? -16 : 16) : 0,
           }}
-          transition={{ duration: 0.15 }}
+          transition={{ duration: 0.12 }}
         >
           {/* Circular Head with cream paper fill */}
           <circle
@@ -289,7 +280,6 @@ export const JumpingSketchMan: React.FC = () => {
             stroke="currentColor"
             strokeWidth="2.8"
             fill="#FBF8EF"
-            style={{ filter: 'url(#pencil-wobble)' }}
           />
 
           {/* Two Cute Hand-Drawn Eyes */}

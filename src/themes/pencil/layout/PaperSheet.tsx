@@ -6,7 +6,6 @@ import { PencilLoader } from '../animations/PencilLoader';
 import { MarginPencilScroll } from '../animations/MarginPencilScroll';
 import { HandDrawnCursor } from '../animations/HandDrawnCursor';
 import { BackgroundParallaxDoodles } from '../animations/BackgroundParallaxDoodles';
-import { ScribbleGuy } from '../animations/ScribbleGuy';
 import { JumpingSketchMan } from '../animations/JumpingSketchMan';
 import { DogEarBookmark } from '../animations/DogEarBookmark';
 import { MarginDoodlePad } from '../animations/MarginDoodlePad';
@@ -29,9 +28,6 @@ export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
 
       {/* Bigger Sketch Man jumping between sections on scroll */}
       <JumpingSketchMan />
-
-      {/* Floating velocity-reactive margin stick figure */}
-      <ScribbleGuy />
 
       {/* Interactive Margin Doodle Pad ("Draw on Page") */}
       <MarginDoodlePad />

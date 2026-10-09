@@ -9,9 +9,13 @@ export const DogEarBookmark: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    let lastVisible = false;
     const handleScroll = () => {
-      // Show bookmark only after scrolling past 400px
-      setIsVisible(window.scrollY > 400);
+      const nextVisible = window.scrollY > 400;
+      if (nextVisible !== lastVisible) {
+        lastVisible = nextVisible;
+        setIsVisible(nextVisible);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

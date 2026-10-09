@@ -35,7 +35,6 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
       transition={{ type: 'spring', stiffness: 320, damping: 22 }}
       className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] hover:shadow-[6px_12px_0px_#2B2B2B] transition-shadow duration-300 p-6 md:p-8 ${className}`}
       style={{
-        filter: 'url(#pencil-wobble)',
         transformStyle: 'preserve-3d',
       }}
     >

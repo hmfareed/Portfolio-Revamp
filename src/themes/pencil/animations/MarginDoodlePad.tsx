@@ -88,7 +88,6 @@ export const MarginDoodlePad: React.FC = () => {
               ? 'bg-[#E4572E] text-white shadow-[2px_2px_0px_#2B2B2B]'
               : 'bg-[#FFE66D] text-[#2B2B2B] hover:bg-amber-300 shadow-[2px_2px_0px_#2B2B2B]'
           }`}
-          style={{ filter: 'url(#pencil-wobble)' }}
           title={isDoodling ? 'Stop Doodling' : 'Draw on the notebook!'}
         >
           <span>✎</span>

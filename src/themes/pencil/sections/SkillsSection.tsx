@@ -120,9 +120,6 @@ export const SkillsSection: React.FC = () => {
                             damping: 18,
                           }}
                           className="relative inline-flex items-center text-xs sm:text-sm font-handwriting font-medium px-2 py-0.5 rounded-xs bg-white/70 border border-stone-700/60 text-stone-900 shadow-2xs hover:bg-white transition-colors"
-                          style={{
-                            filter: 'url(#pencil-wobble)',
-                          }}
                         >
                           {isScratchout ? (
                             <span className="inline-flex items-center gap-1">

@@ -38,7 +38,6 @@ export const ResumeSection: React.FC = () => {
         transition={{ duration: 0.5 }}
         animate={isTorn ? { rotate: [0, -1, 1, 0], y: [0, 6, 0] } : {}}
         className="relative max-w-3xl mx-auto bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[5px_6px_0px_#2B2B2B] p-6 sm:p-10"
-        style={{ filter: 'url(#pencil-wobble)' }}
       >
         <TapeStrip className="-top-3 left-12" angle={-2} />
         <TapeStrip className="-top-3 right-12" angle={2} />

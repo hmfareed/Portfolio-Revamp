@@ -124,7 +124,6 @@ export const HeroSection: React.FC = () => {
           {/* Taped Photo Card */}
           <div
             className="relative bg-white p-4 pb-7 rounded-xs border-2 border-[#2B2B2B] shadow-[5px_7px_0px_#2B2B2B] max-w-xs sm:max-w-sm w-full -rotate-1 hover:rotate-0 transition-transform duration-300"
-            style={{ filter: 'url(#pencil-wobble)' }}
           >
             {/* Top Tape Strip */}
             <TapeStrip className="-top-3 left-1/2 -translate-x-1/2" angle={-1} />
@@ -184,9 +183,6 @@ export const HeroSection: React.FC = () => {
                 damping: 18,
               }}
               className="px-3 py-1 rounded-sm bg-white/90 border border-stone-800 text-stone-800 text-sm font-bold shadow-[2px_2px_0px_#2B2B2B] hover:-translate-y-0.5 transition-transform"
-              style={{
-                filter: 'url(#pencil-wobble)',
-              }}
             >
               #{tech}
             </motion.span>

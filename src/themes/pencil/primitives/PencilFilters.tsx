@@ -12,37 +12,37 @@ export const PencilFilters: React.FC = () => {
       style={{ position: 'absolute', width: 0, height: 0 }}
     >
       <defs>
-        {/* Subtle pencil edge tremor for borders and cards */}
-        <filter id="pencil-wobble" x="-5%" y="-5%" width="110%" height="110%" filterUnits="objectBoundingBox">
+        {/* Subtle pencil edge tremor for borders and cards - optimized for 60/120fps scrolling */}
+        <filter id="pencil-wobble" x="-2%" y="-2%" width="104%" height="104%">
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.03"
-            numOctaves="3"
+            baseFrequency="0.04"
+            numOctaves="1"
             result="noise"
             seed="2"
           />
           <feDisplacementMap
             in="SourceGraphic"
             in2="noise"
-            scale="2.5"
+            scale="2"
             xChannelSelector="R"
             yChannelSelector="G"
           />
         </filter>
 
-        {/* Medium wobble for buttons, tags and stamps */}
-        <filter id="pencil-wobble-rough" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox">
+        {/* Medium wobble for stamps */}
+        <filter id="pencil-wobble-rough" x="-5%" y="-5%" width="110%" height="110%">
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.05"
-            numOctaves="2"
+            baseFrequency="0.06"
+            numOctaves="1"
             result="noise"
             seed="5"
           />
           <feDisplacementMap
             in="SourceGraphic"
             in2="noise"
-            scale="4"
+            scale="3"
             xChannelSelector="R"
             yChannelSelector="G"
           />

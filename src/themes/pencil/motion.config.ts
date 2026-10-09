@@ -4,17 +4,17 @@
  */
 
 export const pencilMotion = {
-  // Landing Page Loader Sequence (< 3.0s total)
+  // Landing Page Loader Sequence (slower, unhurried, super smooth ~5.5s total)
   loader: {
-    totalMaxTime: 2.85,
-    pencilEnterDelay: 0.1,
-    nameDrawDuration: 1.0,
-    underlineDuration: 0.35,
-    starTapDuration: 0.25,
-    progressBarDuration: 0.65,
-    pencilFlickDuration: 0.2,
-    eraserSwipeDuration: 0.38,
-    fadeDelayRepeatSession: 0.15,
+    totalMaxTime: 5.5,
+    pencilEnterDelay: 0.3,
+    nameDrawDuration: 2.4,
+    underlineDuration: 0.85,
+    starTapDuration: 0.4,
+    progressBarDuration: 2.2,
+    pencilFlickDuration: 0.35,
+    eraserSwipeDuration: 0.65,
+    fadeDelayRepeatSession: 0.2,
   },
 
   // Spring physics configs

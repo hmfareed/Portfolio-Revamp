@@ -52,7 +52,6 @@ export const ProjectsSection: React.FC = () => {
               <button
                 key={cat.value}
                 onClick={() => setActiveFilter(cat.value)}
-                style={{ filter: 'url(#pencil-wobble)' }}
                 className={`px-3.5 py-1.5 rounded-sm font-handwriting text-sm sm:text-base font-bold transition-all border-2 border-[#2B2B2B] cursor-pointer ${
                   isSelected
                     ? 'bg-[#FFE66D] text-[#2B2B2B] shadow-[2px_2px_0px_#2B2B2B] -translate-y-0.5'
@@ -216,7 +215,6 @@ export const ProjectsSection: React.FC = () => {
                     <Link
                       href={`/projects/${project.slug}`}
                       className="inline-flex items-center gap-1 text-xs bg-stone-200/90 hover:bg-[#FFE66D] border border-stone-800 text-stone-900 px-2.5 py-1 rounded-xs transition-colors"
-                      style={{ filter: 'url(#pencil-wobble)' }}
                     >
                       <FileText className="w-3 h-3" />
                       <span>Case Study</span>

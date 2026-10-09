@@ -50,7 +50,6 @@ export const ContactSection: React.FC = () => {
         >
           <div
             className="p-6 bg-white/80 border-2 border-[#2B2B2B] rounded-xs shadow-[3px_4px_0px_#2B2B2B]"
-            style={{ filter: 'url(#pencil-wobble)' }}
           >
             <h3 className="font-heading text-2xl font-bold text-[#2B2B2B] mb-4 pb-2 border-b border-stone-300">
               Direct Channels
@@ -131,7 +130,6 @@ export const ContactSection: React.FC = () => {
         >
           <div
             className="relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[5px_6px_0px_#2B2B2B] p-6 sm:p-8"
-            style={{ filter: 'url(#pencil-wobble)' }}
           >
             {/* Top Tape */}
             <TapeStrip className="-top-3 left-1/2 -translate-x-1/2" angle={-1} />
@@ -191,7 +189,6 @@ export const ContactSection: React.FC = () => {
                   required
                   placeholder="e.g. Kwame Mensah"
                   className="w-full px-3.5 py-2 font-handwriting text-base bg-[#FBF8EF] border-2 border-stone-800 rounded-xs focus:outline-hidden focus:border-[#E4572E] focus:ring-1 focus:ring-[#E4572E] text-stone-900 placeholder:text-stone-400"
-                  style={{ filter: 'url(#pencil-wobble)' }}
                 />
                 {state.errors?.name && (
                   <p className="text-xs font-mono text-red-600 mt-1">
@@ -215,7 +212,6 @@ export const ContactSection: React.FC = () => {
                   required
                   placeholder="kwame@example.com"
                   className="w-full px-3.5 py-2 font-handwriting text-base bg-[#FBF8EF] border-2 border-stone-800 rounded-xs focus:outline-hidden focus:border-[#E4572E] focus:ring-1 focus:ring-[#E4572E] text-stone-900 placeholder:text-stone-400"
-                  style={{ filter: 'url(#pencil-wobble)' }}
                 />
                 {state.errors?.email && (
                   <p className="text-xs font-mono text-red-600 mt-1">
@@ -239,7 +235,6 @@ export const ContactSection: React.FC = () => {
                   required
                   placeholder="e.g. Project inquiry or collaboration"
                   className="w-full px-3.5 py-2 font-handwriting text-base bg-[#FBF8EF] border-2 border-stone-800 rounded-xs focus:outline-hidden focus:border-[#E4572E] focus:ring-1 focus:ring-[#E4572E] text-stone-900 placeholder:text-stone-400"
-                  style={{ filter: 'url(#pencil-wobble)' }}
                 />
                 {state.errors?.subject && (
                   <p className="text-xs font-mono text-red-600 mt-1">
@@ -264,7 +259,6 @@ export const ContactSection: React.FC = () => {
                   placeholder="Write your note here..."
                   className="w-full px-3.5 py-2 font-handwriting text-base bg-[#FBF8EF] border-2 border-stone-800 rounded-xs focus:outline-hidden focus:border-[#E4572E] focus:ring-1 focus:ring-[#E4572E] text-stone-900 placeholder:text-stone-400 resize-y leading-relaxed"
                   style={{
-                    filter: 'url(#pencil-wobble)',
                     backgroundImage:
                       'repeating-linear-gradient(to bottom, transparent, transparent 27px, #A9C5E8/50 27px, #A9C5E8/50 28px)',
                     lineHeight: '28px',

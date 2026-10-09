@@ -89,7 +89,6 @@ export const CounterNumber: React.FC<CounterNumberProps> = ({
             pathLength: { duration: 0.75, ease: pencilMotion.easings.handDrawn },
             opacity: { duration: 0.2 },
           }}
-          style={{ filter: 'url(#pencil-wobble)' }}
         />
       </svg>
     </span>

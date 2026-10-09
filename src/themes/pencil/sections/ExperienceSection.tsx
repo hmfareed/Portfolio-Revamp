@@ -53,7 +53,6 @@ export const ExperienceSection: React.FC = () => {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 + 0.1, type: 'spring', stiffness: 400, damping: 15 }}
                   className="absolute -left-[27px] sm:-left-[35px] md:-left-[43px] top-1.5 w-6 h-6 rounded-full bg-[#FFE66D] border-2 border-[#2B2B2B] flex items-center justify-center shadow-xs"
-                  style={{ filter: 'url(#pencil-wobble)' }}
                   aria-hidden="true"
                 >
                   <span className="w-2 h-2 rounded-full bg-[#2B2B2B]" />
@@ -67,7 +66,6 @@ export const ExperienceSection: React.FC = () => {
                   transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.1 }}
                   className="bg-white/80 p-5 sm:p-7 rounded-xs border-2 border-[#2B2B2B] shadow-[3px_4px_0px_#2B2B2B] transition-transform hover:-translate-y-1"
                   style={{
-                    filter: 'url(#pencil-wobble)',
                     transformOrigin: 'top center',
                   }}
                 >

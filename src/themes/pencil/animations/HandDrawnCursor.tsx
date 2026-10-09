@@ -1,23 +1,22 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-
-interface TrailPoint {
-  x: number;
-  y: number;
-  id: number;
-  opacity: number;
-}
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
 export const HandDrawnCursor: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
   const [enabled, setEnabled] = useState(false);
-  const [pos, setPos] = useState({ x: -100, y: -100 });
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const [trail, setTrail] = useState<TrailPoint[]>([]);
-  const trailIdRef = useRef(0);
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const smoothX = useSpring(cursorX, { stiffness: 900, damping: 50 });
+  const smoothY = useSpring(cursorY, { stiffness: 900, damping: 50 });
+
+  // Secondary delayed spring for graphite trail shadow
+  const trailX = useSpring(cursorX, { stiffness: 350, damping: 30 });
+  const trailY = useSpring(cursorY, { stiffness: 350, damping: 30 });
 
   useEffect(() => {
     // Only enable on desktop devices with fine pointer (mouse/trackpad) and when reduced motion is off
@@ -30,27 +29,16 @@ export const HandDrawnCursor: React.FC = () => {
     setEnabled(true);
 
     const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      setPos({ x: clientX, y: clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
 
-      // Add a fading graphite point
-      trailIdRef.current += 1;
-      const newPoint: TrailPoint = {
-        x: clientX,
-        y: clientY,
-        id: trailIdRef.current,
-        opacity: 0.35,
-      };
-
-      setTrail((prev) => [...prev.slice(-6), newPoint]);
-
-      // Detect hover on interactive element
+      // Detect hover on interactive elements, updating state only when value flips
       const target = e.target as HTMLElement | null;
       if (target) {
         const isInteractive = Boolean(
           target.closest('a, button, input, textarea, select, [role="button"], [data-interactive="true"]')
         );
-        setIsHoveringInteractive(isInteractive);
+        setIsHoveringInteractive((prev) => (prev !== isInteractive ? isInteractive : prev));
       }
     };
 
@@ -61,22 +49,12 @@ export const HandDrawnCursor: React.FC = () => {
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
 
-    // Periodically decay trail
-    const decayInterval = setInterval(() => {
-      setTrail((prev) =>
-        prev
-          .map((p) => ({ ...p, opacity: p.opacity - 0.08 }))
-          .filter((p) => p.opacity > 0.05)
-      );
-    }, 60);
-
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
-      clearInterval(decayInterval);
     };
-  }, [shouldReduceMotion]);
+  }, [shouldReduceMotion, cursorX, cursorY]);
 
   if (!enabled || shouldReduceMotion) return null;
 
@@ -85,26 +63,21 @@ export const HandDrawnCursor: React.FC = () => {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-50 overflow-hidden"
     >
-      {/* Fading graphite dust trail */}
-      {trail.map((pt) => (
-        <div
-          key={pt.id}
-          className="absolute w-1.5 h-1.5 rounded-full bg-[#2B2B2B] -translate-x-1/2 -translate-y-1/2"
-          style={{
-            left: pt.x,
-            top: pt.y,
-            opacity: pt.opacity,
-            transform: 'scale(0.8)',
-          }}
-        />
-      ))}
-
-      {/* Custom Cursor Graphic */}
+      {/* Subtle Graphite Dust Trail Dot */}
       <motion.div
-        className="absolute pointer-events-none w-8 h-8 -translate-x-1 -translate-y-7"
+        className="absolute w-2 h-2 rounded-full bg-[#2B2B2B]/25 -translate-x-1 -translate-y-1"
         style={{
-          left: pos.x,
-          top: pos.y,
+          x: trailX,
+          y: trailY,
+        }}
+      />
+
+      {/* Custom Hand-Drawn Cursor Graphic */}
+      <motion.div
+        className="absolute pointer-events-none w-8 h-8 -translate-x-1 -translate-y-7 will-change-transform"
+        style={{
+          x: smoothX,
+          y: smoothY,
         }}
         animate={{
           scale: isPressed ? 0.88 : 1,

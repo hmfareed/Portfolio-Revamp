@@ -34,7 +34,6 @@ export const StickyNote: React.FC<StickyNoteProps> = ({
       whileHover={shouldReduceMotion ? {} : { rotate: 0, scale: 1.02, y: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className={`relative p-5 rounded-xs border transition-shadow duration-200 ${colorStyles} ${className}`}
-      style={{ filter: 'url(#pencil-wobble)' }}
     >
       {hasTape && (
         <div

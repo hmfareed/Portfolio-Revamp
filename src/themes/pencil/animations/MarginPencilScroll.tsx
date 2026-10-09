@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'fr
 export const MarginPencilScroll: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 280, damping: 28 });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 130, damping: 22 });
 
   // Easter egg: sharpener spin on click
   const [isSharpening, setIsSharpening] = useState(false);
@@ -17,11 +17,11 @@ export const MarginPencilScroll: React.FC = () => {
   const pencilRotate = useTransform(
     smoothProgress,
     [0, 0.15, 0.35, 0.55, 0.75, 0.95, 1],
-    [-20, -38, -15, -42, -18, -35, -25]
+    [-20, -36, -16, -40, -18, -32, -24]
   );
 
-  // Position pencil along viewport height: maps 0..1 scroll to 40px..calc(100vh - 80px)
-  const pencilY = useTransform(smoothProgress, [0, 1], [40, typeof window !== 'undefined' ? window.innerHeight - 100 : 700]);
+  // Position pencil along viewport height smoothly using calc
+  const pencilY = useTransform(smoothProgress, (val) => `calc(${val} * (100vh - 120px) + 50px)`);
 
   const handlePencilClick = () => {
     if (isSharpening) return;

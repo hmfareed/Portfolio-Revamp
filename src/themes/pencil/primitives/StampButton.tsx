@@ -57,7 +57,6 @@ export const StampButton: React.FC<StampButtonProps> = ({
         whileHover={shouldReduceMotion ? {} : { scale: 1.03, y: -2 }}
         whileTap={shouldReduceMotion ? {} : { scale: 0.97, y: 1 }}
         className={baseClasses}
-        style={{ filter: 'url(#pencil-wobble)' }}
       >
         {children}
       </motion.a>
@@ -72,7 +71,6 @@ export const StampButton: React.FC<StampButtonProps> = ({
       whileHover={shouldReduceMotion ? {} : { scale: 1.03, y: -2 }}
       whileTap={shouldReduceMotion ? {} : { scale: 0.97, y: 1 }}
       className={baseClasses}
-      style={{ filter: 'url(#pencil-wobble)' }}
     >
       {children}
     </motion.button>
