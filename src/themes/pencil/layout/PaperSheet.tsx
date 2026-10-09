@@ -8,6 +8,8 @@ import { HandDrawnCursor } from '../animations/HandDrawnCursor';
 import { BackgroundParallaxDoodles } from '../animations/BackgroundParallaxDoodles';
 import { ScribbleGuy } from '../animations/ScribbleGuy';
 import { JumpingSketchMan } from '../animations/JumpingSketchMan';
+import { DogEarBookmark } from '../animations/DogEarBookmark';
+import { MarginDoodlePad } from '../animations/MarginDoodlePad';
 
 interface PaperSheetProps {
   children: React.ReactNode;
@@ -30,6 +32,12 @@ export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
 
       {/* Floating velocity-reactive margin stick figure */}
       <ScribbleGuy />
+
+      {/* Interactive Margin Doodle Pad ("Draw on Page") */}
+      <MarginDoodlePad />
+
+      {/* Dog-Eared page corner peel (Back to Top) */}
+      <DogEarBookmark />
 
       {/* Layered background parallax doodles */}
       <BackgroundParallaxDoodles />
@@ -57,6 +65,18 @@ export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
         }}
         aria-hidden="true"
       />
+
+      {/* Faint Dried Coffee Mug Ring Stain in outer margin */}
+      <div
+        className="pointer-events-none fixed top-44 -right-10 w-44 h-44 opacity-8 select-none z-0 hidden lg:block"
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 100 100" fill="none" className="w-full h-full text-[#8B5A2B]">
+          <circle cx="50" cy="50" r="42" stroke="currentColor" strokeWidth="4" strokeDasharray="30 8 15 5" />
+          <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+          <path d="M 45 92 Q 48 97 46 100" stroke="currentColor" strokeWidth="2" opacity="0.5" />
+        </svg>
+      </div>
 
       {/* Vertical Red Exercise Book Margin Line (Desktop only, 72px from left) */}
       <div

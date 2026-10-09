@@ -21,9 +21,22 @@ export const JumpingSketchMan: React.FC = () => {
   const [speech, setSpeech] = useState<string | null>(null);
   const [showDust, setShowDust] = useState(false);
   const [facingLeft, setFacingLeft] = useState(false);
+  const [isReading, setIsReading] = useState(false);
 
   const prevSectionRef = useRef(0);
   const isJumpingRef = useRef(false);
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Reset idle reading timer
+  const resetIdleTimer = useCallback(() => {
+    setIsReading(false);
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    idleTimerRef.current = setTimeout(() => {
+      if (!isJumpingRef.current) {
+        setIsReading(true);
+      }
+    }, 7000);
+  }, []);
 
   // Calculate target screen position based on section index
   const getSectionTarget = useCallback((idx: number): Position => {
@@ -84,9 +97,12 @@ export const JumpingSketchMan: React.FC = () => {
   useEffect(() => {
     if (shouldReduceMotion) return;
 
+    resetIdleTimer();
+
     let ticking = false;
 
     const handleScroll = () => {
+      resetIdleTimer();
       if (ticking) return;
       ticking = true;
 
@@ -107,12 +123,16 @@ export const JumpingSketchMan: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [shouldReduceMotion]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    };
+  }, [shouldReduceMotion, resetIdleTimer]);
 
   // Trigger jump from current section to new section
   const triggerJump = (newSectionIdx: number) => {
     isJumpingRef.current = true;
+    setIsReading(false);
     prevSectionRef.current = newSectionIdx;
     setActiveSectionIdx(newSectionIdx);
 
@@ -148,12 +168,19 @@ export const JumpingSketchMan: React.FC = () => {
 
   // Easter egg: click to do a flip jump
   const handleClick = () => {
+    resetIdleTimer();
     if (isJumpingRef.current) return;
     isJumpingRef.current = true;
     setPose('jumping');
     setJumpArcY(-60);
 
-    const speechOptions = ['Wheee! ✎', 'Keep building! ★', 'Nice to meet you! :)', 'Great section! ✦'];
+    const speechOptions = [
+      'Wheee! ✎',
+      'Keep building! ★',
+      'Nice to meet you! :)',
+      'Drag & toss me! ✦',
+      'Great section! ✎',
+    ];
     const randomSpeech = speechOptions[Math.floor(Math.random() * speechOptions.length)];
     setSpeech(randomSpeech);
 
@@ -175,9 +202,24 @@ export const JumpingSketchMan: React.FC = () => {
   if (shouldReduceMotion) return null;
 
   return (
-    <aside
+    <motion.aside
+      drag
+      dragSnapToOrigin
+      dragElastic={0.25}
+      onDragStart={() => {
+        resetIdleTimer();
+        setPose('jumping');
+      }}
+      onDragEnd={() => {
+        setPose('landing');
+        setShowDust(true);
+        setTimeout(() => {
+          setShowDust(false);
+          setPose('idle');
+        }, 200);
+      }}
       aria-hidden="true"
-      className="pointer-events-auto fixed z-35 select-none"
+      className="pointer-events-auto fixed z-35 select-none cursor-grab active:cursor-grabbing"
       style={{
         left: position.x,
         top: position.y + jumpArcY,
@@ -189,8 +231,8 @@ export const JumpingSketchMan: React.FC = () => {
     >
       <div
         onClick={handleClick}
-        title="I'm jumping through your portfolio! Click me!"
-        className="relative cursor-pointer group"
+        title="I jump as you scroll! You can also drag & toss me!"
+        className="relative group"
       >
         {/* Speech Bubble */}
         <AnimatePresence>
@@ -200,7 +242,7 @@ export const JumpingSketchMan: React.FC = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0, opacity: 0, y: -4 }}
               transition={{ duration: 0.2 }}
-              className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#FFE66D] border-2 border-[#2B2B2B] px-2.5 py-0.5 rounded-xs text-xs font-handwriting font-bold whitespace-nowrap shadow-xs z-20"
+              className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#FFE66D] border-2 border-[#2B2B2B] px-2.5 py-0.5 rounded-xs text-xs font-handwriting font-bold whitespace-nowrap shadow-xs z-20 pointer-events-none"
               style={{ filter: 'url(#pencil-wobble)' }}
             >
               {speech}
@@ -273,13 +315,22 @@ export const JumpingSketchMan: React.FC = () => {
             strokeLinecap="round"
           />
 
-          {/* Arms (changes pose when jumping vs standing) */}
+          {/* Arms (changes pose when jumping vs standing vs reading) */}
           {pose === 'jumping' ? (
             /* Hands raised high in the air when jumping: \o/ */
             <path
               d="M 12 18 L 26 29 L 40 18"
               stroke="currentColor"
               strokeWidth="2.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          ) : isReading ? (
+            /* Arms holding little book */
+            <path
+              d="M 16 35 L 23 38 L 26 31 L 29 38 L 36 35"
+              stroke="currentColor"
+              strokeWidth="2.6"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -300,6 +351,18 @@ export const JumpingSketchMan: React.FC = () => {
               strokeWidth="2.8"
               strokeLinecap="round"
               strokeLinejoin="round"
+            />
+          )}
+
+          {/* Tiny book when reading idle */}
+          {isReading && (
+            <motion.polygon
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              points="20,33 32,33 30,43 18,43"
+              fill="#FFE66D"
+              stroke="currentColor"
+              strokeWidth="1.6"
             />
           )}
 
@@ -363,6 +426,6 @@ export const JumpingSketchMan: React.FC = () => {
           )}
         </motion.svg>
       </div>
-    </aside>
+    </motion.aside>
   );
 };

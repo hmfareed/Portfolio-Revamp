@@ -1,14 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
 import { StampButton } from '../primitives/StampButton';
 import { TapeStrip, CheckmarkDoodle } from '../primitives/Doodles';
-import { Download, FileText, CheckCircle2 } from 'lucide-react';
+import { TeacherStamp } from '../primitives/TeacherStamp';
+import { Download, FileText } from 'lucide-react';
 
 export const ResumeSection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
+  const [isTorn, setIsTorn] = useState(false);
+
+  const handleDownloadClick = () => {
+    setIsTorn(true);
+    setTimeout(() => setIsTorn(false), 2400);
+  };
 
   return (
     <section id="resume" className="py-16 md:py-24 border-t-2 border-dashed border-stone-300">
@@ -29,11 +36,30 @@ export const ResumeSection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
+        animate={isTorn ? { rotate: [0, -1, 1, 0], y: [0, 6, 0] } : {}}
         className="relative max-w-3xl mx-auto bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[5px_6px_0px_#2B2B2B] p-6 sm:p-10"
         style={{ filter: 'url(#pencil-wobble)' }}
       >
         <TapeStrip className="-top-3 left-12" angle={-2} />
         <TapeStrip className="-top-3 right-12" angle={2} />
+
+        {/* Vintage Red Teacher's Rubber Stamp */}
+        <TeacherStamp
+          text="A+ VERIFIED"
+          subtext="CODE &amp; ARCHITECTURE"
+          className="absolute -top-5 right-6 z-20 hidden sm:block"
+          tilt={12}
+        />
+
+        {/* Perforated Tear-Out Line along the top */}
+        <div className="w-full pb-4 mb-4 border-b-2 border-dashed border-stone-400/80 flex items-center justify-between text-stone-500 font-mono text-[11px] select-none">
+          <span className="flex items-center gap-1.5">
+            <span>✂</span>
+            <span>PERFORATED TEAR-OUT LINE</span>
+          </span>
+          <span className="tracking-widest hidden sm:inline">- - - - - - - - - - - - - - - - - -</span>
+          <span>PULL TO TEAR</span>
+        </div>
 
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
           <div className="flex-1 text-center md:text-left">
@@ -72,15 +98,17 @@ export const ResumeSection: React.FC = () => {
               PDF · 76 KB
             </span>
 
-            <StampButton
-              href="/Mohammed-Fareed_Resume.pdf"
-              download="Mohammed-Fareed_Resume.pdf"
-              variant="stamp-red"
-              className="text-lg px-6 py-3 w-full"
-            >
-              <Download className="w-5 h-5 mr-1" />
-              <span>Get Resume</span>
-            </StampButton>
+            <div onClick={handleDownloadClick} className="w-full">
+              <StampButton
+                href="/Mohammed-Fareed_Resume.pdf"
+                download="Mohammed-Fareed_Resume.pdf"
+                variant="stamp-red"
+                className="text-lg px-6 py-3 w-full"
+              >
+                <Download className="w-5 h-5 mr-1" />
+                <span>{isTorn ? 'TEARING PAGE...' : 'Tear Out Resume'}</span>
+              </StampButton>
+            </div>
 
             <span className="font-handwriting text-xs text-stone-600 mt-3">
               Free to save &amp; review
