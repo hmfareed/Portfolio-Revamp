@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { aboutContent } from '@/content/about';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
@@ -86,7 +87,22 @@ export const AboutSection: React.FC = () => {
             <ul className="space-y-3 font-handwriting text-base sm:text-lg text-stone-900">
               {aboutContent.quickFacts.map((fact, idx) => (
                 <li key={idx} className="flex items-start gap-2.5">
-                  <CheckmarkDoodle className="w-4 h-4 text-emerald-700 mt-1 shrink-0" />
+                  {fact.includes('ELAGENT') ? (
+                    <span
+                      className="relative w-5 h-5 rounded-full border border-[#2B2B2B] overflow-hidden shrink-0 mt-0.5 shadow-2xs inline-block bg-[#FFFDF8]"
+                      title="ELAGENT Company Logo"
+                    >
+                      <Image
+                        src="/images/logos/elagent.png"
+                        alt="ELAGENT Logo"
+                        fill
+                        sizes="20px"
+                        className="object-contain p-0.5"
+                      />
+                    </span>
+                  ) : (
+                    <CheckmarkDoodle className="w-4 h-4 text-emerald-700 mt-1 shrink-0" />
+                  )}
                   <span>{fact}</span>
                 </li>
               ))}

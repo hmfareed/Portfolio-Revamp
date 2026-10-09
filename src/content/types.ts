@@ -27,6 +27,7 @@ export interface ExperienceItem {
   period: string;
   type: string;
   location: string;
+  logo?: string;
   bullets: string[];
   placeholders?: string[];
   highlightStats?: {

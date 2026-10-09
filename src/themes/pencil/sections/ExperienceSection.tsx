@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { experienceContent } from '@/content/experience';
 import { HandDrawnUnderline } from '../primitives/HandDrawnUnderline';
@@ -84,13 +85,30 @@ export const ExperienceSection: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Title and Org */}
-                  <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#2B2B2B] mb-1">
-                    {item.role}{' '}
-                    <span className="text-stone-500 font-normal">
-                      — {item.organization}
-                    </span>
-                  </h3>
+                  {/* Title, Org, and Logo */}
+                  <div className="flex items-start justify-between gap-3 mb-1">
+                    <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[#2B2B2B]">
+                      {item.role}{' '}
+                      <span className="text-stone-500 font-normal">
+                        — {item.organization}
+                      </span>
+                    </h3>
+
+                    {item.logo && (
+                      <div
+                        className="relative shrink-0 w-11 h-11 sm:w-13 sm:h-13 rounded-full border-2 border-[#2B2B2B] bg-[#FFFDF8] p-1 shadow-[2px_2px_0px_#2B2B2B] hover:scale-105 hover:rotate-3 transition-transform"
+                        title={`${item.organization} Company Logo`}
+                      >
+                        <Image
+                          src={item.logo}
+                          alt={`${item.organization} Logo`}
+                          fill
+                          sizes="52px"
+                          className="object-contain p-0.5 rounded-full"
+                        />
+                      </div>
+                    )}
+                  </div>
 
                   {/* Highlight Stats if any (e.g. 790+ students, 36+ models) */}
                   {item.highlightStats && item.highlightStats.length > 0 && (

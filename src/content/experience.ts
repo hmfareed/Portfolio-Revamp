@@ -8,6 +8,7 @@ export const experienceContent: ExperienceItem[] = [
     period: "Sep 2026 – Present",
     type: "Contract",
     location: "Remote (United States)",
+    logo: "/images/logos/elagent.png",
     bullets: [
       "Work across frontend and backend on software projects in a remote engineering team."
     ],
