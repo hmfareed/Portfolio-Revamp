@@ -14,6 +14,9 @@ import { ImageLightboxModal } from '../primitives/ImageLightboxModal';
 import { PencilTin } from '../primitives/PencilTin';
 import { SoundToggle } from '../primitives/SoundToggle';
 import { pencilSoundEngine } from '../audio/pencilSoundEngine';
+import { KlyroTaskAiPlayground } from '../primitives/KlyroTaskAiPlayground';
+import { KayspacksCheckoutPlayground } from '../primitives/KayspacksCheckoutPlayground';
+import { HanaraOfflineSyncPlayground } from '../primitives/HanaraOfflineSyncPlayground';
 import {
   ArrowLeft,
   ExternalLink,
@@ -275,6 +278,11 @@ export const CaseStudyDetailView: React.FC<CaseStudyDetailViewProps> = ({
           <p className="font-handwriting text-lg text-stone-800 leading-relaxed">
             {study.overview}
           </p>
+
+          {/* Interactive Case Study Architecture Simulator */}
+          {study.slug === 'klyro' && <KlyroTaskAiPlayground />}
+          {study.slug === 'kayspacks' && <KayspacksCheckoutPlayground />}
+          {study.slug === 'hanara-portal' && <HanaraOfflineSyncPlayground />}
         </div>
 
         {/* System Architecture Layer Pipeline */}
