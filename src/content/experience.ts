@@ -60,11 +60,20 @@ export const experienceContent: ExperienceItem[] = [
     location: "Navrongo",
     logo: "/images/logos/utas.png",
     bullets: [
-      "Led a team applying machine learning models to a chronic kidney disease dataset.",
-      "Coordinated model testing and evaluated prediction accuracy."
+      "Led a student research team applying machine learning classification models to a chronic disease dataset to calculate predictive accuracy for heart disease diagnosis.",
+      "Coordinated feature preprocessing, model training, and performance benchmarking across algorithms to optimize detection accuracy.",
+      "Directed team workflows, experiment evaluations, and model validation metrics (precision, recall, and overall accuracy) on clinical indicators."
     ],
-    placeholders: [
-      "[Add: models used, accuracy achieved, team size.]"
+    placeholders: [],
+    highlightStats: [
+      {
+        value: "Heart Disease",
+        label: "predictive classification modeling"
+      },
+      {
+        value: "Team Lead",
+        label: "algorithm testing & accuracy evaluation"
+      }
     ]
   },
   {
