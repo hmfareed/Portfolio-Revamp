@@ -12,6 +12,8 @@ import { DogEarBookmark } from '../animations/DogEarBookmark';
 import { MarginDoodlePad } from '../animations/MarginDoodlePad';
 import { PencilLoaderProvider, usePencilLoaderContext } from '../context/PencilLoaderContext';
 import { InkColorProvider } from '../context/InkColorContext';
+import { DoodleTerminalProvider } from '../context/DoodleTerminalContext';
+import { DoodleTerminal } from '../primitives/DoodleTerminal';
 
 interface PaperSheetProps {
   children: React.ReactNode;
@@ -53,6 +55,9 @@ const PaperSheetInner: React.FC<PaperSheetProps> = ({ children, showLoader = tru
 
       {/* Dog-Eared page corner peel (Back to Top) */}
       <DogEarBookmark />
+
+      {/* Interactive Developer Terminal / Doodle CLI (Ctrl+K or trigger) */}
+      <DoodleTerminal />
 
       {/* Layered background parallax doodles */}
       <BackgroundParallaxDoodles />
@@ -119,7 +124,9 @@ export const PaperSheet: React.FC<PaperSheetProps> = ({ children, showLoader = t
   return (
     <InkColorProvider>
       <PencilLoaderProvider>
-        <PaperSheetInner showLoader={showLoader}>{children}</PaperSheetInner>
+        <DoodleTerminalProvider>
+          <PaperSheetInner showLoader={showLoader}>{children}</PaperSheetInner>
+        </DoodleTerminalProvider>
       </PencilLoaderProvider>
     </InkColorProvider>
   );

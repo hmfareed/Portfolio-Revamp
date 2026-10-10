@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { PencilTin } from '../primitives/PencilTin';
 import { SoundToggle } from '../primitives/SoundToggle';
 import { pencilSoundEngine } from '../audio/pencilSoundEngine';
+import { useDoodleTerminal } from '../context/DoodleTerminalContext';
 
 interface NavItem {
   label: string;
@@ -23,6 +24,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export const NotebookNav: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('#home');
+  const { openTerminal } = useDoodleTerminal();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,8 +86,20 @@ export const NotebookNav: React.FC = () => {
           })}
         </nav>
 
-        {/* Vintage Desk Accessories: Pencil Tin & Tactile Sound Toggle */}
+        {/* Vintage Desk Accessories: Doodle CLI Trigger, Pencil Tin & Tactile Sound Toggle */}
         <div className="flex items-center gap-2 self-end md:self-auto shrink-0 pb-1">
+          <button
+            onClick={openTerminal}
+            className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono font-bold bg-[#FAF6EC] text-[#2B2B2B] rounded border-2 border-[#2B2B2B] shadow-[2px_2px_0px_#2B2B2B] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all cursor-pointer select-none"
+            title="Open Sketchbook Developer CLI (Ctrl + K / Cmd + K)"
+            aria-label="Open Developer Terminal"
+          >
+            <span className="text-[#E4572E] font-bold">&gt;_</span>
+            <span>CLI</span>
+            <kbd className="hidden sm:inline text-[9px] font-mono px-1 py-0.2 bg-[#2B2B2B]/10 rounded border border-[#2B2B2B]/20">
+              ⌘K
+            </kbd>
+          </button>
           <PencilTin />
           <SoundToggle />
         </div>
