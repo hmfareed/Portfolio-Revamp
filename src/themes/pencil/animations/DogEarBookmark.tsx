@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
+import { pencilSoundEngine } from '../audio/pencilSoundEngine';
+
 export const DogEarBookmark: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(false);
@@ -23,6 +25,7 @@ export const DogEarBookmark: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
+    pencilSoundEngine.playPaperFlip();
     window.scrollTo({ top: 0, behavior: shouldReduceMotion ? 'auto' : 'smooth' });
   };
 

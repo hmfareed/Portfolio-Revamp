@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { pencilSoundEngine } from '../audio/pencilSoundEngine';
 
 export const MarginDoodlePad: React.FC = () => {
   const [isDoodling, setIsDoodling] = useState(false);
@@ -21,7 +22,8 @@ export const MarginDoodlePad: React.FC = () => {
       canvas.height = window.innerHeight;
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        ctx.strokeStyle = '#2B2B2B';
+        const inkColor = window.getComputedStyle(document.documentElement).getPropertyValue('--pencil-ink').trim() || '#2B2B2B';
+        ctx.strokeStyle = inkColor;
         ctx.lineWidth = 2.5;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
@@ -37,6 +39,15 @@ export const MarginDoodlePad: React.FC = () => {
     isDrawingRef.current = true;
     const pos = getPos(e);
     lastPosRef.current = pos;
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        const inkColor = window.getComputedStyle(document.documentElement).getPropertyValue('--pencil-ink').trim() || '#2B2B2B';
+        ctx.strokeStyle = inkColor;
+      }
+    }
+    pencilSoundEngine.playPencilScribble();
   };
 
   const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {

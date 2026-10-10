@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { pencilSoundEngine } from '../audio/pencilSoundEngine';
 
 interface StampButtonProps {
   children: React.ReactNode;
@@ -25,6 +26,14 @@ export const StampButton: React.FC<StampButtonProps> = ({
   disabled = false,
 }) => {
   const shouldReduceMotion = useReducedMotion();
+
+  const handleSound = () => {
+    if (variant === 'stamp-red' || variant === 'stamp-blue') {
+      pencilSoundEngine.playStampThud();
+    } else {
+      pencilSoundEngine.playPop();
+    }
+  };
 
   let variantStyles = '';
   switch (variant) {
@@ -54,6 +63,10 @@ export const StampButton: React.FC<StampButtonProps> = ({
       <motion.a
         href={href}
         download={download}
+        onClick={(e) => {
+          handleSound();
+          if (onClick) onClick();
+        }}
         whileHover={shouldReduceMotion ? {} : { scale: 1.03, y: -2 }}
         whileTap={shouldReduceMotion ? {} : { scale: 0.97, y: 1 }}
         className={baseClasses}
@@ -66,7 +79,10 @@ export const StampButton: React.FC<StampButtonProps> = ({
   return (
     <motion.button
       type={type}
-      onClick={onClick}
+      onClick={(e) => {
+        handleSound();
+        if (onClick) onClick();
+      }}
       disabled={disabled}
       whileHover={shouldReduceMotion ? {} : { scale: 1.03, y: -2 }}
       whileTap={shouldReduceMotion ? {} : { scale: 0.97, y: 1 }}

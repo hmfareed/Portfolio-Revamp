@@ -12,6 +12,8 @@ import { PlaceholderSlot } from '../primitives/PlaceholderSlot';
 import { StarDoodle, CodeBracketsDoodle, ArrowDoodle, GithubDoodle } from '../primitives/Doodles';
 import { FallingPencilShavings } from '../animations/SectionTransitions';
 import { SketchManMascot } from '../animations/SketchManMascot';
+import { ImageLightboxModal } from '../primitives/ImageLightboxModal';
+import { Project } from '@/content/types';
 import { ExternalLink, FileText, Sparkles } from 'lucide-react';
 
 const CATEGORIES: { label: string; value: 'all' | ProjectCategory }[] = [
@@ -24,6 +26,7 @@ const CATEGORIES: { label: string; value: 'all' | ProjectCategory }[] = [
 
 export const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'all' | ProjectCategory>('all');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const shouldReduceMotion = useReducedMotion();
 
   const filteredProjects = projectsContent.filter((project) => {
@@ -95,15 +98,27 @@ export const ProjectsSection: React.FC = () => {
                 >
                   <div className="flex flex-col flex-1">
                     {/* Project Screenshot / Visual Sketch Frame */}
-                    <div className={`relative w-full aspect-16/10 rounded-xs overflow-hidden border-2 border-[#2B2B2B] ${project.slug === 'novelverse' ? 'bg-[#0A0713]' : 'bg-stone-100'} mb-5 shadow-inner`}>
+                    <div
+                      onClick={() => project.image && setSelectedProject(project)}
+                      className={`relative w-full aspect-16/10 rounded-xs overflow-hidden border-2 border-[#2B2B2B] ${
+                        project.slug === 'novelverse' ? 'bg-[#0A0713]' : 'bg-stone-100'
+                      } mb-5 shadow-inner ${project.image ? 'cursor-pointer group/img' : ''}`}
+                    >
                       {project.image ? (
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover object-top hover:scale-105 transition-transform duration-500"
-                        />
+                        <>
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover object-top group-hover/img:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-stone-900/0 group-hover/img:bg-stone-900/25 transition-colors flex items-center justify-center pointer-events-none">
+                            <span className="opacity-0 group-hover/img:opacity-100 transition-opacity bg-[#FBF8EF] text-[#2B2B2B] border border-[#2B2B2B] text-xs font-handwriting font-bold px-2 py-1 rounded-xs shadow-xs">
+                              🔍 Click to Expand
+                            </span>
+                          </div>
+                        </>
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center bg-[#F4EED9] p-4 text-center">
                           <CodeBracketsDoodle className="w-10 h-10 text-stone-500 mb-2" />
@@ -258,6 +273,14 @@ export const ProjectsSection: React.FC = () => {
 
       {/* Falling pencil shavings transition to Experience */}
       <FallingPencilShavings />
+
+      {/* High-Resolution Screenshot Lightbox & Blueprint Modal */}
+      <ImageLightboxModal
+        project={selectedProject}
+        projectsList={filteredProjects}
+        onClose={() => setSelectedProject(null)}
+        onSelectProject={setSelectedProject}
+      />
     </section>
   );
 };

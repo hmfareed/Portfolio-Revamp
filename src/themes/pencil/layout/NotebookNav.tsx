@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { PencilTin } from '../primitives/PencilTin';
+import { SoundToggle } from '../primitives/SoundToggle';
+import { pencilSoundEngine } from '../audio/pencilSoundEngine';
 
 interface NavItem {
   label: string;
@@ -46,37 +49,48 @@ export const NotebookNav: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FBF8EF]/95 backdrop-blur-md pt-2 pb-1.5 mb-6 border-b-2 border-[#2B2B2B]/20 shadow-xs will-change-transform">
-      <nav
-        aria-label="Notebook sections"
-        className="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 px-2 py-1"
-      >
-        {NAV_ITEMS.map((item) => {
-          const isActive = activeTab === item.href;
-          return (
-            <motion.a
-              key={item.href}
-              href={item.href}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              style={{
-                backgroundColor: item.color,
-              }}
-              className={`relative px-3.5 sm:px-5 py-1.5 sm:py-2 text-sm sm:text-base font-handwriting font-bold tracking-wide rounded-t-md border-2 border-b-0 border-[#2B2B2B] shadow-xs shrink-0 transition-transform ${
-                isActive
-                  ? 'translate-y-0.5 border-b-2 border-b-transparent shadow-[0_-3px_0px_#2B2B2B]'
-                  : 'opacity-85 hover:opacity-100 hover:-translate-y-1'
-              }`}
-            >
-              {/* Tab index divider hole doodle */}
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2B2B2B]/40 mr-1.5 -translate-y-0.5" />
-              {item.label}
-              {isActive && (
-                <span className="absolute -bottom-1 left-2 right-2 h-0.5 bg-[#2B2B2B]" />
-              )}
-            </motion.a>
-          );
-        })}
-      </nav>
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row items-center justify-between gap-2.5">
+        {/* Notebook tab dividers */}
+        <nav
+          aria-label="Notebook sections"
+          className="flex items-center overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 py-0.5 max-w-full"
+        >
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeTab === item.href;
+            return (
+              <motion.a
+                key={item.href}
+                href={item.href}
+                onClick={() => pencilSoundEngine.playPaperFlip()}
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+                style={{
+                  backgroundColor: item.color,
+                }}
+                className={`relative px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm md:text-base font-handwriting font-bold tracking-wide rounded-t-md border-2 border-b-0 border-[#2B2B2B] shadow-xs shrink-0 transition-transform ${
+                  isActive
+                    ? 'translate-y-0.5 border-b-2 border-b-transparent shadow-[0_-3px_0px_#2B2B2B]'
+                    : 'opacity-85 hover:opacity-100 hover:-translate-y-1'
+                }`}
+              >
+                {/* Tab index divider hole doodle */}
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2B2B2B]/40 mr-1.5 -translate-y-0.5" />
+                {item.label}
+                {isActive && (
+                  <span className="absolute -bottom-1 left-2 right-2 h-0.5 bg-[#2B2B2B]" />
+                )}
+              </motion.a>
+            );
+          })}
+        </nav>
+
+        {/* Vintage Desk Accessories: Pencil Tin & Tactile Sound Toggle */}
+        <div className="flex items-center gap-2 self-end md:self-auto shrink-0 pb-1">
+          <PencilTin />
+          <SoundToggle />
+        </div>
+      </div>
+
       {/* Notebook binder edge wire line underneath tabs */}
       <div className="w-full h-1 border-b-2 border-[#2B2B2B] opacity-80" />
     </header>

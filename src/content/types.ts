@@ -90,3 +90,38 @@ export interface ContactData {
   location: string;
   availability: string;
 }
+
+export interface CaseStudyArchitectureNode {
+  layer: string;
+  technologies: string[];
+  description: string;
+}
+
+export interface CaseStudySchemaItem {
+  name: string;
+  fields: string[];
+  description: string;
+}
+
+export interface CaseStudyChallenge {
+  title: string;
+  problem: string;
+  solution: string;
+  impact: string;
+}
+
+export interface CaseStudy {
+  slug: string;
+  title: string;
+  subtitle: string;
+  overview: string;
+  role: string;
+  timeline: string;
+  status: 'In Production' | 'Live' | 'Flagship Build';
+  metrics: { label: string; value: string }[];
+  architecture: CaseStudyArchitectureNode[];
+  dataModel: CaseStudySchemaItem[];
+  challenges: CaseStudyChallenge[];
+  lessons: string[];
+  nextSteps: string[];
+}

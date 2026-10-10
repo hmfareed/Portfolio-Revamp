@@ -11,6 +11,7 @@ import { JumpingSketchMan } from '../animations/JumpingSketchMan';
 import { DogEarBookmark } from '../animations/DogEarBookmark';
 import { MarginDoodlePad } from '../animations/MarginDoodlePad';
 import { PencilLoaderProvider, usePencilLoaderContext } from '../context/PencilLoaderContext';
+import { InkColorProvider } from '../context/InkColorContext';
 
 interface PaperSheetProps {
   children: React.ReactNode;
@@ -115,8 +116,10 @@ const PaperSheetInner: React.FC<PaperSheetProps> = ({ children }) => {
 
 export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
   return (
-    <PencilLoaderProvider>
-      <PaperSheetInner>{children}</PaperSheetInner>
-    </PencilLoaderProvider>
+    <InkColorProvider>
+      <PencilLoaderProvider>
+        <PaperSheetInner>{children}</PaperSheetInner>
+      </PencilLoaderProvider>
+    </InkColorProvider>
   );
 };

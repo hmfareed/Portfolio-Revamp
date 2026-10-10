@@ -15,10 +15,33 @@
   :root {
     --font-heading: var(--font-caveat), cursive, sans-serif;
     --font-handwriting: var(--font-kalam), cursive, sans-serif;
+    --pencil-ink: #2B2B2B;
+    --pencil-ink-muted: #525252;
+    --pencil-ink-tint: rgba(43, 43, 43, 0.08);
+  }
+
+  [data-ink="blue"] {
+    --pencil-ink: #1E3A8A;
+    --pencil-ink-muted: #2563EB;
+    --pencil-ink-tint: rgba(30, 58, 138, 0.08);
+  }
+
+  [data-ink="red"] {
+    --pencil-ink: #991B1B;
+    --pencil-ink-muted: #DC2626;
+    --pencil-ink-tint: rgba(153, 27, 27, 0.08);
+  }
+
+  [data-ink="emerald"] {
+    --pencil-ink: #065F46;
+    --pencil-ink-muted: #059669;
+    --pencil-ink-tint: rgba(6, 95, 70, 0.08);
   }
 
   body {
     min-height: 100vh;
+    color: var(--pencil-ink, #2B2B2B);
+    transition: color 0.25s ease;
   }
 
   /* Accessible visible focus states */
