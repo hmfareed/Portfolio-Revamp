@@ -1,0 +1,17 @@
+{
+  "name": "Mohammed Fareed — Full-Stack Developer",
+  "short_name": "Fareed Portfolio",
+  "description": "Hand-drawn sketchbook portfolio of Mohammed Fareed Mandeeya Haruna, full-stack software engineer and creator of resilient digital systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF8EF",
+  "theme_color": "#ECE5D3",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

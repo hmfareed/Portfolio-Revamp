@@ -69,6 +69,81 @@ export const metadata: Metadata = {
       'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products.',
     images: ['/images/profile/fareed.png'],
   },
+  manifest: '/manifest.json',
+  alternates: {
+    canonical: 'https://mohammedfareed.dev',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
+
+const jsonLdData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://mohammedfareed.dev/#person',
+      name: 'Mohammed Fareed Mandeeya Haruna',
+      alternateName: 'Mohammed Fareed',
+      url: 'https://mohammedfareed.dev',
+      image: 'https://mohammedfareed.dev/images/profile/fareed.png',
+      jobTitle: 'Full-Stack Software Developer',
+      worksFor: [
+        {
+          '@type': 'Organization',
+          name: 'ELAGENT',
+        },
+        {
+          '@type': 'Organization',
+          name: 'Hanara Schools',
+        },
+      ],
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'University of Technology and Applied Sciences (UTAS), Navrongo',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Tamale',
+        addressCountry: 'GH',
+      },
+      sameAs: [
+        'https://github.com/hmfareed',
+        'https://linkedin.com/in/mohammed-fareed-haruna',
+      ],
+      knowsAbout: [
+        'Full-Stack Web Development',
+        'Next.js',
+        'React',
+        'TypeScript',
+        'Node.js',
+        'Express',
+        'PostgreSQL',
+        'Supabase',
+        'Docker',
+        'MongoDB',
+        'Payment integrations',
+        'Machine Learning',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://mohammedfareed.dev/#website',
+      url: 'https://mohammedfareed.dev',
+      name: 'Mohammed Fareed — Full-Stack Developer Portfolio',
+      publisher: {
+        '@id': 'https://mohammedfareed.dev/#person',
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -82,6 +157,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`scroll-smooth ${caveat.variable} ${kalam.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+        />
+      </head>
       <body className="antialiased min-h-screen" suppressHydrationWarning>
         <ThemeProvider defaultTheme="pencil">
           {children}
