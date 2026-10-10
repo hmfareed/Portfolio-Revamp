@@ -10,10 +10,20 @@ export const experienceContent: ExperienceItem[] = [
     location: "Remote (United States)",
     logo: "/images/logos/elagent.png",
     bullets: [
-      "Work across frontend and backend on software projects in a remote engineering team."
+      "Architected and built the centralized Admin Dashboard for ELAGENT, enabling internal operational control, metrics tracking, and platform workflows.",
+      "Engineered database architecture and schemas on Supabase (PostgreSQL), setting up relational data models, automated migrations, and secure query access.",
+      "Containerized application services and local environments with Docker, ensuring environment parity and streamlined collaboration across the engineering team."
     ],
-    placeholders: [
-      "[Add 1–2 specifics: features shipped, stack used, what you owned.]"
+    placeholders: [],
+    highlightStats: [
+      {
+        value: "Admin Hub",
+        label: "dashboard built for internal operations"
+      },
+      {
+        value: "Supabase & Docker",
+        label: "relational DB & containerized workflow"
+      }
     ]
   },
   {
@@ -25,10 +35,20 @@ export const experienceContent: ExperienceItem[] = [
     location: "On-site, Tamale",
     logo: "/images/logos/tma.png",
     bullets: [
-      "Support IT management and computer information systems activities."
+      "Collaborated directly with the Management Information Systems (MIS) department to support computer systems, municipal network uptime, and IT operations.",
+      "Assisted in managing client engagements and constituent services, helping residents process municipal inquiries and digital administrative records.",
+      "Managed official documentation, reporting, and high-volume administrative printing workflows across metropolitan departments."
     ],
-    placeholders: [
-      "[Add: systems you worked with, tasks, or improvements you made.]"
+    placeholders: [],
+    highlightStats: [
+      {
+        value: "MIS Dept",
+        label: "systems support & municipal IT ops"
+      },
+      {
+        value: "Client Services",
+        label: "constituent data & documentation"
+      }
     ]
   },
   {

@@ -71,8 +71,18 @@ export const ExperienceSection: React.FC = () => {
                     transformOrigin: 'top center',
                   }}
                 >
-                  {/* Sketch Man bringing attention to top career milestone */}
-                  {idx === 0 && (
+                  {/* Sketch Man bringing attention to key career milestones */}
+                  {item.id === 'elagent' && (
+                    <div className="absolute -top-7 right-5 z-20 pointer-events-auto hidden sm:block">
+                      <SketchManMascot
+                        pose="perched"
+                        size="sm"
+                        defaultSpeech="Admin Hub & Docker! 🚀"
+                        className="hover:scale-110 transition-transform"
+                      />
+                    </div>
+                  )}
+                  {item.id === 'freelance' && (
                     <div className="absolute -top-7 right-5 z-20 pointer-events-auto hidden sm:block">
                       <SketchManMascot
                         pose="perched"

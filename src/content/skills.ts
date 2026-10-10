@@ -50,6 +50,7 @@ export const skillsContent: SkillCategoryGroup[] = [
       "MongoDB",
       "Mongoose",
       "PostgreSQL",
+      "Supabase",
       "Prisma",
       "Neon",
       "Docker",
