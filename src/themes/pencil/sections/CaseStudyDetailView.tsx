@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -47,8 +47,15 @@ export const CaseStudyDetailView: React.FC<CaseStudyDetailViewProps> = ({
   const shouldReduceMotion = useReducedMotion();
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  // Automatically scroll to top whenever a new case study is opened
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [study.slug]);
+
   const handleOpenLightbox = () => {
-    pencilSoundEngine.playPop();
+    try {
+      pencilSoundEngine.playPop();
+    } catch {}
     setLightboxOpen(true);
   };
 
@@ -56,23 +63,34 @@ export const CaseStudyDetailView: React.FC<CaseStudyDetailViewProps> = ({
     <div className="py-8 sm:py-14 max-w-5xl mx-auto px-4 sm:px-6">
       {/* Top Navigation Row */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <Link
+        <a
           href="/#projects"
-          onClick={() => pencilSoundEngine.playPaperFlip()}
+          onClick={() => {
+            try {
+              pencilSoundEngine.playPaperFlip();
+            } catch {}
+          }}
           className="inline-flex items-center gap-2 font-handwriting text-lg text-stone-800 hover:text-[#E4572E] font-bold group cursor-pointer"
+          data-interactive="true"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           <span>← Return to Exercise Book</span>
-        </Link>
+        </a>
 
         {/* Quick Prev / Next Case Study links + Desk Tools */}
         <div className="flex flex-wrap items-center gap-3 font-handwriting text-sm font-bold">
           <div className="flex items-center gap-2">
             <Link
               href={`/projects/${prevStudy.slug}`}
-              onClick={() => pencilSoundEngine.playPaperFlip()}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-stone-100 hover:bg-[#FFE66D] border border-stone-400 rounded-xs transition-colors cursor-pointer"
+              scroll={true}
+              onClick={() => {
+                try {
+                  pencilSoundEngine.playPaperFlip();
+                } catch {}
+              }}
+              className="inline-flex items-center gap-1 px-3 py-1 bg-stone-100 hover:bg-[#FFE66D] text-stone-900 border border-stone-400 rounded-xs transition-colors cursor-pointer"
               title={`Previous: ${prevStudy.title}`}
+              data-interactive="true"
             >
               <ChevronLeft className="w-4 h-4" />
               <span className="hidden sm:inline">Prev Build</span>
@@ -80,9 +98,15 @@ export const CaseStudyDetailView: React.FC<CaseStudyDetailViewProps> = ({
             <span className="text-stone-400">|</span>
             <Link
               href={`/projects/${nextStudy.slug}`}
-              onClick={() => pencilSoundEngine.playPaperFlip()}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-stone-100 hover:bg-[#FFE66D] border border-stone-400 rounded-xs transition-colors cursor-pointer"
+              scroll={true}
+              onClick={() => {
+                try {
+                  pencilSoundEngine.playPaperFlip();
+                } catch {}
+              }}
+              className="inline-flex items-center gap-1 px-3 py-1 bg-stone-100 hover:bg-[#FFE66D] text-stone-900 border border-stone-400 rounded-xs transition-colors cursor-pointer"
               title={`Next: ${nextStudy.title}`}
+              data-interactive="true"
             >
               <span className="hidden sm:inline">Next Build</span>
               <ChevronRight className="w-4 h-4" />
@@ -97,7 +121,7 @@ export const CaseStudyDetailView: React.FC<CaseStudyDetailViewProps> = ({
       </div>
 
       {/* Main Blueprint Sheet */}
-      <TornPageCard className="p-6 sm:p-10 md:p-12 mb-12 shadow-[8px_12px_0px_#2B2B2B]">
+      <TornPageCard interactive={false} className="p-6 sm:p-10 md:p-12 mb-12 shadow-[8px_12px_0px_#2B2B2B]">
         {/* Header Ribbon & Blueprint Badge */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-2.5">
@@ -446,31 +470,48 @@ export const CaseStudyDetailView: React.FC<CaseStudyDetailViewProps> = ({
         </div>
 
         {/* Bottom Pagination & Return Row */}
-        <div className="pt-8 border-t-2 border-dashed border-stone-300 flex flex-col sm:flex-row items-center justify-between gap-4 font-handwriting">
+        <div className="pt-8 border-t-2 border-dashed border-stone-300 flex flex-col sm:flex-row items-center justify-between gap-4 font-handwriting select-none">
           <Link
             href={`/projects/${prevStudy.slug}`}
-            onClick={() => pencilSoundEngine.playPaperFlip()}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 hover:bg-[#FFE66D] border-2 border-[#2B2B2B] rounded-xs font-bold text-sm shadow-[2px_2px_0px_#2B2B2B] transition-transform hover:-translate-y-0.5 cursor-pointer"
+            scroll={true}
+            onClick={() => {
+              try {
+                pencilSoundEngine.playPaperFlip();
+              } catch {}
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-stone-100 hover:bg-[#FFE66D] text-stone-900 border-2 border-[#2B2B2B] rounded-xs font-bold text-sm shadow-[2px_2px_0px_#2B2B2B] hover:-translate-y-0.5 active:translate-y-0 transition-transform cursor-pointer"
+            data-interactive="true"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4 shrink-0" />
             <span>Prev: {prevStudy.title.split('—')[0].trim()}</span>
           </Link>
 
-          <Link
+          <a
             href="/#projects"
-            onClick={() => pencilSoundEngine.playPaperFlip()}
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#FFE66D] hover:bg-amber-300 text-[#2B2B2B] border-2 border-[#2B2B2B] rounded-xs font-bold text-base shadow-[3px_3px_0px_#2B2B2B] transition-transform hover:-translate-y-0.5 cursor-pointer"
+            onClick={() => {
+              try {
+                pencilSoundEngine.playPaperFlip();
+              } catch {}
+            }}
+            className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#FFE66D] hover:bg-amber-300 text-[#2B2B2B] border-2 border-[#2B2B2B] rounded-xs font-bold text-base shadow-[3px_3px_0px_#2B2B2B] hover:-translate-y-0.5 active:translate-y-0 transition-transform cursor-pointer"
+            data-interactive="true"
           >
             <span>All Projects in Exercise Book</span>
-          </Link>
+          </a>
 
           <Link
             href={`/projects/${nextStudy.slug}`}
-            onClick={() => pencilSoundEngine.playPaperFlip()}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 hover:bg-[#FFE66D] border-2 border-[#2B2B2B] rounded-xs font-bold text-sm shadow-[2px_2px_0px_#2B2B2B] transition-transform hover:-translate-y-0.5 cursor-pointer"
+            scroll={true}
+            onClick={() => {
+              try {
+                pencilSoundEngine.playPaperFlip();
+              } catch {}
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-stone-100 hover:bg-[#FFE66D] text-stone-900 border-2 border-[#2B2B2B] rounded-xs font-bold text-sm shadow-[2px_2px_0px_#2B2B2B] hover:-translate-y-0.5 active:translate-y-0 transition-transform cursor-pointer"
+            data-interactive="true"
           >
             <span>Next: {nextStudy.title.split('—')[0].trim()}</span>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 shrink-0" />
           </Link>
         </div>
       </TornPageCard>

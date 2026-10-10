@@ -47,7 +47,7 @@ export const MarginPencilScroll: React.FC = () => {
   return (
     <aside
       aria-hidden="true"
-      className="pointer-events-auto fixed top-0 bottom-0 left-6 sm:left-12 lg:left-24 z-30 hidden md:block select-none"
+      className="pointer-events-none fixed top-0 bottom-0 left-6 sm:left-12 lg:left-24 z-30 hidden md:block select-none w-10"
     >
       {/* Hand-drawn SVG doodle scroll path running down the margin */}
       <svg
@@ -90,7 +90,7 @@ export const MarginPencilScroll: React.FC = () => {
         }
         onClick={handlePencilClick}
         title="Click to sharpen pencil!"
-        className="absolute -left-5 top-0 w-11 h-11 cursor-pointer transition-transform hover:scale-110 active:scale-95"
+        className="pointer-events-auto absolute -left-5 top-0 w-11 h-11 cursor-pointer transition-transform hover:scale-110 active:scale-95"
       >
         {/* Pencil SVG */}
         <svg viewBox="0 0 48 48" fill="none" className="w-full h-full drop-shadow-md">

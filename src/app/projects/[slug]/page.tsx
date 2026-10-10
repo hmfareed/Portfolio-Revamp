@@ -56,7 +56,7 @@ export default async function ProjectCaseStudyPage({ params }: ProjectPageProps)
   const nextIndex = (currentIndex + 1) % projectsContent.length;
 
   return (
-    <PaperSheet>
+    <PaperSheet showLoader={false}>
       <CaseStudyDetailView
         study={study}
         project={project}

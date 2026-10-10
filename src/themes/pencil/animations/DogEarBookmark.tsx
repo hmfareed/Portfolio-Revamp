@@ -34,7 +34,7 @@ export const DogEarBookmark: React.FC = () => {
   return (
     <aside
       aria-label="Back to top page corner"
-      className="fixed bottom-0 right-0 z-40 select-none cursor-pointer"
+      className="fixed bottom-0 right-0 w-16 h-16 sm:w-20 sm:h-20 z-40 select-none cursor-pointer"
       onClick={scrollToTop}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

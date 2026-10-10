@@ -10,6 +10,7 @@ interface TornPageCardProps {
   initialTilt?: number;
   doodleSlot?: React.ReactNode;
   hasSpiralEdge?: boolean;
+  interactive?: boolean;
 }
 
 export const TornPageCard: React.FC<TornPageCardProps> = ({
@@ -18,6 +19,7 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
   initialTilt = 0,
   doodleSlot,
   hasSpiralEdge = true,
+  interactive = true,
 }) => {
   const shouldReduceMotion = useReducedMotion();
 
@@ -29,13 +31,15 @@ export const TornPageCard: React.FC<TornPageCardProps> = ({
           : { opacity: 0, y: 35, rotateY: initialTilt > 0 ? 10 : -10, rotate: initialTilt }
       }
       whileInView={{ opacity: 1, y: 0, rotateY: 0, rotate: initialTilt }}
-      viewport={{ once: true, amount: 0.15 }}
-      whileHover={shouldReduceMotion ? {} : { rotate: 0, y: -8, scale: 1.02 }}
-      whileTap={shouldReduceMotion ? {} : { scale: 0.99 }}
+      viewport={{ once: true, amount: 0.05 }}
+      whileHover={shouldReduceMotion || !interactive ? {} : { rotate: 0, y: -8, scale: 1.02 }}
+      whileTap={shouldReduceMotion || !interactive ? {} : { scale: 0.99 }}
       transition={{ type: 'spring', stiffness: 320, damping: 22 }}
-      className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] hover:shadow-[6px_12px_0px_#2B2B2B] transition-shadow duration-300 p-6 md:p-8 ${hasSpiralEdge ? 'pt-7 md:pt-8' : ''} ${className}`}
+      className={`relative bg-[#FFFDF8] border-2 border-[#2B2B2B] rounded-xs shadow-[4px_6px_0px_#2B2B2B] ${
+        interactive ? 'hover:shadow-[6px_12px_0px_#2B2B2B]' : ''
+      } transition-shadow duration-300 p-6 md:p-8 ${hasSpiralEdge ? 'pt-7 md:pt-8' : ''} ${className}`}
       style={{
-        transformStyle: 'preserve-3d',
+        transformStyle: interactive ? 'preserve-3d' : undefined,
       }}
     >
       {/* Top Masking Tape Strip with press-down animation (absolute so it never acts as flex item) */}

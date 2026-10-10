@@ -15,15 +15,16 @@ import { InkColorProvider } from '../context/InkColorContext';
 
 interface PaperSheetProps {
   children: React.ReactNode;
+  showLoader?: boolean;
 }
 
-const PaperSheetInner: React.FC<PaperSheetProps> = ({ children }) => {
+const PaperSheetInner: React.FC<PaperSheetProps> = ({ children, showLoader = true }) => {
   const { isLoaded, markLoaded } = usePencilLoaderContext();
   const shouldReduceMotion = useReducedMotion();
 
   // Safety fallback: Ensure page is always visible even if loader is interrupted
   useEffect(() => {
-    if (shouldReduceMotion) {
+    if (!showLoader || shouldReduceMotion) {
       markLoaded();
       return;
     }
@@ -31,12 +32,12 @@ const PaperSheetInner: React.FC<PaperSheetProps> = ({ children }) => {
       markLoaded();
     }, 6200);
     return () => clearTimeout(timer);
-  }, [markLoaded, shouldReduceMotion]);
+  }, [markLoaded, shouldReduceMotion, showLoader]);
 
   return (
     <div className="relative min-h-screen w-full bg-[#FBF8EF] text-[#2B2B2B] font-handwriting overflow-x-clip selection:bg-[#FFE66D] selection:text-[#2B2B2B]">
       {/* 3D Exercise Book Loader with 100% Celebration & Dive Transition */}
-      <PencilLoader onComplete={markLoaded} />
+      {showLoader && <PencilLoader onComplete={markLoaded} />}
 
       {/* Desktop fine-pointer custom graphite pencil cursor & eraser mode */}
       <HandDrawnCursor />
@@ -114,11 +115,11 @@ const PaperSheetInner: React.FC<PaperSheetProps> = ({ children }) => {
   );
 };
 
-export const PaperSheet: React.FC<PaperSheetProps> = ({ children }) => {
+export const PaperSheet: React.FC<PaperSheetProps> = ({ children, showLoader = true }) => {
   return (
     <InkColorProvider>
       <PencilLoaderProvider>
-        <PaperSheetInner>{children}</PaperSheetInner>
+        <PaperSheetInner showLoader={showLoader}>{children}</PaperSheetInner>
       </PencilLoaderProvider>
     </InkColorProvider>
   );
