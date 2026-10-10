@@ -71,14 +71,14 @@ export const experienceContent: ExperienceItem[] = [
     location: "Tamale · Hybrid",
     logo: "/images/logos/hanara-schools.png",
     bullets: [
-      "Architected and built an end-to-end School Management System across two campuses, supporting 790+ active students, multi-stream classes, fee reconciliation and academic reporting.",
+      "Architected and built an end-to-end School Management System across two campuses, supporting 1000+ active students, multi-stream classes, fee reconciliation and academic reporting.",
       "Engineered IndexedDB/Dexie local caching and background sync with UUID idempotency keys so staff can record fees and attendance during network outages.",
       "Built a digital fee ledger with dual verification between Form Teachers and School Accountants, including discrepancy logs, audit trails and digital handover receipts."
     ],
     placeholders: [],
     highlightStats: [
       {
-        value: "790+",
+        value: "1000+",
         label: "active students across 2 campuses"
       },
       {

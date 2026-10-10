@@ -126,7 +126,7 @@ export const ExperienceSection: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Highlight Stats if any (e.g. 790+ students, 36+ models) */}
+                  {/* Highlight Stats if any (e.g. 1000+ students, 36+ models) */}
                   {item.highlightStats && item.highlightStats.length > 0 && (
                     <div className="my-4 flex flex-wrap items-center gap-6 p-3 bg-amber-50/80 border border-stone-300 rounded-xs font-handwriting">
                       {item.highlightStats.map((stat, sIdx) => (

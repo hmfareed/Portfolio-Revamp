@@ -100,7 +100,7 @@ export const projectsContent: Project[] = [
   {
     slug: "hanara-sms",
     title: "HANARA SMS — School Management System",
-    pitch: "End-to-end School Management System across two campuses, supporting 790+ active students, multi-stream classes, fee reconciliation and academic reporting.",
+    pitch: "End-to-end School Management System across two campuses, supporting 1000+ active students, multi-stream classes, fee reconciliation and academic reporting.",
     role: "Architect & Lead Software Developer",
     stack: [
       "React",
