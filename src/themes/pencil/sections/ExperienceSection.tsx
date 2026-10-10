@@ -12,6 +12,9 @@ import { CounterNumber } from '../animations/CounterNumber';
 import { DoodleBurst } from '../animations/SectionTransitions';
 import { SketchManMascot } from '../animations/SketchManMascot';
 import { pencilMotion } from '../motion.config';
+import { HeartDiseaseModelPlayground } from '../primitives/HeartDiseaseModelPlayground';
+import { ElagentDashboardPlayground } from '../primitives/ElagentDashboardPlayground';
+import { HanaraPaymentPlayground } from '../primitives/HanaraPaymentPlayground';
 
 export const ExperienceSection: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -165,6 +168,11 @@ export const ExperienceSection: React.FC = () => {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Interactive Micro-Interactions & Playgrounds */}
+                  {item.id === 'elagent' && <ElagentDashboardPlayground />}
+                  {item.id === 'utas-ml' && <HeartDiseaseModelPlayground />}
+                  {item.id === 'hanara' && <HanaraPaymentPlayground />}
 
                   {/* Placeholders if any */}
                   {item.placeholders && item.placeholders.length > 0 && (
