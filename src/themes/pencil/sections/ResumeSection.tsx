@@ -94,7 +94,7 @@ export const ResumeSection: React.FC = () => {
               </li>
               <li className="flex items-center justify-center md:justify-start gap-2">
                 <CheckmarkDoodle className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Production experience with Paystack, offline sync &amp; AI</span>
+                <span>Production experience with Payment integrations, offline sync &amp; AI</span>
               </li>
               <li className="flex items-center justify-center md:justify-start gap-2">
                 <CheckmarkDoodle className="w-4 h-4 text-emerald-700 shrink-0" />

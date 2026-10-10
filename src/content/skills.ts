@@ -66,7 +66,7 @@ export const skillsContent: SkillCategoryGroup[] = [
     id: "payments",
     title: "Payments & Integrations",
     skills: [
-      "Paystack (payments, subaccounts, split payments to Mobile Money)",
+      "Payment integrations (Paystack, Mobile Money, subaccounts, split payouts)",
       "Clerk (auth and subscriptions)",
       "Cloudinary (media)",
       "Nodemailer and Resend (email)",

@@ -423,7 +423,7 @@ export const HeroSection: React.FC = () => {
             'Node.js',
             'MongoDB',
             'PostgreSQL',
-            'Paystack',
+            'Payment Integrations',
             'Tailwind CSS',
             'AI Integrations',
           ].map((tech, idx) => (

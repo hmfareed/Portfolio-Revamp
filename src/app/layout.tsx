@@ -27,13 +27,13 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://mohammedfareed.dev'),
   title: 'Mohammed Fareed — Full-Stack Developer | Portfolio',
   description:
-    'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products. Next.js, React, TypeScript, Node.js, MongoDB, PostgreSQL, Paystack, and AI.',
+    'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products. Next.js, React, TypeScript, Node.js, MongoDB, PostgreSQL, Payment integrations, and AI.',
   keywords: [
     'Mohammed Fareed',
     'Mohammed Fareed Mandeeya Haruna',
     'Full-Stack Developer Ghana',
     'Next.js Developer Tamale',
-    'Paystack integration',
+    'Payment integrations',
     'Tamale developer',
     'Ghanaian web developer',
     'Klyro founder',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     url: 'https://mohammedfareed.dev',
     title: 'Mohammed Fareed — Full-Stack Developer Portfolio',
     description:
-      'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products. Next.js, React, TypeScript, Node.js, Paystack, and AI.',
+      'Full-stack engineer architecting scalable web applications, robust APIs, and production-ready digital products. Next.js, React, TypeScript, Node.js, Payment integrations, and AI.',
     siteName: 'Mohammed Fareed Portfolio',
     images: [
       {

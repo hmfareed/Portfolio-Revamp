@@ -41,7 +41,7 @@ export const projectsContent: Project[] = [
       "TypeScript",
       "MongoDB",
       "Cloudinary",
-      "Paystack",
+      "Payment integrations",
       "Tailwind CSS",
       "Vercel"
     ],
@@ -51,7 +51,7 @@ export const projectsContent: Project[] = [
       "Full e-commerce platform for a water delivery business, with multiple brands and pack quantities.",
       "Admin panel for products, orders and business settings.",
       "One-click GPS location capture at checkout that auto-fills delivery details.",
-      "Direct WhatsApp ordering plus Paystack payments.",
+      "Direct WhatsApp ordering plus Payment integrations.",
       "Yango door delivery and self-pickup options.",
       "Customer-facing AI chatbot that recommends products, answers questions, places orders and escalates to human agents.",
       "Separate admin AI assistant for order summaries, inventory checks, store settings and sales analytics."
@@ -77,7 +77,7 @@ export const projectsContent: Project[] = [
       "JWT",
       "Vercel",
       "Cloudinary",
-      "Paystack"
+      "Payment integrations"
     ],
     categories: ["e-commerce"],
     featured: true,
@@ -86,7 +86,7 @@ export const projectsContent: Project[] = [
       "Real-time cart discount and wholesale pricing engine.",
       "Admin tools for vendor verification, subscription tiers, hub-based fulfilment oversight and financial/inventory dashboards.",
       "Secure vendor onboarding with document-review workflows and multi-role JWT auth.",
-      "Paystack subaccount/split payments for direct vendor payouts to Mobile Money.",
+      "Payment integrations with subaccounts and split payouts to Mobile Money.",
       "WCAG AA-compliant, dark-first responsive UI with custom skeleton loading states."
     ],
     links: {
@@ -142,13 +142,13 @@ export const projectsContent: Project[] = [
       "Node.js",
       "MongoDB",
       "Tailwind CSS",
-      "Paystack"
+      "Payment integrations"
     ],
     categories: ["e-commerce", "AI"],
     featured: false,
     features: [
       "Luxury storefront with an AI shopping assistant built into the experience for product guidance.",
-      "Paystack payments, real-time order tracking and in-app notifications.",
+      "Payment integrations, real-time order tracking and in-app notifications.",
       "Full admin panel: products and inventory, orders, customers and sales analytics."
     ],
     links: {
